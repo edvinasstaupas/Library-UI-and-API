@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/librarydb
+    username: library
+    password: edvinas
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto=: update

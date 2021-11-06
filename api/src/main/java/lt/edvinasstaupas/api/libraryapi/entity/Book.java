@@ -3,6 +3,8 @@ package lt.edvinasstaupas.api.libraryapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,4 +25,8 @@ public class Book {
 
     @OneToMany(mappedBy = "book")
     private List<Copy> copies;
+
+    @NotNull
+    @Column(name = "published_at")
+    private Date publishedAt;
 }
