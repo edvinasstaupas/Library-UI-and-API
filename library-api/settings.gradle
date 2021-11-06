@@ -1,1 +1,4 @@
 rootProject.name = 'library-api'
+include 'api'
+include 'main'
+
