@@ -11,16 +11,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String author;
-
-    private String title;
-
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "library")
     private List<Copy> copies;
 }

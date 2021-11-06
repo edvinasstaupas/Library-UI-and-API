@@ -1,7 +1,7 @@
 package lt.edvinasstaupas.api.libraryapi.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+
 @RequiredArgsConstructor
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public abstract class SecurityConfig //extends WebSecurityConfigurerAdapter {

@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -11,16 +10,17 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Copy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    private String title;
-
-    @OneToMany(mappedBy = "book")
-    private List<Copy> copies;
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    private Library library;
 }
