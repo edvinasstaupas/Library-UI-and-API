@@ -2,7 +2,6 @@ package lt.edvinasstaupas.api.libraryapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
-import lt.edvinasstaupas.api.libraryapi.exception.NoSuchEntityException;
 import lt.edvinasstaupas.api.libraryapi.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class AuthorService implements IEntityService<Author> {
     }
 
     @Override
-    public Author findById(Long id) throws NoSuchEntityException {
+    public Author getById(Long id) {
         return null;
     }
 }

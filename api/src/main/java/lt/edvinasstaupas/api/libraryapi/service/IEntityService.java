@@ -7,5 +7,5 @@ public interface IEntityService<T> {
 
     void delete(T t);
 
-    T findById(Long id) throws NoSuchEntityException;
+    T getById(Long id);
 }

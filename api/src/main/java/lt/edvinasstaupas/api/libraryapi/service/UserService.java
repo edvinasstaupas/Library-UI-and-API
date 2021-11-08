@@ -23,7 +23,7 @@ public class UserService implements IEntityService<User> {
     }
 
     @Override
-    public User findById(Long id) throws NoSuchEntityException {
+    public User getById(Long id) {
         return null;
     }
 }

@@ -23,7 +23,7 @@ public class LibraryService implements IEntityService<Library> {
     }
 
     @Override
-    public Library findById(Long id) throws NoSuchEntityException {
+    public Library getById(Long id) {
         return null;
     }
 }

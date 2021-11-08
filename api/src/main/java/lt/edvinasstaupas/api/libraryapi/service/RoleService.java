@@ -23,7 +23,7 @@ public class RoleService implements IEntityService<Role> {
     }
 
     @Override
-    public Role findById(Long id) throws NoSuchEntityException {
+    public Role getById(Long id) {
         return null;
     }
 }

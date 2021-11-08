@@ -23,7 +23,7 @@ public class CopyService implements IEntityService<Copy> {
     }
 
     @Override
-    public Copy findById(Long id) throws NoSuchEntityException {
+    public Copy getById(Long id) {
         return null;
     }
 }
