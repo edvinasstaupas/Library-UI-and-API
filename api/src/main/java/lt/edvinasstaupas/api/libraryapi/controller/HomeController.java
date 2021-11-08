@@ -19,9 +19,4 @@ public class HomeController {
     public String getHomePage() {
         return homeService.getHomeString();
     }
-
-    @GetMapping("book")
-    public Book getBookPage() {
-        return bookService.getBook();
-    }
 }

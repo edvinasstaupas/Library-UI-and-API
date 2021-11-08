@@ -3,6 +3,7 @@ package lt.edvinasstaupas.api.libraryapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,4 +24,7 @@ public class Author {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 }

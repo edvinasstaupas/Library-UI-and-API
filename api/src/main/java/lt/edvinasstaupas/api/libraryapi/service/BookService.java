@@ -12,14 +12,6 @@ public class BookService implements IEntityService<Book> {
 
     private final BookRepository bookRepository;
 
-    public Book getBook() {
-        return Book.builder()
-                .id(1L)
-                .author("Autorius")
-                .title("Titlas")
-                .build();
-    }
-
     @Override
     public void save(Book book) {
 
