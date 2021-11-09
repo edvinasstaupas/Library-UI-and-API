@@ -2,6 +2,7 @@ package lt.edvinasstaupas.api.libraryapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.BookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.AuthorMapper;
@@ -27,6 +28,18 @@ public class BookService implements IEntityService<Book> {
         bookRepository.save(book);
     }
 
+    public BookDto create(CreateBookDto createBookDto) {
+        Book book = Book.builder()
+                .author(authorMapper.convertToDomain(createBookDto.getAuthor()))
+                .isbn(createBookDto.getIsbn())
+                .publishedAt(createBookDto.getPublishedAt())
+                .copies(createBookDto.getCopies())
+                .title(createBookDto.getTitle())
+                .build();
+        save(book);
+        return bookMapper.convertToDto(book);
+    }
+
     @Override
     public void delete(Book book) {
         bookRepository.delete(book);
@@ -34,7 +47,7 @@ public class BookService implements IEntityService<Book> {
 
     @Override
     public Book getById(Long id) {
-        return bookRepository.getById(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     public BookDto getByIdDto(Long id) {
