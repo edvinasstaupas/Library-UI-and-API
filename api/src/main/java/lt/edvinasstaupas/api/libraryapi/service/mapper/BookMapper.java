@@ -4,19 +4,21 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.BookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class BookMapper {
+public class BookMapper implements IMapper<Book, BookDto> {
+
     private final ModelMapper modelMapper;
 
-
-    public BookDto convertToDto (Book book) {
+    @Override
+    public BookDto convertToDto(Book book) {
         return modelMapper.map(book, BookDto.class);
     }
 
-    public Book convertToDomain (BookDto bookDto) {
+    @Override
+    public Book convertToDomain(BookDto bookDto) {
         return modelMapper.map(bookDto, Book.class);
     }
 }
