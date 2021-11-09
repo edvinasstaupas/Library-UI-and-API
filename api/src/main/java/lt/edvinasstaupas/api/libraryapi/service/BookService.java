@@ -21,21 +21,13 @@ public class BookService implements IEntityService<Book> {
 
     private final BookMapper bookMapper;
 
-    private final AuthorMapper authorMapper;
-
     @Override
     public void save(Book book) {
         bookRepository.save(book);
     }
 
     public BookDto create(CreateBookDto createBookDto) {
-        Book book = Book.builder()
-                .author(authorMapper.convertToDomain(createBookDto.getAuthor()))
-                .isbn(createBookDto.getIsbn())
-                .publishedAt(createBookDto.getPublishedAt())
-                .copies(createBookDto.getCopies())
-                .title(createBookDto.getTitle())
-                .build();
+        Book book = bookMapper.convertToDomainFromCreate(createBookDto);
         save(book);
         return bookMapper.convertToDto(book);
     }
@@ -62,13 +54,6 @@ public class BookService implements IEntityService<Book> {
     }
 
     public void update(BookDto bookDto) {
-        save(Book.builder()
-                .id(bookDto.getId())
-                .author(authorMapper.convertToDomain(bookDto.getAuthor()))
-                .isbn(bookDto.getIsbn())
-                .publishedAt(bookDto.getPublishedAt())
-                .copies(bookDto.getCopies())
-                .title(bookDto.getTitle())
-                .build());
+        save(bookMapper.convertToDomain(bookDto));
     }
 }
