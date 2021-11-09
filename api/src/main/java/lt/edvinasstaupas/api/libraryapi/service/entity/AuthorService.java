@@ -1,8 +1,8 @@
-package lt.edvinasstaupas.api.libraryapi.service;
+package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
-import lt.edvinasstaupas.api.libraryapi.dto.AuthorDto;
-import lt.edvinasstaupas.api.libraryapi.dto.CreateAuthorDto;
+import lt.edvinasstaupas.api.libraryapi.dto.author.AuthorDto;
+import lt.edvinasstaupas.api.libraryapi.dto.author.CreateAuthorDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
 import lt.edvinasstaupas.api.libraryapi.repository.AuthorRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.AuthorMapper;

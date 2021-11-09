@@ -1,10 +1,9 @@
 package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
-import lt.edvinasstaupas.api.libraryapi.service.RoleFactory;
+import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 

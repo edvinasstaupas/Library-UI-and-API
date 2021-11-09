@@ -1,7 +1,8 @@
-package lt.edvinasstaupas.api.libraryapi.dto;
+package lt.edvinasstaupas.api.libraryapi.dto.book;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.edvinasstaupas.api.libraryapi.dto.author.AuthorDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 
 import java.util.Date;
@@ -9,7 +10,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CreateBookDto {
+public class BookDto {
+    private Long id;
 
     private String isbn;
 

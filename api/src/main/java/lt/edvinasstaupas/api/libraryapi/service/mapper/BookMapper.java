@@ -1,8 +1,8 @@
 package lt.edvinasstaupas.api.libraryapi.service.mapper;
 
 import lombok.RequiredArgsConstructor;
-import lt.edvinasstaupas.api.libraryapi.dto.BookDto;
-import lt.edvinasstaupas.api.libraryapi.dto.CreateBookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

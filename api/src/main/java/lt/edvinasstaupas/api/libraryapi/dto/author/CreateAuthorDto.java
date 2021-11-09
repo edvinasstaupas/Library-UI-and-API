@@ -1,12 +1,11 @@
-package lt.edvinasstaupas.api.libraryapi.dto;
+package lt.edvinasstaupas.api.libraryapi.dto.author;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AuthorDto {
-    private Long id;
+public class CreateAuthorDto {
 
     private String isbn;
 

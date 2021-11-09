@@ -1,4 +1,4 @@
-package lt.edvinasstaupas.api.libraryapi.exception;
+package lt.edvinasstaupas.api.libraryapi.exception.nosuchentity;
 
 public abstract class NoSuchEntityException extends Exception {
     public NoSuchEntityException(String entity, Long id) {

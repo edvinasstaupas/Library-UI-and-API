@@ -1,8 +1,7 @@
-package lt.edvinasstaupas.api.libraryapi.service;
+package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.entity.Library;
-import lt.edvinasstaupas.api.libraryapi.exception.NoSuchEntityException;
 import lt.edvinasstaupas.api.libraryapi.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,10 @@
-package lt.edvinasstaupas.api.libraryapi.service;
+package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
-import lt.edvinasstaupas.api.libraryapi.dto.BookDto;
-import lt.edvinasstaupas.api.libraryapi.dto.CreateBookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
-import lt.edvinasstaupas.api.libraryapi.service.mapper.AuthorMapper;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.stereotype.Service;
 

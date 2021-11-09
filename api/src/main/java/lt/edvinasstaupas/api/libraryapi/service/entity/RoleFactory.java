@@ -1,4 +1,4 @@
-package lt.edvinasstaupas.api.libraryapi.service;
+package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lt.edvinasstaupas.api.libraryapi.entity.Role;
 
