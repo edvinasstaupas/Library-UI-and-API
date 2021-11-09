@@ -15,7 +15,7 @@ import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("Author")
+@RequestMapping("author")
 @RequiredArgsConstructor
 public class AuthorController {
 
