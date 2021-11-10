@@ -34,7 +34,7 @@ public class AuthorController {
         return ok(authorService.getByIdDto(id));
     }
 
-    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
         return ok(authorService.create(createAuthorDto));
     }

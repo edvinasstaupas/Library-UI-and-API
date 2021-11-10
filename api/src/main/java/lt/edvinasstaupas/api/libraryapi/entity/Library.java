@@ -17,6 +17,11 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    @OneToOne
+    private Address address;
+
     @OneToMany(mappedBy = "library")
     private List<Copy> copies;
 }

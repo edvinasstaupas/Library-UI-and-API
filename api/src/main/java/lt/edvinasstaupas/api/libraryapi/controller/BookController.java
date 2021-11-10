@@ -34,7 +34,7 @@ public class BookController {
         return ok(bookService.getByIdDto(id));
     }
 
-    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDto> createBook(@RequestBody CreateBookDto createBookDto) {
         return ok(bookService.create(createBookDto));
     }
