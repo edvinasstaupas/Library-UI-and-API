@@ -1,4 +1,6 @@
-insert into USERS (id, first_name, last_name) values ( 1, 'Edvinas', 'Staupas' );
+insert into USERS (id, first_name, last_name, user_number) values ( 1, 'Edvinas', 'Staupas' , '1234');
+insert into ROLE (id, name) values (1, 'MEMBER');
+insert into USERS_ROLES values ( 1, 1 );
 insert into AUTHOR (id, isbn, first_name, last_name)
 values (1, 9781782924142, 'J. K.', 'Rowling');
 insert into BOOK (id, isbn, author_id, title, published_at)
