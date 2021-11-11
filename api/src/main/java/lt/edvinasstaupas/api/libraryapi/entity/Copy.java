@@ -37,4 +37,8 @@ public class Copy {
 
     @Column(name = "due_at")
     private Date dueAt;
+
+    @ManyToOne
+    @JoinColumn(name = "taken_by_user_id")
+    private User takenBy;
 }

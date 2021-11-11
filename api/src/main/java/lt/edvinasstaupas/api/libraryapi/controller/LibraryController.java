@@ -2,6 +2,7 @@ package lt.edvinasstaupas.api.libraryapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.library.CreateLibraryDto;
+import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Library;
 import lt.edvinasstaupas.api.libraryapi.service.entity.LibraryService;
 import org.springframework.http.MediaType;
@@ -21,31 +22,31 @@ public class LibraryController {
     private final LibraryService libraryService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Library>> getCopies() {
-        return ok(libraryService.getAll());
+    public ResponseEntity<List<LibraryDto>> getCopies() {
+        return ok(libraryService.getAllDto());
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Library> getLibraryById(@PathVariable Long id) {
+    public ResponseEntity<LibraryDto> getLibraryById(@PathVariable Long id) {
         Library library = libraryService.getById(id);
         if (library == null)
             return notFound().build();
-        return ok(libraryService.getById(id));
+        return ok(libraryService.getByIdDto(id));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Library> createLibrary(@RequestBody CreateLibraryDto createLibrary) {
-        return ok(libraryService.create(createLibrary));
+    public ResponseEntity<LibraryDto> createLibrary(@RequestBody CreateLibraryDto createLibraryDto) {
+        return ok(libraryService.create(createLibraryDto));
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Library> putLibraryById(@RequestBody Library library) {
-        libraryService.update(library);
-        return ok(library);
+    public ResponseEntity<LibraryDto> putLibraryById(@RequestBody LibraryDto libraryDto) {
+        libraryService.update(libraryDto);
+        return ok(libraryDto);
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteLibraryById(@PathVariable Long id) {
+    public ResponseEntity deleteLibraryById(@PathVariable Long id) { //TODO fix empty ResponseEntity
         Library library = libraryService.getById(id);
         if (library == null)
             return notFound().build();

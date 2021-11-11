@@ -3,18 +3,15 @@ package lt.edvinasstaupas.api.libraryapi.dto.copy;
 import lombok.Getter;
 import lombok.Setter;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
-import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryCopyDto;
 
 import java.util.Date;
 
 @Getter
 @Setter
-public class CopyDto {
+public class CopyLibraryDto {
     private Long id;
 
     private BookDto book;
-
-    private LibraryCopyDto library;
 
     private boolean isTaken = false;
 

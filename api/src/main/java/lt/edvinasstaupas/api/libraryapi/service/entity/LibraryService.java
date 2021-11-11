@@ -2,12 +2,14 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.library.CreateLibraryDto;
+import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Library;
 import lt.edvinasstaupas.api.libraryapi.repository.LibraryRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.LibraryMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class LibraryService implements IEntityService<Library> {
         libraryRepository.save(library);
     }
 
-    public Library create(CreateLibraryDto createLibraryDto) {
+    public LibraryDto create(CreateLibraryDto createLibraryDto) {
         Library library = libraryMapper.convertToDomainFromCreate(createLibraryDto);
         save(library);
         return libraryMapper.convertToDto(library);
@@ -43,7 +45,18 @@ public class LibraryService implements IEntityService<Library> {
         return libraryRepository.findAll();
     }
 
-    public void update(Library library) {
-        save(library);
+    public List<LibraryDto> getAllDto() {
+        return libraryRepository.findAll()
+                .stream()
+                .map(libraryMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    public void update(LibraryDto libraryDto) {
+        save(libraryMapper.convertToDomain(libraryDto));
+    }
+
+    public LibraryDto getByIdDto(Long id) {
+        return libraryMapper.convertToDto(libraryRepository.findById(id).orElse(null));
     }
 }
