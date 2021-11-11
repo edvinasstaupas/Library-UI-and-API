@@ -23,7 +23,7 @@ public class CopyController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CopyDto>> getCopies() {
-        return ok(copyService.getAll());
+        return ok(copyService.getAllDto());
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
