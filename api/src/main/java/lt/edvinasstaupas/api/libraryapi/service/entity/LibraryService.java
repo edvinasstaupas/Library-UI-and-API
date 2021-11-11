@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class LibraryService implements IEntityService<Library> {
+public class LibraryService implements IEntityService<Library, LibraryDto, CreateLibraryDto> {
 
     private final LibraryRepository libraryRepository;
 
@@ -24,6 +24,7 @@ public class LibraryService implements IEntityService<Library> {
         libraryRepository.save(library);
     }
 
+    @Override
     public LibraryDto create(CreateLibraryDto createLibraryDto) {
         Library library = libraryMapper.convertToDomainFromCreate(createLibraryDto);
         save(library);
@@ -40,11 +41,7 @@ public class LibraryService implements IEntityService<Library> {
         return libraryRepository.findById(id).orElse(null);
     }
 
-
-    public List<Library> getAll() {
-        return libraryRepository.findAll();
-    }
-
+    @Override
     public List<LibraryDto> getAllDto() {
         return libraryRepository.findAll()
                 .stream()
@@ -52,10 +49,12 @@ public class LibraryService implements IEntityService<Library> {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void update(LibraryDto libraryDto) {
         save(libraryMapper.convertToDomain(libraryDto));
     }
 
+    @Override
     public LibraryDto getByIdDto(Long id) {
         return libraryMapper.convertToDto(libraryRepository.findById(id).orElse(null));
     }

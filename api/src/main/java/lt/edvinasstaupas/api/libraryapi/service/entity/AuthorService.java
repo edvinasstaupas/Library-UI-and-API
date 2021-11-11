@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorService implements IEntityService<Author> {
+public class AuthorService implements IEntityService<Author, AuthorDto, CreateAuthorDto> {
 
     private final AuthorRepository authorRepository;
 
@@ -25,6 +25,7 @@ public class AuthorService implements IEntityService<Author> {
         authorRepository.save(author);
     }
 
+    @Override
     public AuthorDto create(CreateAuthorDto createAuthorDto) {
         Author author = authorMapper.convertToDomainFromCreate(createAuthorDto);
         save(author);
@@ -41,17 +42,20 @@ public class AuthorService implements IEntityService<Author> {
         return authorRepository.findById(id).orElse(null);
     }
 
+    @Override
     public AuthorDto getByIdDto(Long id) {
         Optional<Author> AuthorOptional = authorRepository.findById(id);
         return AuthorOptional.map(authorMapper::convertToDto).orElse(null);
     }
 
+    @Override
     public List<AuthorDto> getAllDto() {
         return authorRepository.findAll().stream()
                 .map(authorMapper::convertToDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void update(AuthorDto authorDto) {
         save(authorMapper.convertToDomain(authorDto));
     }

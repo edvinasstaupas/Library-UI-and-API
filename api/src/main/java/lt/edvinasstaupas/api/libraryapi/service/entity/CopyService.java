@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
-import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.repository.CopyRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CopyService implements IEntityService<Copy> {
+public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto> {
 
     private final CopyRepository copyRepository;
 
@@ -26,6 +25,7 @@ public class CopyService implements IEntityService<Copy> {
         copyRepository.save(copy);
     }
 
+    @Override
     public CopyDto create(CreateCopyDto createCopyDto) {
         Copy copy = copyMapper.convertToDomainFromCreate(createCopyDto);
         save(copy);
@@ -42,18 +42,21 @@ public class CopyService implements IEntityService<Copy> {
         return copyRepository.findById(id).orElse(null);
     }
 
+    @Override
     public CopyDto getByIdDto(Long id) {
         Optional<Copy> copyOptional = copyRepository.findById(id);
         return copyOptional.map(copyMapper::convertToDto).orElse(null);
     }
 
-    public List<CopyDto> getAll() {
+    @Override
+    public List<CopyDto> getAllDto() {
         return copyRepository.findAll()
                 .stream()
                 .map(copyMapper::convertToDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void update(CopyDto copyDto) {
         save(copyMapper.convertToDomain(copyDto));
     }

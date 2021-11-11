@@ -1,9 +1,25 @@
 package lt.edvinasstaupas.api.libraryapi.service.entity;
 
-public interface IEntityService<T> {
-    void save(T t);
+import java.util.List;
 
-    void delete(T t);
+/**
+ * @param <B> base entity class
+ * @param <D> dto entity class
+ * @param <C> create dto entity class
+ */
 
-    T getById(Long id);
+public interface IEntityService<B, D, C> {
+    void save(B b);
+
+    void delete(B B);
+
+    B getById(Long id);
+
+    List<D> getAllDto();
+
+    D getByIdDto(Long id);
+
+    void update(D d);
+
+    D create(C c);
 }

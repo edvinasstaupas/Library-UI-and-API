@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BookService implements IEntityService<Book> {
+public class BookService implements IEntityService<Book, BookDto, CreateBookDto> {
 
     private final BookRepository bookRepository;
 
@@ -25,6 +25,7 @@ public class BookService implements IEntityService<Book> {
         bookRepository.save(book);
     }
 
+    @Override
     public BookDto create(CreateBookDto createBookDto) {
         Book book = bookMapper.convertToDomainFromCreate(createBookDto);
         save(book);
@@ -41,17 +42,20 @@ public class BookService implements IEntityService<Book> {
         return bookRepository.findById(id).orElse(null);
     }
 
+    @Override
     public BookDto getByIdDto(Long id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         return bookOptional.map(bookMapper::convertToDto).orElse(null);
     }
 
+    @Override
     public List<BookDto> getAllDto() {
         return bookRepository.findAll().stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void update(BookDto bookDto) {
         save(bookMapper.convertToDomain(bookDto));
     }
