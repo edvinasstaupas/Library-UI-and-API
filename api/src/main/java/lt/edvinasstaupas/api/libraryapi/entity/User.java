@@ -2,6 +2,8 @@ package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
 import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,7 +17,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User //implements UserDetails
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +30,11 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "user_number")
+    private String userNumber;
+
+    private String password;
+
     @Column(name = "avatar_path")
     private String avatarPath;
 
@@ -37,20 +45,21 @@ public class User {
     private List<Copy> copies;
 
     @ManyToMany()
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
+    //TODO something not right here
     public boolean hasPrivileges() {
         return roles.contains(RoleFactory.getAdminRole());
     }
-/*
-    @Override
-    public int compareTo(User o) {
-        return Math.toIntExact(this.getId() - o.getId());
+
+    /*@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles;
+    public String getUsername() {
+        return this.userNumber;
     }
 
     @Override
