@@ -6,12 +6,21 @@ import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Role;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
+import lt.edvinasstaupas.api.libraryapi.service.file.FileService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.UserMapper;/*
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -26,6 +35,8 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
+
+    private final FileService fileService;
 
     @Override
     public void save(User user) {
@@ -73,6 +84,19 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
     public UserDto getByUserNumber(String userNumber) {
         return userMapper.convertToDto(userRepository.findByUserNumber(userNumber));
     }
+
+    public UserDto uploadAvatar(Long id, MultipartFile avatar) {
+        Path avatarPath = fileService.saveFileInSystem(avatar);
+        User user = getById(id);
+        user.setAvatarPath(avatarPath.toString());
+        save(user);
+        return userMapper.convertToDto(user);
+    }
+
+     public ResponseEntity<Resource> getAvatarById(Long id) {
+         String fileName = getById(id).getAvatarPath();
+         return fileService.getResourceResponseEntity(fileName);
+     }
 
      /*@Override
      public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {

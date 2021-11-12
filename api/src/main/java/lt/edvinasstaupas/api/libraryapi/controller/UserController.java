@@ -1,14 +1,19 @@
-package lt.edvinasstaupas.api.userapi.controller;
+package lt.edvinasstaupas.api.libraryapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.notFound;
@@ -52,5 +57,15 @@ public class UserController {
             return notFound().build();
         userService.delete(user);
         return ok().build();
+    }
+
+    @PostMapping("{id}/avatar")
+    public ResponseEntity<UserDto> uploadAvatar(@PathVariable Long id, @RequestParam MultipartFile avatar) {
+        return ok(userService.uploadAvatar(id, avatar));
+    }
+
+    @GetMapping("{id}/avatar")
+    public ResponseEntity<Resource> downloadAvatar(@PathVariable Long id) {
+        return userService.getAvatarById(id);
     }
 }
