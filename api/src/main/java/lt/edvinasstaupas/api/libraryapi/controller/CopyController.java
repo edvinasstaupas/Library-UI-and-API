@@ -46,7 +46,7 @@ public class CopyController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteCopyById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCopyById(@PathVariable Long id) {
         Copy copy = copyService.getById(id);
         if (copy == null)
             return notFound().build();

@@ -46,7 +46,7 @@ public class BookController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteBookById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBookById(@PathVariable Long id) {
         Book book = bookService.getById(id);
         if (book == null)
             return notFound().build();

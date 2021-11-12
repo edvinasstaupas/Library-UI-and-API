@@ -46,7 +46,7 @@ public class LibraryController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteLibraryById(@PathVariable Long id) { //TODO fix empty ResponseEntity
+    public ResponseEntity<Void> deleteLibraryById(@PathVariable Long id) {
         Library library = libraryService.getById(id);
         if (library == null)
             return notFound().build();

@@ -46,7 +46,7 @@ public class AuthorController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteAuthorById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAuthorById(@PathVariable Long id) {
         Author author = authorService.getById(id);
         if (author == null)
             return notFound().build();
