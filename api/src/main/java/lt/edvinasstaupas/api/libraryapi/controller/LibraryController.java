@@ -40,7 +40,7 @@ public class LibraryController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LibraryDto> putLibraryById(@RequestBody LibraryDto libraryDto) {
+    public ResponseEntity<LibraryDto> putLibrary(@RequestBody LibraryDto libraryDto) {
         libraryService.update(libraryDto);
         return ok(libraryDto);
     }

@@ -40,7 +40,7 @@ public class AuthorController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AuthorDto> putAuthorById(@RequestBody AuthorDto AuthorDto) {
+    public ResponseEntity<AuthorDto> putAuthor(@RequestBody AuthorDto AuthorDto) {
         authorService.update(AuthorDto);
         return ok(authorService.getByIdDto(AuthorDto.getId()));
     }

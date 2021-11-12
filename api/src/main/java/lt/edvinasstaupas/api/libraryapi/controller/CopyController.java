@@ -40,7 +40,7 @@ public class CopyController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CopyDto> putCopyById(@RequestBody CopyDto copyDto) {
+    public ResponseEntity<CopyDto> putCopy(@RequestBody CopyDto copyDto) {
         copyService.update(copyDto);
         return ok(copyDto);
     }

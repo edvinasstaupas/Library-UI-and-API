@@ -40,7 +40,7 @@ public class BookController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookDto> putBookById(@RequestBody BookDto bookDto) {
+    public ResponseEntity<BookDto> putBook(@RequestBody BookDto bookDto) {
         bookService.update(bookDto);
         return ok(bookService.getByIdDto(bookDto.getId()));
     }
