@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
-import lt.edvinasstaupas.api.libraryapi.entity.Role;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
@@ -14,16 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserService implements IEntityService<User, UserDto, CreateUserDto>//, UserDetailsService
- {
+{
 
     private final UserRepository userRepository;
 
@@ -94,10 +89,10 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
         return userMapper.convertToDto(user);
     }
 
-     public ResponseEntity<Resource> getAvatarById(Long id) {
-         String fileName = getById(id).getAvatarPath();
-         return fileService.getResourceResponseEntity(fileName);
-     }
+    public ResponseEntity<Resource> getAvatarById(Long id) {
+        String fileName = getById(id).getAvatarPath();
+        return fileService.getResourceResponseEntity(fileName);
+    }
 
      /*@Override
      public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {

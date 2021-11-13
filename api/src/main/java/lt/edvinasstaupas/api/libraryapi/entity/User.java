@@ -6,7 +6,6 @@ import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

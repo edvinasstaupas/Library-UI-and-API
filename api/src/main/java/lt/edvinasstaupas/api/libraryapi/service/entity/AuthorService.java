@@ -5,13 +5,11 @@ import lt.edvinasstaupas.api.libraryapi.dto.author.AuthorDto;
 import lt.edvinasstaupas.api.libraryapi.dto.author.CreateAuthorDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchAuthorException;
-import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.AuthorRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.AuthorMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

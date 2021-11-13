@@ -5,13 +5,11 @@ import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchBookException;
-import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
