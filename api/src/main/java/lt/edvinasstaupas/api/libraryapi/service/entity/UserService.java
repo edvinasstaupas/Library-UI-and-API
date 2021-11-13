@@ -5,6 +5,7 @@ import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Role;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
 import lt.edvinasstaupas.api.libraryapi.service.file.FileService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.UserMapper;/*
@@ -50,7 +51,7 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
 
     @Override
     public User getById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new NoSuchUserException(id));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
 
     @Override
     public UserDto getByIdDto(Long id) {
-        return userMapper.convertToDto(userRepository.findById(id).orElse(null));
+        return userMapper.convertToDto(getById(id));
     }
 
     @Override

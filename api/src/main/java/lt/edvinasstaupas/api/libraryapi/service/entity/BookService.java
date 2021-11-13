@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchBookException;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.stereotype.Service;
@@ -39,13 +41,12 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
 
     @Override
     public Book getById(Long id) {
-        return bookRepository.findById(id).orElse(null);
+        return bookRepository.findById(id).orElseThrow(() -> new NoSuchBookException(id));
     }
 
     @Override
     public BookDto getByIdDto(Long id) {
-        Optional<Book> bookOptional = bookRepository.findById(id);
-        return bookOptional.map(bookMapper::convertToDto).orElse(null);
+        return bookMapper.convertToDto(getById(id));
     }
 
     @Override

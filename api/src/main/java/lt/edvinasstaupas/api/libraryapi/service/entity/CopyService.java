@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchCopyException;
 import lt.edvinasstaupas.api.libraryapi.repository.CopyRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,13 +39,12 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
 
     @Override
     public Copy getById(Long id) {
-        return copyRepository.findById(id).orElse(null);
+        return copyRepository.findById(id).orElseThrow(() -> new NoSuchCopyException(id));
     }
 
     @Override
     public CopyDto getByIdDto(Long id) {
-        Optional<Copy> copyOptional = copyRepository.findById(id);
-        return copyOptional.map(copyMapper::convertToDto).orElse(null);
+        return copyMapper.convertToDto(getById(id));
     }
 
     @Override

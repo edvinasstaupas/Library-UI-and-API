@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.library.CreateLibraryDto;
 import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Library;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchLibraryException;
 import lt.edvinasstaupas.api.libraryapi.repository.LibraryRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.LibraryMapper;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class LibraryService implements IEntityService<Library, LibraryDto, Creat
 
     @Override
     public Library getById(Long id) {
-        return libraryRepository.findById(id).orElse(null);
+        return libraryRepository.findById(id).orElseThrow(() -> new NoSuchLibraryException(id));
     }
 
     @Override
@@ -56,6 +57,6 @@ public class LibraryService implements IEntityService<Library, LibraryDto, Creat
 
     @Override
     public LibraryDto getByIdDto(Long id) {
-        return libraryMapper.convertToDto(libraryRepository.findById(id).orElse(null));
+        return libraryMapper.convertToDto(getById(id));
     }
 }

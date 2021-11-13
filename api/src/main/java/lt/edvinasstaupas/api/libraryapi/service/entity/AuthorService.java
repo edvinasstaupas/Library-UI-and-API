@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.author.AuthorDto;
 import lt.edvinasstaupas.api.libraryapi.dto.author.CreateAuthorDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchAuthorException;
+import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.AuthorRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.AuthorMapper;
 import org.springframework.stereotype.Service;
@@ -39,13 +41,12 @@ public class AuthorService implements IEntityService<Author, AuthorDto, CreateAu
 
     @Override
     public Author getById(Long id) {
-        return authorRepository.findById(id).orElse(null);
+        return authorRepository.findById(id).orElseThrow(() -> new NoSuchAuthorException(id));
     }
 
     @Override
     public AuthorDto getByIdDto(Long id) {
-        Optional<Author> AuthorOptional = authorRepository.findById(id);
-        return AuthorOptional.map(authorMapper::convertToDto).orElse(null);
+        return authorMapper.convertToDto(getById(id));
     }
 
     @Override
