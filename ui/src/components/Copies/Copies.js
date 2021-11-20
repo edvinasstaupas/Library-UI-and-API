@@ -21,7 +21,7 @@ const useStyle = makeStyles({
 
 const Copies = () => {
     const classes = useStyle();
-    const [id, setId] = useState(
+    const [id, setId] = useState( //this is not ideal, but i do not know any other way of doing this
         getUserId()
             .then(({ data }) => {
                 console.log(data.id);
