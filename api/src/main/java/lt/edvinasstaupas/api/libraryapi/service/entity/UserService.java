@@ -3,6 +3,7 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
+import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
@@ -93,7 +94,6 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
         String fileName = getById(id).getAvatarPath();
         return fileService.getResourceResponseEntity(fileName);
     }
-
      /*@Override
      public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {
          return userRepository.loadByUserNumber(userNumber);

@@ -1,9 +1,12 @@
 package lt.edvinasstaupas.api.libraryapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
+import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
+import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
 import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -22,6 +25,8 @@ import static org.springframework.http.ResponseEntity.ok;
 public class UserController {
 
     private final UserService userService;
+
+    private final CopyService copyService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDto>> getCopies() {
@@ -64,5 +69,15 @@ public class UserController {
     @GetMapping("{id}/avatar")
     public ResponseEntity<Resource> downloadAvatar(@PathVariable Long id) {
         return userService.getAvatarById(id);
+    }
+
+    @GetMapping(value = "{id}/copies", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CopyDto>> getUserBooks(@PathVariable Long id) {
+        return ok(copyService.getBooksByUserId(userService.getById(id)));
+    }
+
+    @GetMapping(value = "currentUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> getCurrentUser() {
+        return ok(userService.getByIdDto(1L));
     }
 }

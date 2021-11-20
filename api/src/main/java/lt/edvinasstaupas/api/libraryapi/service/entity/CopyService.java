@@ -3,10 +3,13 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
+import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
+import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchCopyException;
 import lt.edvinasstaupas.api.libraryapi.repository.CopyRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +61,9 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
     @Override
     public void update(CopyDto copyDto) {
         save(copyMapper.convertToDomain(copyDto));
+    }
+
+    public List<CopyDto> getBooksByUserId(User user) {
+        return copyRepository.findAllByTakenBy(user).stream().map(copyMapper::convertToDto).collect(Collectors.toList());
     }
 }

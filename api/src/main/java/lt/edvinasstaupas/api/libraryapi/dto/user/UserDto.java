@@ -2,6 +2,7 @@ package lt.edvinasstaupas.api.libraryapi.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Address;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.entity.Role;
@@ -23,7 +24,7 @@ public class UserDto {
 
     private Address address;
 
-    private List<Copy> copies;
+    private List<CopyDto> copies;
 
     private Set<Role> roles;
 }
