@@ -3,18 +3,16 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
-import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
 import lt.edvinasstaupas.api.libraryapi.service.file.FileService;
-import lt.edvinasstaupas.api.libraryapi.service.mapper.UserMapper;/*
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
-import org.springframework.core.io.InputStreamResource;
+import lt.edvinasstaupas.api.libraryapi.service.mapper.UserMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,8 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IEntityService<User, UserDto, CreateUserDto>//, UserDetailsService
-{
+public class UserService implements IEntityService<User, UserDto, CreateUserDto>, UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -94,8 +91,9 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
         String fileName = getById(id).getAvatarPath();
         return fileService.getResourceResponseEntity(fileName);
     }
-     /*@Override
-     public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {
-         return userRepository.loadByUserNumber(userNumber);
-     }*/
+
+    @Override
+    public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {
+        return userRepository.loadByUserNumber(userNumber);
+    }
 }

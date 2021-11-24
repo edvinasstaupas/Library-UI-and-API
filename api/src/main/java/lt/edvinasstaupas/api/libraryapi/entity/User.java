@@ -2,10 +2,11 @@ package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
 import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User //implements UserDetails
+public class User implements UserDetails
 {
 
     @Id
@@ -51,7 +52,7 @@ public class User //implements UserDetails
         return roles.contains(RoleFactory.getAdminRole());
     }
 
-    /*@Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;
     }
@@ -79,5 +80,5 @@ public class User //implements UserDetails
     @Override
     public boolean isEnabled() {
         return true;
-    }*/
+    }
 }

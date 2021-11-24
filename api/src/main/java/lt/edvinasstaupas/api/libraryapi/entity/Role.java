@@ -1,7 +1,7 @@
 package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
-//import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role //implements GrantedAuthority
+public class Role implements GrantedAuthority
 {
 
     @Id
@@ -26,7 +26,7 @@ public class Role //implements GrantedAuthority
     @NotNull
     private String name;
 
-    //@Override
+    @Override
     public String getAuthority() {
         return "ROLE_" + this.name;
     }
