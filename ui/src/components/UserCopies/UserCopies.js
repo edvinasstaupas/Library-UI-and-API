@@ -1,6 +1,7 @@
 import { fetchCopiesByUser, getUserId } from '../../api/apiEndpoints';
 import { useEffect, useState } from 'react';
 import {
+    CircularProgress,
     Container,
     makeStyles,
     Paper,
@@ -19,25 +20,19 @@ const useStyle = makeStyles({
     },
 });
 
-const Copies = () => {
+const UserCopies = () => {
     const classes = useStyle();
-    const [id, setId] = useState( //this is not ideal, but i do not know any other way of doing this
-        getUserId()
-            .then(({ data }) => {
-                console.log(data.id);
-                setId(data.id);
-            })
-            .catch((error) => console.log(error.name))
-    );
     const [copies, setCopies] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetchCopiesByUser(id)
+        fetchCopiesByUser()
             .then(({ data }) => {
                 setCopies(data);
             })
-            .catch((error) => console.log(error.name));
-    }, [id]);
+            .catch((error) => console.log(error.name))
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
         <>
@@ -53,7 +48,13 @@ const Copies = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {copies.map((copy) => (
+                            {loading
+                                ? <TableRow id={-1}>
+                                    <TableCell colSpan={5} align="center">
+                                        <CircularProgress/>
+                                    </TableCell>
+                                </TableRow>
+                                : copies.map((copy) => (
                                 <TableRow id={copy.id}>
                                     <TableCell>{copy.book.title}</TableCell>
                                     <TableCell>
@@ -76,4 +77,4 @@ const Copies = () => {
     );
 };
 
-export default Copies;
+export default UserCopies;

@@ -1,9 +1,9 @@
-import Copies from '../../../components/Copies';
+import UserCopies from '../../../components/UserCopies';
 
-const UserCopiesPage = () => {
+const UserCopiesPage = (id) => {
     return (
         <>
-            <Copies />
+            <UserCopies />
         </>
     );
 };

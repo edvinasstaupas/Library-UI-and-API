@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.security.service.JwtTokenProvider;
 import lt.edvinasstaupas.api.libraryapi.security.dto.LoginRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -46,6 +48,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        response.addHeader("Authorization", jwtProvider.createToken((User) authResult.getPrincipal()));
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+
+        response.addHeader(HttpHeaders.AUTHORIZATION, jwtProvider.createToken((User) authResult.getPrincipal()));
+
+        chain.doFilter(request, response);
     }
 }
