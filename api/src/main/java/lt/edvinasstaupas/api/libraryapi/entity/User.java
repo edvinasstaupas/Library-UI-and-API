@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -46,11 +47,6 @@ public class User implements UserDetails
 
     @ManyToMany()
     private Set<Role> roles;
-
-    //TODO something not right here
-    public boolean hasPrivileges() {
-        return roles.contains(RoleFactory.getAdminRole());
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

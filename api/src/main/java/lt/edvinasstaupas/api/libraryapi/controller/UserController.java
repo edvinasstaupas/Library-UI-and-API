@@ -71,13 +71,9 @@ public class UserController {
         return userService.getAvatarById(id);
     }
 
-    @GetMapping(value = "{id}/copies", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getUserBooks(@PathVariable Long id) {
-        return ok(copyService.getBooksByUserId(userService.getById(id)));
-    }
-
-    @GetMapping(value = "currentUser", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDto> getCurrentUser() {
-        return ok(userService.getByIdDto(1L));
+    @GetMapping(value = "copies", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CopyDto>> getUserBooks() {
+        Long currentUserId = 1L;
+        return ok(copyService.getBooksByUserId(userService.getById(currentUserId)));
     }
 }

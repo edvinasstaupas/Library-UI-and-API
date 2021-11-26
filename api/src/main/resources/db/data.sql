@@ -1,6 +1,8 @@
 insert into USERS (id, first_name, last_name, user_number, password) values ( 1, 'Edvinas', 'Staupas' , '1234', '{bcrypt}$2a$12$Kaw0R6WQ4I/vWA7vayUGyeGmwVfqcdPZf59ZGRszT3jH2iscyOHD.');
 insert into ROLE (id, name) values (1, 'MEMBER');
+insert into ROLE (id, name) values (2, 'ADMIN');
 insert into USERS_ROLES values ( 1, 1 );
+insert into USERS_ROLES values ( 1, 2 );
 insert into AUTHOR (id, isbn, first_name, last_name)
 values (1, 9781782924142, 'J. K.', 'Rowling');
 insert into BOOK (id, isbn, author_id, title, published_at)
