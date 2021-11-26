@@ -19,11 +19,7 @@ public class Author {
 
     private String isbn;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    private String name;
 
     @OneToMany(mappedBy = "author")
     private List<Book> books;

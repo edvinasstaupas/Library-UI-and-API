@@ -3,12 +3,18 @@ package lt.edvinasstaupas.api.libraryapi.controller;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
+import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
+import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.BookService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.notFound;
@@ -20,6 +26,8 @@ import static org.springframework.http.ResponseEntity.ok;
 public class BookController {
 
     private final BookService bookService;
+
+    private final CopyService copyService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BookDto>> getBooks() {
@@ -52,6 +60,16 @@ public class BookController {
             return notFound().build();
         bookService.delete(book);
         return ok().build();
+    }
+
+    @GetMapping(value = "{id}/copies", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CopyDto>> getCopiesByBook(@PathVariable Long id) {
+        return ok(copyService.getAllDtoByBook(bookService.getById(id)));
+    }
+
+    @PostMapping(value = "find", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookDto>> getBooksBySearch(@RequestBody SearchDto searchDto) {
+        return ok(bookService.getAllDtoBySearch(searchDto));
     }
 
 }

@@ -1,8 +1,10 @@
 package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
+import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
+import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
@@ -63,7 +65,16 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         save(copyMapper.convertToDomain(copyDto));
     }
 
+    public CopyDto updateDomain(Copy copy) {
+        save(copy);
+        return copyMapper.convertToDto(copy);
+    }
+
     public List<CopyDto> getBooksByUserId(User user) {
         return copyRepository.findAllByTakenBy(user).stream().map(copyMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    public List<CopyDto> getAllDtoByBook(Book book) {
+        return copyRepository.findAllByBook(book).stream().map(copyMapper::convertToDto).collect(Collectors.toList());
     }
 }

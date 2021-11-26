@@ -10,7 +10,5 @@ public class AuthorDto {
 
     private String isbn;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 }

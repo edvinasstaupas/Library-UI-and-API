@@ -7,8 +7,10 @@ import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.notFound;
@@ -52,6 +54,16 @@ public class CopyController {
             return notFound().build();
         copyService.delete(copy);
         return ok().build();
+    }
+
+    @PostMapping(value = "take", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CopyDto> takenCopyById(@RequestBody CopyDto copyDto) {
+        Copy copy = copyService.getById(copyDto.getId());
+        copy.setTaken(true);
+        copy.setTakenAt(new Date());
+        //TODO add current user here
+        //copy.getTakenBy();
+        return ok(copyService.updateDomain(copy));
     }
 
 }

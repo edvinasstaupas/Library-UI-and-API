@@ -9,7 +9,5 @@ public class CreateAuthorDto {
 
     private String isbn;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 }
