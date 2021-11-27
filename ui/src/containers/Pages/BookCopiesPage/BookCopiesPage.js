@@ -1,4 +1,4 @@
-import BookCopies from "../../../components/BookCopies";
+import BookCopies from '../../../components/BookCopies';
 
 const BookCopiesPage = (id) => {
     return (

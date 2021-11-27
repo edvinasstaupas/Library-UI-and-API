@@ -23,7 +23,7 @@ const useStyle = makeStyles({
 const UserCopies = () => {
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchCopiesByUser()
@@ -48,27 +48,31 @@ const UserCopies = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {loading
-                                ? <TableRow id={-1}>
+                            {loading ? (
+                                <TableRow id={-1}>
                                     <TableCell colSpan={5} align="center">
-                                        <CircularProgress/>
+                                        <CircularProgress />
                                     </TableCell>
                                 </TableRow>
-                                : copies.map((copy) => (
-                                <TableRow id={copy.id}>
-                                    <TableCell>{copy.book.title}</TableCell>
-                                    <TableCell>
-                                        {copy.book.author.firstName}{' '}
-                                        {copy.book.author.lastName}
-                                    </TableCell>
-                                    <TableCell>
-                                        {moment(copy.dueAt).format(
-                                            'YYYY MM DD'
-                                        )}
-                                    </TableCell>
-                                    <TableCell>{copy.library.name}</TableCell>
-                                </TableRow>
-                            ))}
+                            ) : (
+                                copies.map((copy) => (
+                                    <TableRow id={copy.id}>
+                                        <TableCell>{copy.book.title}</TableCell>
+                                        <TableCell>
+                                            {copy.book.author.firstName}{' '}
+                                            {copy.book.author.lastName}
+                                        </TableCell>
+                                        <TableCell>
+                                            {moment(copy.dueAt).format(
+                                                'YYYY MM DD'
+                                            )}
+                                        </TableCell>
+                                        <TableCell>
+                                            {copy.library.name}
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>

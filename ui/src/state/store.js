@@ -1,5 +1,5 @@
-import {combineReducers, createStore} from "redux";
-import userReducer from "./User/UserReducer";
+import { combineReducers, createStore } from 'redux';
+import userReducer from './User/UserReducer';
 
 /**
  * Bendras Redux store
@@ -7,15 +7,16 @@ import userReducer from "./User/UserReducer";
 
 const rootReducer = combineReducers({
     user: userReducer,
-})
+});
 
 const constructStore = () => {
     return createStore(
         rootReducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  //<== reikalingas irankis REDUX DevTools
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__() //<== reikalingas irankis REDUX DevTools
     );
-}
+};
 
-const store = constructStore()
+const store = constructStore();
 
-export default store
+export default store;

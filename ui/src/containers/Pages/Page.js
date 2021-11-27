@@ -3,18 +3,15 @@ import React from 'react';
 import SearchPage from './SearchPage/SearchPage';
 import NewBooksPage from './NewBooksPage/NewBooksPage';
 import UserCopiesPage from './UserCopies/UserCopiesPage';
-import BookCopiesPage from "./BookCopiesPage/BookCopiesPage";
-import Error404Page from "./Error404Page/Error404Page";
-import LoginPage from "./LoginPage/LoginPage";
+import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
+import Error404Page from './Error404Page/Error404Page';
+import LoginPage from './LoginPage/LoginPage';
 
 const Page = () => (
     <>
         <Switch>
-            {/*<Route exact path="/">
-                <SearchPage />
-            </Route>*/}
             <Route exact path="/">
-                <LoginPage />
+                <SearchPage />
             </Route>
             <Route path="/newBooks">
                 <NewBooksPage />
@@ -26,7 +23,7 @@ const Page = () => (
                 <BookCopiesPage />
             </Route>
             <Route exact path="/login">
-                <LoginPage/>
+                <LoginPage />
             </Route>
         </Switch>
     </>

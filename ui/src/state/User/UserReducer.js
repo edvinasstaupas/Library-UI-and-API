@@ -1,12 +1,12 @@
-import {LOGIN} from "./UserModel";
+import { LOGIN } from './UserModel';
 
 const userReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGIN:
-            return action.user
+            return action.user;
         default:
-            return state
+            return state;
     }
-}
+};
 
-export default userReducer
+export default userReducer;

@@ -7,7 +7,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
-    const classes = useStyles()
+    const classes = useStyles();
 
-    const state = useSelector(state => state.user)
+    const state = useSelector((state) => state.user);
 
     return (
         <>
@@ -74,9 +74,10 @@ const Header = () => {
                             Copies
                         </Link>
                     </nav>
-                    {state.loggedInUser != null
-                        ? <p>{state.loggedInUser.fullUserName}</p>
-                        : <Button
+                    {state.loggedInUser != null ? (
+                        <p>{state.loggedInUser.fullUserName}</p>
+                    ) : (
+                        <Button
                             to="/login"
                             color="primary"
                             variant="outlined"
@@ -85,7 +86,7 @@ const Header = () => {
                         >
                             Login
                         </Button>
-                    }
+                    )}
                 </Toolbar>
             </AppBar>
         </>

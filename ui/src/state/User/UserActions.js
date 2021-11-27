@@ -1,8 +1,6 @@
-import {LOGIN} from "./UserModel";
+import { LOGIN } from './UserModel';
 
-export const setLogin = (
-    user
-) => ({
+export const setLogin = (user) => ({
     type: LOGIN,
-    user
-})
+    user,
+});

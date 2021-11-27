@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import {
     Button,
     CircularProgress,
@@ -12,8 +12,8 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import {NavLink} from "react-router-dom";
-import {BookContext} from "../../containers/Pages/SearchPage/SearchPage";
+import { NavLink } from 'react-router-dom';
+import { BookContext } from '../../containers/Pages/SearchPage/SearchPage';
 
 const useStyle = makeStyles({
     table: {
@@ -22,19 +22,16 @@ const useStyle = makeStyles({
 });
 
 const Books = () => {
-
     const classes = useStyle();
 
-    const {books, loading, fromSearch, setBooksAll} = useContext(BookContext)
+    const { books, loading, fromSearch, setBooksAll } = useContext(BookContext);
 
     useEffect(() => {
-        console.log(fromSearch)
-            if (!fromSearch) {
-                setBooksAll()
-            }
+        console.log(fromSearch);
+        if (!fromSearch) {
+            setBooksAll();
         }
-        , [fromSearch, setBooksAll]);
-
+    }, [fromSearch, setBooksAll]);
 
     return (
         <>
@@ -49,21 +46,35 @@ const Books = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {loading
-                                ? <TableRow id={-1}>
+                            {loading ? (
+                                <TableRow id={-1}>
                                     <TableCell colSpan={5} align="center">
-                                        <CircularProgress/>
+                                        <CircularProgress />
                                     </TableCell>
                                 </TableRow>
-                                : books.map((book) => (
-                                <TableRow id={book.id}>
-                                    <TableCell>{book.title}</TableCell>
-                                    <TableCell>
-                                        {book.author.name}
-                                    </TableCell>
-                                    <TableCell><Button component={NavLink} className="btn btn-primary" to={"/book/" + book.id + "/copies"}>Check out</Button></TableCell>
-                                </TableRow>
-                            ))}
+                            ) : (
+                                books.map((book) => (
+                                    <TableRow id={book.id}>
+                                        <TableCell>{book.title}</TableCell>
+                                        <TableCell>
+                                            {book.author.name}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                component={NavLink}
+                                                className="btn btn-primary"
+                                                to={
+                                                    '/book/' +
+                                                    book.id +
+                                                    '/copies'
+                                                }
+                                            >
+                                                Check out
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -72,4 +83,4 @@ const Books = () => {
     );
 };
 
-export default Books
+export default Books;

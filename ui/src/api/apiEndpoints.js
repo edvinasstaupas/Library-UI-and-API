@@ -21,15 +21,15 @@ const fetchCopiesByBook = (id) => {
 };
 
 const fetchBooksBySearch = (searchDto) => {
-    return HTTP.post("/book/find", {
+    return HTTP.post('/book/find', {
         title: searchDto.title,
-        author: searchDto.author
-    })
+        author: searchDto.author,
+    });
 };
 
 const takeCopyByCopyId = (copyId) => {
-    const copy = {id: copyId}
-    return HTTP.post('copy/take', copy)
+    const copy = { id: copyId };
+    return HTTP.post('copy/take', copy);
 };
 
 const fetchBooks = () => {
@@ -42,8 +42,15 @@ const fetchBooks = () => {
     );
 };
 
-const login = (loginData) => HTTP.post("/login", loginData)
+const login = (loginData) => HTTP.post('/login', loginData);
 
-export {fetchCopiesByUser, fetchBooks, fetchCopiesByBook, takeCopyByCopyId, login, fetchBooksBySearch};
+export {
+    fetchCopiesByUser,
+    fetchBooks,
+    fetchCopiesByBook,
+    takeCopyByCopyId,
+    login,
+    fetchBooksBySearch,
+};
 
 // ./
