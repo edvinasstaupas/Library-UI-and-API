@@ -13,6 +13,8 @@ import {
     TableRow,
 } from '@material-ui/core';
 import moment from 'moment';
+import handleError from "../errors";
+import {useHistory} from "react-router-dom";
 
 const useStyle = makeStyles({
     table: {
@@ -25,14 +27,16 @@ const UserCopies = () => {
     const [copies, setCopies] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const history = useHistory();
+
     useEffect(() => {
         fetchCopiesByUser()
             .then(({data}) => {
                 setCopies(data);
             })
-            .catch((error) => console.log(error.name))
+            .catch((error) => history.push(handleError(error.response)))
             .finally(() => setLoading(false));
-    }, []);
+    }, [history]);
 
     return (
         <>
