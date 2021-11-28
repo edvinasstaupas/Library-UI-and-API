@@ -1,13 +1,8 @@
-import {
-    AppBar,
-    Button,
-    Link,
-    makeStyles,
-    Toolbar,
-    Typography,
-} from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {AppBar, Button, Link, makeStyles, Toolbar, Typography,} from '@material-ui/core';
+import {NavLink, useHistory} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {LOGOUT} from "../../state/User/UserModel";
+import {logout} from "../../state/User/UserActions";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -32,6 +27,13 @@ const Header = () => {
     const classes = useStyles();
 
     const state = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const onClickLogOut = () => {
+        dispatch(logout());
+        history.push("/")
+    }
 
     return (
         <>
@@ -73,19 +75,28 @@ const Header = () => {
                         >
                             New books
                         </Link>
-                        <Link
-                            variant="button"
-                            color="textPrimary"
-                            to="/user/copies"
-                            className={classes.link}
-                            activeClassName={classes.active}
-                            component={NavLink}
-                        >
-                            Copies
-                        </Link>
                     </nav>
                     {state.loggedInUser != null ? (
-                        <p>{state.loggedInUser.fullUserName}</p>
+                        <>
+                            <Link
+                                variant="button"
+                                color="textPrimary"
+                                to="/user/copies"
+                                className={classes.link}
+                                activeClassName={classes.active}
+                                component={NavLink}
+                            >
+                                Copies
+                            </Link><p>{state.loggedInUser.fullUserName}</p>
+                            <Button
+                                onClick = {onClickLogOut}
+                                color="primary"
+                                variant="outlined"
+                                className={classes.link}
+                            >
+                                Log out
+                            </Button>
+                        </>
                     ) : (
                         <Button
                             to="/login"

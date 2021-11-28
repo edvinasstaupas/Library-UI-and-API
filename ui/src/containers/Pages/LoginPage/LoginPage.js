@@ -28,7 +28,7 @@ const LoginPage = () => {
                     })
                 );
 
-                history.push('/');
+                history.goBack();
             })
             .finally(() => helper.setSubmitting(false));
     };
