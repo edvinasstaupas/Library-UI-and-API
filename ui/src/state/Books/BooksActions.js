@@ -1,6 +1,15 @@
-import {SEARCH} from './BooksModel';
+import {RESET, SEARCH, SEARCHED} from './BooksModel';
 
-export const setBooks = (books) => ({
+export const setBookList = (bookList) => ({
     type: SEARCH,
-    books,
+    bookList,
+});
+
+export const resetBooks = () => ({
+    type: RESET,
+});
+
+export const setSearched = (searched) => ({
+    type: SEARCHED,
+    searched,
 });

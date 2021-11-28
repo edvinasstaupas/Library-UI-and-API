@@ -2,22 +2,21 @@ import Books from '../../../components/Books';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from "react";
 import {fetchBooks, login} from "../../../api/apiEndpoints";
-import {setBooks} from "../../../state/Books/BooksActions";
+import {setBookList} from "../../../state/Books/BooksActions";
 
 
-const SearchPage = () => {
+const AllBooksPage = () => {
 
-    const state = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
         fetchBooks()
             .then((data) => {
                 dispatch(
-                    setBooks(data.data)
+                    setBookList({bookList: data.data})
                 );
             });
-    }, [state, dispatch])
+    }, [dispatch])
 
     return (
         <>
@@ -26,4 +25,4 @@ const SearchPage = () => {
     )
 };
 
-export default SearchPage;
+export default AllBooksPage;

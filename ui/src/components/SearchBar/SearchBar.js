@@ -2,7 +2,7 @@ import {Field, Form, Formik} from 'formik';
 import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Paper,} from '@material-ui/core';
 import {useDispatch} from "react-redux";
 import {fetchBooksBySearch} from "../../api/apiEndpoints";
-import {setBooks} from "../../state/Books/BooksActions";
+import {setBookList, setSearched} from "../../state/Books/BooksActions";
 
 const SearchBar = () => {
 
@@ -10,16 +10,18 @@ const SearchBar = () => {
 
     const postSearch = (searchData, helper) => {
         if (searchData.title === null) {
-            searchData.title = " ";
+            searchData.title = "";
         }
         if (searchData.author === null) {
-            searchData.author = " ";
+            searchData.author = "";
         }
         fetchBooksBySearch(searchData)
             .then((data) => {
-                dispatch(setBooks(data.data))
+                dispatch(setBookList({bookList: data.data, searched: true}))
             })
-            .finally(() => helper.setSubmitting(false))
+            .finally(() => {
+                helper.setSubmitting(false)
+            })
     }
 
     return (

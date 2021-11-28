@@ -8,9 +8,10 @@ import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchBookException;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,6 +23,9 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     private final BookRepository bookRepository;
 
     private final BookMapper bookMapper;
+
+    @Value("#{${book.new-additional-time} * 86400000}")
+    private Long newBookDateInMillis;
 
     @Override
     public void save(Book book) {
@@ -69,5 +73,16 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
                 .distinct()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<BookDto> getAllDtoNew() {
+        return bookRepository.getAllByPublishedAtAfter(newBookDate())
+                .stream()
+                .map(bookMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private Date newBookDate() {
+        return new Date((new Date()).getTime() - newBookDateInMillis);
     }
 }

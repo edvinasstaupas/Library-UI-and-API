@@ -1,17 +1,17 @@
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Books from '../../../components/Books';
-import {useSelector} from 'react-redux';
-import {useEffect} from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from "react";
+import {resetBooks} from "../../../state/Books/BooksActions";
 
 
 const SearchPage = () => {
 
-    const state = useSelector((state) => state.user);
-
+    const dispatch = useDispatch();
 
     useEffect(() => {
-
-    }, )
+        dispatch(resetBooks())
+    }, [dispatch])
 
     return (
         <>

@@ -1,7 +1,5 @@
-import {useEffect, useState} from 'react';
 import {
     Button,
-    CircularProgress,
     Container,
     makeStyles,
     Paper,
@@ -14,7 +12,7 @@ import {
 } from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {fetchBooks} from "../../api/apiEndpoints";
+import {useEffect} from "react";
 
 const useStyle = makeStyles({
     table: {
@@ -22,16 +20,10 @@ const useStyle = makeStyles({
     },
 });
 
-const Books = (fetchedBooks) => {
+const Books = () => {
     const classes = useStyle();
 
-    const books = useSelector(state => state.books)
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-            setLoading(false)
-    }, []);
+    const state = useSelector(state => state.books)
 
     return (
         <>
@@ -46,14 +38,10 @@ const Books = (fetchedBooks) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {loading ? (
-                                <TableRow id={-1}>
-                                    <TableCell colSpan={5} align="center">
-                                        <CircularProgress/>
-                                    </TableCell>
-                                </TableRow>
+                            {state.bookList == null ? (
+                                <p>asd</p>
                             ) : (
-                                books.map((book) => (
+                                state.bookList.map((book) => (
                                     <TableRow id={book.id}>
                                         <TableCell>{book.title}</TableCell>
                                         <TableCell>

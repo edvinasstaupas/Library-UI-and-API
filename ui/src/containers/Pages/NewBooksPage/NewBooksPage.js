@@ -1,6 +1,7 @@
 import NewBooks from '../../../components/NewBooks';
 
 const NewBooksPage = () => {
+
     return (
         <>
             <NewBooks />

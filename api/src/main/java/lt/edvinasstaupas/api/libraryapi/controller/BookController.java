@@ -72,4 +72,9 @@ public class BookController {
         return ok(bookService.getAllDtoBySearch(searchDto));
     }
 
+    @GetMapping(value = "new", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookDto>> getBooksNew() {
+        return ok(bookService.getAllDtoNew());
+    }
+
 }
