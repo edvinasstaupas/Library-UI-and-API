@@ -1,21 +1,26 @@
-import { Field, Form, Formik } from 'formik';
-import {
-    Box,
-    Button,
-    Container,
-    FormControl,
-    Grid,
-    InputLabel,
-    OutlinedInput,
-    Paper,
-} from '@material-ui/core';
-import { fetchBooksBySearch } from '../../api/apiEndpoints';
-import { Link, Redirect } from 'react-router-dom';
-import { useContext } from 'react';
-import { BookContext } from '../../containers/Pages/SearchPage/SearchPage';
+import {Field, Form, Formik} from 'formik';
+import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Paper,} from '@material-ui/core';
+import {useDispatch} from "react-redux";
+import {fetchBooksBySearch} from "../../api/apiEndpoints";
+import {setBooks} from "../../state/Books/BooksActions";
 
 const SearchBar = () => {
-    const { setFromSearch } = useContext(BookContext);
+
+    const dispatch = useDispatch();
+
+    const postSearch = (searchData, helper) => {
+        if (searchData.title === null) {
+            searchData.title = " ";
+        }
+        if (searchData.author === null) {
+            searchData.author = " ";
+        }
+        fetchBooksBySearch(searchData)
+            .then((data) => {
+                dispatch(setBooks(data.data))
+            })
+            .finally(() => helper.setSubmitting(false))
+    }
 
     return (
         <>
@@ -24,10 +29,7 @@ const SearchBar = () => {
                     title: '',
                     author: '',
                 }}
-                onSubmit={() => {
-                    setFromSearch(true);
-                    setFromSearch(true);
-                }}
+                onSubmit={postSearch}
             >
                 {(props) => (
                     <Container maxWidth="md">

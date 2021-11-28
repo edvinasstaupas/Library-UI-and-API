@@ -42,6 +42,16 @@ const fetchBooks = () => {
     );
 };
 
+const fetchBooksNew = () => {
+    const path = 'book/new';
+    return HTTP.get(path).finally(
+        (response) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(response), 100);
+            })
+    );
+};
+
 const login = (loginData) => HTTP.post('/login', loginData);
 
 export {
@@ -51,6 +61,5 @@ export {
     takeCopyByCopyId,
     login,
     fetchBooksBySearch,
+    fetchBooksNew,
 };
-
-// ./

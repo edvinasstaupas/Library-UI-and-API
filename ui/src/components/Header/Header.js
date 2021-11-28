@@ -1,13 +1,6 @@
-import {
-    AppBar,
-    Button,
-    Link,
-    makeStyles,
-    Toolbar,
-    Typography,
-} from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {AppBar, Button, Link, makeStyles, Toolbar, Typography,} from '@material-ui/core';
+import {NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -53,6 +46,16 @@ const Header = () => {
                         Your internet library
                     </Typography>
                     <nav>
+                        <Link
+                            variant="button"
+                            color="textPrimary"
+                            to="/Search"
+                            className={classes.link}
+                            activeClassName={classes.active}
+                            component={NavLink}
+                        >
+                            Search
+                        </Link>
                         <Link
                             variant="button"
                             color="textPrimary"

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import {
     Button,
     CircularProgress,
@@ -12,8 +12,9 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { BookContext } from '../../containers/Pages/SearchPage/SearchPage';
+import {NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {fetchBooks} from "../../api/apiEndpoints";
 
 const useStyle = makeStyles({
     table: {
@@ -21,17 +22,16 @@ const useStyle = makeStyles({
     },
 });
 
-const Books = () => {
+const Books = (fetchedBooks) => {
     const classes = useStyle();
 
-    const { books, loading, fromSearch, setBooksAll } = useContext(BookContext);
+    const books = useSelector(state => state.books)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log(fromSearch);
-        if (!fromSearch) {
-            setBooksAll();
-        }
-    }, [fromSearch, setBooksAll]);
+
+            setLoading(false)
+    }, []);
 
     return (
         <>
@@ -49,7 +49,7 @@ const Books = () => {
                             {loading ? (
                                 <TableRow id={-1}>
                                     <TableCell colSpan={5} align="center">
-                                        <CircularProgress />
+                                        <CircularProgress/>
                                     </TableCell>
                                 </TableRow>
                             ) : (

@@ -6,11 +6,15 @@ import UserCopiesPage from './UserCopies/UserCopiesPage';
 import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
 import Error404Page from './Error404Page/Error404Page';
 import LoginPage from './LoginPage/LoginPage';
+import AllBooksPage from "./AllBooksPage/AllBooksPage";
 
 const Page = () => (
     <>
         <Switch>
             <Route exact path="/">
+                <AllBooksPage />
+            </Route>
+            <Route path="/search">
                 <SearchPage />
             </Route>
             <Route path="/newBooks">
