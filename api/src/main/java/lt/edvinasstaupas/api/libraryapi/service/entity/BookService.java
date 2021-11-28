@@ -7,6 +7,7 @@ import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchBookException;
 import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
+import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -76,13 +77,9 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     }
 
     public List<BookDto> getAllDtoNew() {
-        return bookRepository.getAllByPublishedAtAfter(newBookDate())
+        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeduction(newBookDateInMillis))
                 .stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());
-    }
-
-    private Date newBookDate() {
-        return new Date((new Date()).getTime() - newBookDateInMillis);
     }
 }
