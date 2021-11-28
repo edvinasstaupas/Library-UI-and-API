@@ -1,4 +1,4 @@
-import { fetchCopiesByUser, getUserId } from '../../api/apiEndpoints';
+import { fetchCopiesByUser } from '../../api/apiEndpoints';
 import { useEffect, useState } from 'react';
 import {
     CircularProgress,

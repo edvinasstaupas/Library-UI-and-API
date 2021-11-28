@@ -1,7 +1,7 @@
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Books from '../../../components/Books';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { resetBooks } from '../../../state/Books/BooksActions';
 
 const SearchPage = () => {
