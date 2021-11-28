@@ -11,6 +11,7 @@ import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -72,6 +73,7 @@ public class UserController {
         return userService.getAvatarById(id);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping(value = "copies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CopyDto>> getUserBooks(Principal principal) {
         return ok(copyService.getBooksByUserId(userService.getByUserNumber(principal.getName())));
