@@ -96,7 +96,7 @@ const BookCopies = () => {
                                                         takeBook(copy.id)
                                                     }
                                                 >
-                                                    Available
+                                                    Reserve
                                                 </Button>
                                             )}
                                         </TableCell>
