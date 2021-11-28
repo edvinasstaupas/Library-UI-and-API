@@ -4,9 +4,9 @@ import SearchPage from './SearchPage/SearchPage';
 import NewBooksPage from './NewBooksPage/NewBooksPage';
 import UserCopiesPage from './UserCopies/UserCopiesPage';
 import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
-import Error404Page from './Error404Page/Error404Page';
 import LoginPage from './LoginPage/LoginPage';
 import AllBooksPage from './AllBooksPage/AllBooksPage';
+import Error404Page from "./Error404Page/Error404Page";
 
 const Page = () => (
     <>
@@ -28,6 +28,9 @@ const Page = () => (
             </Route>
             <Route exact path="/login">
                 <LoginPage />
+            </Route>
+            <Route exact path="/404">
+                <Error404Page />
             </Route>
         </Switch>
     </>

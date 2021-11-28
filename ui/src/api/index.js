@@ -12,5 +12,15 @@ HTTP.interceptors.request.use(config => {
 
     return config
 })
+/*
+
+HTTP.interceptors.response.use(response => response, error => {
+    //console.log(error.response)
+    if (error.response.status === 401) {
+//        history.push("/login")
+        console.log("AAAAAAAAAAAAAAA");
+    }
+    return error;
+});*/
 
 export default HTTP;

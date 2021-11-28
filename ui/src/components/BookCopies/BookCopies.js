@@ -13,7 +13,8 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
+import handleError from "../errors";
 
 const useStyle = makeStyles({
     table: {
@@ -28,22 +29,25 @@ const BookCopies = () => {
     const [copies, setCopies] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const history = useHistory();
+
     useEffect(() => {
-        console.log(id);
         fetchCopiesByBook(id)
             .then(({ data }) => {
                 setCopies(data);
             })
-            .catch((error) => console.log(error.name))
+            .catch((error) => history.push(handleError(error.response)))
             .finally(() => setLoading(false));
-    }, [id]);
+    }, [history, id]);
 
     const takeBook = (copyId) => {
         takeCopyByCopyId(copyId)
             .then(() => {
-                this.context.router.push('http://localhost:3000/user/copies');
+                history.push('/http://localhost:3000/user/copies');
             })
-            .catch((error) => console.log(error.name));
+            .catch((error) => {
+                history.push(handleError(error.response))
+            });
     };
 
     return (
