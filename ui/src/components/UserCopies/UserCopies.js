@@ -64,8 +64,7 @@ const UserCopies = () => {
                                     <TableRow id={copy.id}>
                                         <TableCell>{copy.book.title}</TableCell>
                                         <TableCell>
-                                            {copy.book.author.firstName}{' '}
-                                            {copy.book.author.lastName}
+                                            {copy.book.author.name}
                                         </TableCell>
                                         {new Date(copy.dueAt) <= new Date() ? (
                                             <TableCell
