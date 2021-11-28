@@ -1,7 +1,6 @@
 package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
-import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -18,8 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User implements UserDetails
-{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

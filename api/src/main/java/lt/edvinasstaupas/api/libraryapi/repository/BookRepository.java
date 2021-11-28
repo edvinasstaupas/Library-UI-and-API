@@ -14,5 +14,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b from Book b where b.author.name = :author")
     List<Book> getAllByAuthor(String author);
 
-    List<Book> getAllByPublishedAtAfter (Date date);
+    List<Book> getAllByPublishedAtAfter(Date date);
 }

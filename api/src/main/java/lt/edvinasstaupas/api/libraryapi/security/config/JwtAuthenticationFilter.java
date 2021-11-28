@@ -2,8 +2,8 @@ package lt.edvinasstaupas.api.libraryapi.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
-import lt.edvinasstaupas.api.libraryapi.security.service.JwtTokenProvider;
 import lt.edvinasstaupas.api.libraryapi.security.dto.LoginRequest;
+import lt.edvinasstaupas.api.libraryapi.security.service.JwtTokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

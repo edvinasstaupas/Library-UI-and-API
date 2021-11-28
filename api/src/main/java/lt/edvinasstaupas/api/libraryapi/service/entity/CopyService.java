@@ -17,8 +17,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.ResponseEntity.ok;
-
 @Service
 @RequiredArgsConstructor
 public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto> {

@@ -6,15 +6,12 @@ import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
-import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.BookService;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.notFound;

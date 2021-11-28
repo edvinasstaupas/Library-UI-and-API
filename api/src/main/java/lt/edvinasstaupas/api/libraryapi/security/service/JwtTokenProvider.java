@@ -4,9 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import lt.edvinasstaupas.api.libraryapi.entity.Role;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +27,7 @@ public class JwtTokenProvider {
     @Value("#{${security.jwt.validity-time} * 60 * 1000}")
     private Long tokenValidityInMillis;
 
-    private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
     private SecretKey secretKey;
 
     @PostConstruct
