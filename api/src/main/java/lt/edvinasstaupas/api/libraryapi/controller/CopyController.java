@@ -5,11 +5,15 @@ import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +26,8 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CopyController {
 
     private final CopyService copyService;
+
+    private final UserService userService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CopyDto>> getCopies() {
@@ -56,14 +62,10 @@ public class CopyController {
         return ok().build();
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping(value = "take", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CopyDto> takenCopyById(@RequestBody CopyDto copyDto) {
-        Copy copy = copyService.getById(copyDto.getId());
-        copy.setTaken(true);
-        copy.setTakenAt(new Date());
-        //TODO add current user here
-        //copy.getTakenBy();
-        return ok(copyService.updateDomain(copy));
+    public ResponseEntity<CopyDto> takenCopyById(@RequestBody CopyDto copyDto, Principal principal) {
+        return ok(copyService.takeCopy(copyDto, principal));
     }
 
 }

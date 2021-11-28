@@ -15,4 +15,5 @@ spring:
       password: a
 
 book.new-additional-time: 14  #in days
+copy.return-time: 30  #in days
 security.jwt.validity-time: 30  #in minutes

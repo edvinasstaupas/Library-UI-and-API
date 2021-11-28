@@ -75,8 +75,12 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
         save(user);
     }
 
-    public UserDto getByUserNumber(String userNumber) {
+    public UserDto getByUserNumberDto(String userNumber) {
         return userMapper.convertToDto(userRepository.findByUserNumber(userNumber));
+    }
+
+    public User getByUserNumber(String userNumber) {
+        return userRepository.findByUserNumber(userNumber);
     }
 
     public UserDto uploadAvatar(Long id, MultipartFile avatar) {
