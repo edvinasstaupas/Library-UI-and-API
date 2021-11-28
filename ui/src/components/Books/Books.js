@@ -10,9 +10,9 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import {NavLink} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {useEffect} from "react";
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const useStyle = makeStyles({
     table: {
@@ -23,7 +23,7 @@ const useStyle = makeStyles({
 const Books = () => {
     const classes = useStyle();
 
-    const state = useSelector(state => state.books)
+    const state = useSelector((state) => state.books);
 
     return (
         <>

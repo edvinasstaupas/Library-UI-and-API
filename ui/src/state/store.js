@@ -1,8 +1,8 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import userReducer from './User/UserReducer';
-import booksReducer from "./Books/BooksReducer";
-import thunkMiddleware from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import booksReducer from './Books/BooksReducer';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 /**
  * Bendras Redux store
@@ -13,15 +13,14 @@ const rootReducer = combineReducers({
     books: booksReducer,
 });
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const constructStore = () => {
-    const store =
-        createStore(
-            rootReducer,
-            window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    const store = createStore(
+        rootReducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__() //<== reikalingas irankis REDUX DevTools
-        );
+    );
 
     composedEnhancer();
 

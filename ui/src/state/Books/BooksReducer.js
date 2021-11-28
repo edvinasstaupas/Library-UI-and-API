@@ -1,6 +1,6 @@
-import {SEARCH, RESET, SEARCHED} from './BooksModel';
+import { SEARCH, RESET, SEARCHED } from './BooksModel';
 
-const booksReducer = (state = {bookList: [], searched: false}, action) => {
+const booksReducer = (state = { bookList: [], searched: false }, action) => {
     switch (action.type) {
         case SEARCH:
             return action.bookList;
@@ -13,6 +13,6 @@ const booksReducer = (state = {bookList: [], searched: false}, action) => {
     }
 };
 
-const booksDefaultState = {bookList: [], searched: false};
+const booksDefaultState = { bookList: [], searched: false };
 
 export default booksReducer;

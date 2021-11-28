@@ -1,28 +1,36 @@
-import {Field, Form, Formik} from 'formik';
-import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Paper,} from '@material-ui/core';
-import {useDispatch} from "react-redux";
-import {fetchBooksBySearch} from "../../api/apiEndpoints";
-import {setBookList, setSearched} from "../../state/Books/BooksActions";
+import { Field, Form, Formik } from 'formik';
+import {
+    Box,
+    Button,
+    Container,
+    FormControl,
+    Grid,
+    InputLabel,
+    OutlinedInput,
+    Paper,
+} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { fetchBooksBySearch } from '../../api/apiEndpoints';
+import { setBookList, setSearched } from '../../state/Books/BooksActions';
 
 const SearchBar = () => {
-
     const dispatch = useDispatch();
 
     const postSearch = (searchData, helper) => {
         if (searchData.title === null) {
-            searchData.title = "";
+            searchData.title = '';
         }
         if (searchData.author === null) {
-            searchData.author = "";
+            searchData.author = '';
         }
         fetchBooksBySearch(searchData)
             .then((data) => {
-                dispatch(setBookList({bookList: data.data, searched: true}))
+                dispatch(setBookList({ bookList: data.data, searched: true }));
             })
             .finally(() => {
-                helper.setSubmitting(false)
-            })
-    }
+                helper.setSubmitting(false);
+            });
+    };
 
     return (
         <>
