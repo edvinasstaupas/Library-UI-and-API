@@ -43,7 +43,7 @@ const BookCopies = () => {
     const takeBook = (copyId) => {
         takeCopyByCopyId(copyId)
             .then(() => {
-                history.push('/http://localhost:3000/user/copies');
+                history.push('/user/copies');
             })
             .catch((error) => {
                 history.push(handleError(error.response))
