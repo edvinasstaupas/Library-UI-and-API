@@ -1,4 +1,4 @@
-import { RESET, SEARCH, SEARCHED } from './BooksModel';
+import { RESET_BOOKS, SEARCH, SEARCHED } from './BooksModel';
 
 export const setBookList = (bookList) => ({
     type: SEARCH,
@@ -6,7 +6,7 @@ export const setBookList = (bookList) => ({
 });
 
 export const resetBooks = () => ({
-    type: RESET,
+    type: RESET_BOOKS,
 });
 
 export const setSearched = (searched) => ({
