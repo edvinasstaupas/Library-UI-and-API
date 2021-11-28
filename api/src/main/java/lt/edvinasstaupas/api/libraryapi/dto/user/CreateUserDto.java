@@ -2,7 +2,7 @@ package lt.edvinasstaupas.api.libraryapi.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.edvinasstaupas.api.libraryapi.entity.Address;
+import lt.edvinasstaupas.api.libraryapi.dto.address.CreateAddressDto;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -15,7 +15,9 @@ public class CreateUserDto {
 
     private String password;
 
-    private Address address;
+    private String password2;
+
+    private CreateAddressDto address;
 
     private MultipartFile avatar;
 }

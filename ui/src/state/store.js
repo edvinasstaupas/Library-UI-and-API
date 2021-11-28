@@ -3,6 +3,7 @@ import userReducer from './User/UserReducer';
 import booksReducer from './Books/BooksReducer';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import newUserReducer from "./NewUser/NewUserReducer";
 
 /**
  * Bendras Redux store
@@ -11,6 +12,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const rootReducer = combineReducers({
     user: userReducer,
     books: booksReducer,
+    newUser: newUserReducer,
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
