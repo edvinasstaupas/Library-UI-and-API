@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.notFound;
@@ -72,8 +73,7 @@ public class UserController {
     }
 
     @GetMapping(value = "copies", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getUserBooks() {
-        Long currentUserId = 1L;
-        return ok(copyService.getBooksByUserId(userService.getById(currentUserId)));
+    public ResponseEntity<List<CopyDto>> getUserBooks(Principal principal) {
+        return ok(copyService.getBooksByUserId(userService.getByUserNumber(principal.getName())));
     }
 }
