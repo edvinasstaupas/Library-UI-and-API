@@ -13,6 +13,6 @@ public class LoginController {
 
     @PostMapping
     public LoginResponse login(@AuthenticationPrincipal User user) {
-        return  new LoginResponse(user);
+        return new LoginResponse(user);
     }
 }
