@@ -6,7 +6,7 @@ import UserCopiesPage from './UserCopies/UserCopiesPage';
 import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
 import LoginPage from './LoginPage/LoginPage';
 import AllBooksPage from './AllBooksPage/AllBooksPage';
-import Error404Page from "./Error404Page/Error404Page";
+import Error404Page from './Error404Page/Error404Page';
 
 const Page = () => (
     <>

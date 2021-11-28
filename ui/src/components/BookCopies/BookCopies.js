@@ -13,8 +13,8 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import {useHistory, useParams} from 'react-router-dom';
-import handleError from "../errors";
+import { useHistory, useParams } from 'react-router-dom';
+import handleError from '../errors';
 
 const useStyle = makeStyles({
     table: {
@@ -46,7 +46,7 @@ const BookCopies = () => {
                 history.push('/user/copies');
             })
             .catch((error) => {
-                history.push(handleError(error.response))
+                history.push(handleError(error.response));
             });
     };
 

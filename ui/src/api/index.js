@@ -1,17 +1,17 @@
 import axios from 'axios';
-import store from "../state/store";
+import store from '../state/store';
 
 const HTTP = axios.create({
     baseURL: '/api/',
 });
 
-HTTP.interceptors.request.use(config => {
+HTTP.interceptors.request.use((config) => {
     if (store.getState().user.jwt) {
-        config.headers.authorization = "Bearer " + store.getState().user.jwt
+        config.headers.authorization = 'Bearer ' + store.getState().user.jwt;
     }
 
-    return config
-})
+    return config;
+});
 /*
 
 HTTP.interceptors.response.use(response => response, error => {

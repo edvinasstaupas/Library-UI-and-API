@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT} from './UserModel';
+import { LOGIN, LOGOUT } from './UserModel';
 
 export const setLogin = (user) => ({
     type: LOGIN,
@@ -8,4 +8,3 @@ export const setLogin = (user) => ({
 export const logout = () => ({
     type: LOGOUT,
 });
-

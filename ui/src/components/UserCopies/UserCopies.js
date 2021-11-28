@@ -1,5 +1,5 @@
-import {fetchCopiesByUser} from '../../api/apiEndpoints';
-import {useEffect, useState} from 'react';
+import { fetchCopiesByUser } from '../../api/apiEndpoints';
+import { useEffect, useState } from 'react';
 import {
     CircularProgress,
     Container,
@@ -13,8 +13,8 @@ import {
     TableRow,
 } from '@material-ui/core';
 import moment from 'moment';
-import handleError from "../errors";
-import {useHistory} from "react-router-dom";
+import handleError from '../errors';
+import { useHistory } from 'react-router-dom';
 
 const useStyle = makeStyles({
     table: {
@@ -31,7 +31,7 @@ const UserCopies = () => {
 
     useEffect(() => {
         fetchCopiesByUser()
-            .then(({data}) => {
+            .then(({ data }) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
@@ -56,7 +56,7 @@ const UserCopies = () => {
                             {loading ? (
                                 <TableRow id={-1}>
                                     <TableCell colSpan={5} align="center">
-                                        <CircularProgress/>
+                                        <CircularProgress />
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -67,19 +67,23 @@ const UserCopies = () => {
                                             {copy.book.author.firstName}{' '}
                                             {copy.book.author.lastName}
                                         </TableCell>
-                                        {new Date(copy.dueAt) <= new Date()
-                                            ? (<TableCell style={{backgroundColor: 'red'}}>
+                                        {new Date(copy.dueAt) <= new Date() ? (
+                                            <TableCell
+                                                style={{
+                                                    backgroundColor: 'red',
+                                                }}
+                                            >
                                                 {moment(copy.dueAt).format(
                                                     'YYYY MM DD'
                                                 )}
-                                            </TableCell>)
-                                            :
-                                            (<TableCell>
+                                            </TableCell>
+                                        ) : (
+                                            <TableCell>
                                                 {moment(copy.dueAt).format(
                                                     'YYYY MM DD'
                                                 )}
-                                            </TableCell>)
-                                        }
+                                            </TableCell>
+                                        )}
                                         <TableCell>
                                             {copy.library.name}
                                         </TableCell>

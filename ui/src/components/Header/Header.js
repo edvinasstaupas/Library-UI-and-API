@@ -1,8 +1,15 @@
-import {AppBar, Button, Link, makeStyles, Toolbar, Typography,} from '@material-ui/core';
-import {NavLink, useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {LOGOUT} from "../../state/User/UserModel";
-import {logout} from "../../state/User/UserActions";
+import {
+    AppBar,
+    Button,
+    Link,
+    makeStyles,
+    Toolbar,
+    Typography,
+} from '@material-ui/core';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOGOUT } from '../../state/User/UserModel';
+import { logout } from '../../state/User/UserActions';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -32,8 +39,8 @@ const Header = () => {
 
     const onClickLogOut = () => {
         dispatch(logout());
-        history.push("/")
-    }
+        history.push('/');
+    };
 
     return (
         <>
@@ -87,9 +94,10 @@ const Header = () => {
                                 component={NavLink}
                             >
                                 Copies
-                            </Link><p>{state.loggedInUser.fullUserName}</p>
+                            </Link>
+                            <p>{state.loggedInUser.fullUserName}</p>
                             <Button
-                                onClick = {onClickLogOut}
+                                onClick={onClickLogOut}
                                 color="primary"
                                 variant="outlined"
                                 className={classes.link}
