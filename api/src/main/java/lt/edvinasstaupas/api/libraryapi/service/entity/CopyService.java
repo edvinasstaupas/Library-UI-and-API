@@ -1,10 +1,8 @@
 package lt.edvinasstaupas.api.libraryapi.service.entity;
 
 import lombok.RequiredArgsConstructor;
-import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
-import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
@@ -13,11 +11,9 @@ import lt.edvinasstaupas.api.libraryapi.repository.CopyRepository;
 import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,8 +29,8 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
 
     private final UserService userService;
 
-    @Value("#{${copy.return-time} * 86400000}")
-    private Long dateToReturnBookInMillis;
+    @Value("${copy.return-time}")
+    private Long dateToReturnBookInDays;
 
     @Override
     public void save(Copy copy) {
@@ -92,7 +88,8 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
     public CopyDto takeCopy(CopyDto copyDto, Principal principal) {
         Copy copy = getById(copyDto.getId());
         copy.setTaken(true);
-        copy.setTakenAt(DateService.getDateWithAddition(dateToReturnBookInMillis));
+        copy.setTakenAt(DateService.getCurrentDate());
+        copy.setDueAt(DateService.getDateWithAdditionalDays(dateToReturnBookInDays));
         copy.setTakenBy(userService.getByUserNumber(principal.getName()));
         updateDomain(copy);
         return copyMapper.convertToDto(copy);

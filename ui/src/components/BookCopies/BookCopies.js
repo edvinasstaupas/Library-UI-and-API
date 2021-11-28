@@ -78,7 +78,7 @@ const BookCopies = () => {
                                             {copy.library.name}
                                         </TableCell>
                                         <TableCell>
-                                            {copy.library.taken ? (
+                                            {copy.taken ? (
                                                 <Button
                                                     variant="outlined"
                                                     disabled

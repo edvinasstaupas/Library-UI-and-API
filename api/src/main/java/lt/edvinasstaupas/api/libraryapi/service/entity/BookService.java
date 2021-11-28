@@ -12,7 +12,6 @@ import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,8 +24,8 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
 
     private final BookMapper bookMapper;
 
-    @Value("#{${book.new-additional-time} * 86400000}")
-    private Long newBookDateInMillis;
+    @Value("${book.new-additional-time}")
+    private Long newBookDateInDays;
 
     @Override
     public void save(Book book) {
@@ -77,7 +76,7 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     }
 
     public List<BookDto> getAllDtoNew() {
-        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeduction(newBookDateInMillis))
+        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeductedDays(newBookDateInDays))
                 .stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());
