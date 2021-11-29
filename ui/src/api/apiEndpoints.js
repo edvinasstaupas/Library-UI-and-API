@@ -52,7 +52,7 @@ const fetchBooksNew = () => {
     );
 };
 
-const login = (loginData) => HTTP.post('/login', loginData);
+const login = (loginData) => HTTP.post('login', loginData);
 
 const register = (registerData) => HTTP.post('register', registerData);
 
