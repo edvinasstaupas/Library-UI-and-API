@@ -5,7 +5,6 @@ import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
-import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,8 +22,6 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CopyController {
 
     private final CopyService copyService;
-
-    private final UserService userService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CopyDto>> getCopies() {

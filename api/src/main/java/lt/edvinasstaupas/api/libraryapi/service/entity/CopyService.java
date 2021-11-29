@@ -9,6 +9,7 @@ import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchCopyException;
 import lt.edvinasstaupas.api.libraryapi.repository.CopyRepository;
 import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.user.UserService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
