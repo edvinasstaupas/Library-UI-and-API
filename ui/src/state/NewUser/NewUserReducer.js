@@ -24,6 +24,6 @@ const newUserReducer = (state = initialUserState, action) => {
     }
 };
 
-const initialUserState = {firstStepInfo: {}, secondStepInfo: {}, thirdStepInfo: {}};
+const initialUserState = {};
 
 export default newUserReducer;
