@@ -6,7 +6,7 @@ import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
 import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
-import lt.edvinasstaupas.api.libraryapi.service.entity.UserService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.user.UserService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

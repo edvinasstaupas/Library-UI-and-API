@@ -8,7 +8,7 @@ const Register2 = (step) => {
     const dispatch = useDispatch();
 
     const nextStep2 = (data, helper) => {
-        dispatch(setSecondStepInfo({secondStepInfo: data}));
+        dispatch(setSecondStepInfo(data));
         helper.setSubmitting(false);
         step.setStep(3);
     }

@@ -1,4 +1,4 @@
-package lt.edvinasstaupas.api.libraryapi.service.entity;
+package lt.edvinasstaupas.api.libraryapi.service.entity.user;
 
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.user.CreateUserDto;
@@ -6,6 +6,9 @@ import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.User;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchUserException;
 import lt.edvinasstaupas.api.libraryapi.repository.UserRepository;
+import lt.edvinasstaupas.api.libraryapi.service.entity.AddressService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.IEntityService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.RoleFactory;
 import lt.edvinasstaupas.api.libraryapi.service.file.FileService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.UserMapper;
 import org.springframework.core.io.Resource;
@@ -13,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +35,12 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
     private final UserMapper userMapper;
 
     private final FileService fileService;
+
+    private final UserNumberService userNumberService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final AddressService addressService;
 
     @Override
     public void save(User user) {
@@ -99,5 +109,17 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
     @Override
     public UserDetails loadUserByUsername(String userNumber) throws UsernameNotFoundException {
         return userRepository.loadByUserNumber(userNumber);
+    }
+
+    public UserDto register(CreateUserDto createUserDto) {
+        if (!createUserDto.getPassword().equals(createUserDto.getPassword2()))
+            throw new RuntimeException(); //TODO change to specific exception
+        User user = userMapper.convertToDomainFromCreate(createUserDto);
+        user.setUserNumber(userNumberService.getUserNumber());
+        user.getRoles().add(RoleFactory.getUserRole());
+        user.setPassword("{bcrypt}" + passwordEncoder.encode(user.getPassword()));
+        addressService.save(user.getAddress());
+        save(user);
+        return userMapper.convertToDto(user);
     }
 }

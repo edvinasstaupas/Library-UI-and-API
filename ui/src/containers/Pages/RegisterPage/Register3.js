@@ -11,7 +11,7 @@ const Register3 = () => {
     const history = useHistory();
 
     const nextStep3 = (data, helper) => {
-        dispatch(setThirdStepInfo({ThirdStepInfo: data}));
+        dispatch(setThirdStepInfo(data));
         helper.setSubmitting(false);
         history.push("/register/finish");
     }

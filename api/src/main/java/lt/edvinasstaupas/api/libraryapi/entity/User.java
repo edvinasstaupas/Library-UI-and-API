@@ -5,9 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -40,10 +38,10 @@ public class User implements UserDetails {
     private Address address;
 
     @OneToMany(mappedBy = "takenBy")
-    private List<Copy> copies;
+    private List<Copy> copies = new ArrayList<>();
 
     @ManyToMany()
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

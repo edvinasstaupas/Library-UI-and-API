@@ -8,6 +8,7 @@ import LoginPage from './LoginPage/LoginPage';
 import AllBooksPage from './AllBooksPage/AllBooksPage';
 import Error404Page from './Error404Page/Error404Page';
 import RegisterPage from "./RegisterPage/RegisterPage";
+import RegisterFinish from "./RegisterPage/RegisterFinish";
 
 const Page = () => (
     <>
@@ -34,7 +35,7 @@ const Page = () => (
                 <RegisterPage />
             </Route>
             <Route exact path="/register/finish">
-                <RegisterPage />
+                <RegisterFinish />
             </Route>
             <Route exact path="/404">
                 <Error404Page />
