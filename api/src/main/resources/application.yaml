@@ -9,10 +9,6 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 5MB
-  security:
-    user:
-      name: user
-      password: a
 
 book.new-additional-time: 14  #in days
 copy.return-time: 30  #in days
