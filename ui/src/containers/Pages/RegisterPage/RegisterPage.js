@@ -14,10 +14,10 @@ const RegisterPage = () => {
     const [step, setStep] = useState(1);
 
     useEffect(() => {
-        dispatch(resetNewUser())
-        if (state.loggedInUser == null) {
+        if (state.loggedInUser != null) {
             history.push("/");
         }
+        dispatch(resetNewUser())
     }, [dispatch, history, state])
 
     return (
@@ -35,96 +35,3 @@ const RegisterPage = () => {
 }
 
 export default RegisterPage;
-/*
-
-    const postLogin = (loginData, helper) => {
-        login(loginData)
-            .then(({data: userResponseDto, headers: {authorization}}) => {
-                dispatch(
-                    setLogin({
-                        loggedInUser: userResponseDto,
-                        jwt: authorization,
-                    })
-                );
-
-                history.goBack();
-            })
-            .finally(() => helper.setSubmitting(false));
-    };
-
-    return (
-        <>
-            <Formik
-                initialValues={{
-                    userNumber: '',
-                    password: '',
-                }}
-                onSubmit={postLogin}
-            >
-                {(props) => (
-                    <Container maxWidth="sm">
-                        <Paper elevation={10}>
-                            <Box p={3}>
-                                <Grid
-                                    align="center"
-                                    container
-                                    justify="center"
-                                    alignItems="center"
-                                >
-                                    <h1>Register</h1>
-                                </Grid>
-                                <Form onSubmit={props.handleSubmit}>
-                                    <div>
-
-                                        <hr style={{
-                                            color: "black",
-                                            backgroundColor: "black",
-                                            height: 1
-                                        }}/>
-
-
-
-                                        <hr style={{
-                                            color: "black",
-                                            backgroundColor: "black",
-                                            height: 1
-                                        }}/>
-
-
-                                    </div>
-                                    <Box p={3}>
-                                        <Grid
-                                            align="center"
-                                            container
-                                            justify="center"
-                                            alignItems="center"
-                                        >
-                                            <Grid item>
-                                                {props.isSubmitting ? (
-                                                    <span>Submiting...</span>
-                                                ) : (
-                                                    <Button
-                                                        color="primary"
-                                                        variant="contained"
-                                                        type="submit"
-                                                    >
-                                                        Login
-                                                    </Button>
-                                                )}
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
-                                    Already have an account?{' '}
-                                    <Button component={NavLink} to="/login">
-                                        Register
-                                    </Button>
-                                </Form>
-                            </Box>
-                        </Paper>
-                    </Container>
-                )}
-            </Formik>
-        </>
-    );
-};
-*/
