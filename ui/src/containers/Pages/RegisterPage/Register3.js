@@ -5,15 +5,14 @@ import {useHistory} from "react-router-dom";
 import {register} from '../../../api/apiEndpoints';
 import {setThirdStepInfo} from "../../../state/NewUser/NewUserActions";
 
-const Register3 = () => {
+const Register3 = (step) => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const nextStep3 = (data, helper) => {
         dispatch(setThirdStepInfo(data));
         helper.setSubmitting(false);
-        history.push("/register/finish");
+        step.setStep(4);
     }
 
     return (

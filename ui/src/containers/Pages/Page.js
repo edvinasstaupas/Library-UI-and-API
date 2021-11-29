@@ -34,9 +34,6 @@ const Page = () => (
             <Route exact path="/register">
                 <RegisterPage />
             </Route>
-            <Route exact path="/register/finish">
-                <RegisterFinish />
-            </Route>
             <Route exact path="/404">
                 <Error404Page />
             </Route>
