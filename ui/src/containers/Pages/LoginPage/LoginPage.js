@@ -57,6 +57,7 @@ const LoginPage = () => {
                                 <Form onSubmit={props.handleSubmit}>
                                     <div>
                                         <FormControl
+                                            required
                                             fullWidth
                                             variant="outlined"
                                             margin="dense"
@@ -73,6 +74,7 @@ const LoginPage = () => {
                                         </FormControl>
 
                                         <FormControl
+                                            required
                                             fullWidth
                                             variant="outlined"
                                             margin="dense"
