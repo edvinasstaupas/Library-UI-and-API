@@ -58,4 +58,8 @@ public class AuthorService implements IEntityService<Author, AuthorDto, CreateAu
     public void update(AuthorDto authorDto) {
         save(authorMapper.convertToDomain(authorDto));
     }
+
+    public List<Author> getAllByName(String name) {
+        return authorRepository.getAllByNameContainingIgnoreCase(name);
+    }
 }
