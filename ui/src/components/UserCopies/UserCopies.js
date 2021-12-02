@@ -6,11 +6,10 @@ import {
     makeStyles,
     Paper,
     Table,
-    TableBody,
-    TableCell,
+    TableBody, TableCell,
     TableContainer,
     TableHead,
-    TableRow,
+    TableRow, withStyles,
 } from '@material-ui/core';
 import moment from 'moment';
 import handleError from '../errors';
@@ -18,9 +17,28 @@ import { useHistory } from 'react-router-dom';
 
 const useStyle = makeStyles({
     table: {
-        minWidth: 650,
+        minWidth: 700,
     },
 });
+
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 const UserCopies = () => {
     const classes = useStyle();
@@ -45,29 +63,29 @@ const UserCopies = () => {
                 <TableContainer component={Paper} className={classes.table}>
                     <Table aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Author</TableCell>
-                                <TableCell>Due at</TableCell>
-                                <TableCell>Library</TableCell>
-                            </TableRow>
+                            <StyledTableRow>
+                                <StyledTableCell>Title</StyledTableCell>
+                                <StyledTableCell align="center">Author</StyledTableCell>
+                                <StyledTableCell align="center">Due at</StyledTableCell>
+                                <StyledTableCell align="center">Library</StyledTableCell>
+                            </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {loading ? (
-                                <TableRow id={-1}>
-                                    <TableCell colSpan={5} align="center">
+                                <StyledTableRow id={-1}>
+                                    <StyledTableCell colSpan={5} align="center">
                                         <CircularProgress />
-                                    </TableCell>
-                                </TableRow>
+                                    </StyledTableCell>
+                                </StyledTableRow>
                             ) : (
                                 copies.map((copy) => (
-                                    <TableRow id={copy.id}>
-                                        <TableCell>{copy.book.title}</TableCell>
-                                        <TableCell>
+                                    <StyledTableRow id={copy.id}>
+                                        <StyledTableCell>{copy.book.title}</StyledTableCell>
+                                        <StyledTableCell align="center">
                                             {copy.book.author.name}
-                                        </TableCell>
+                                        </StyledTableCell>
                                         {new Date(copy.dueAt) <= new Date() ? (
-                                            <TableCell
+                                            <StyledTableCell align="center"
                                                 style={{
                                                     backgroundColor: 'red',
                                                 }}
@@ -75,18 +93,18 @@ const UserCopies = () => {
                                                 {moment(copy.dueAt).format(
                                                     'YYYY MM DD'
                                                 )}
-                                            </TableCell>
+                                            </StyledTableCell>
                                         ) : (
-                                            <TableCell>
+                                            <StyledTableCell align="center">
                                                 {moment(copy.dueAt).format(
                                                     'YYYY MM DD'
                                                 )}
-                                            </TableCell>
+                                            </StyledTableCell>
                                         )}
-                                        <TableCell>
+                                        <StyledTableCell align="center">
                                             {copy.library.name}
-                                        </TableCell>
-                                    </TableRow>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
                                 ))
                             )}
                         </TableBody>
