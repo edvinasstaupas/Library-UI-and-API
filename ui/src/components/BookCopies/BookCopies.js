@@ -1,5 +1,5 @@
-import { fetchCopiesByBook, takeCopyByCopyId } from '../../api/apiEndpoints';
-import { useEffect, useState } from 'react';
+import {fetchCopiesByBook, takeCopyByCopyId} from '../../api/apiEndpoints';
+import {useEffect, useState} from 'react';
 import {
     Button,
     CircularProgress,
@@ -13,7 +13,7 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import { useHistory, useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import handleError from '../errors';
 
 const useStyle = makeStyles({
@@ -23,7 +23,7 @@ const useStyle = makeStyles({
 });
 
 const BookCopies = () => {
-    const { id } = useParams();
+    const {id} = useParams();
 
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
@@ -33,7 +33,7 @@ const BookCopies = () => {
 
     useEffect(() => {
         fetchCopiesByBook(id)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
@@ -64,10 +64,14 @@ const BookCopies = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {loading ? (
+                            {copies.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={5} align="center">List is empty</TableCell>
+                                </TableRow>
+                            ) : [loading ? (
                                 <TableRow id={-1}>
                                     <TableCell colSpan={5} align="center">
-                                        <CircularProgress />
+                                        <CircularProgress/>
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -101,7 +105,7 @@ const BookCopies = () => {
                                         </TableCell>
                                     </TableRow>
                                 ))
-                            )}
+                            )]}
                         </TableBody>
                     </Table>
                 </TableContainer>

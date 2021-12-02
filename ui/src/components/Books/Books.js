@@ -10,9 +10,8 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import {NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const useStyle = makeStyles({
     table: {
@@ -38,31 +37,38 @@ const Books = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {state.bookList == null ? (
-                                <p>asd</p>
-                            ) : (
-                                state.bookList.map((book) => (
-                                    <TableRow id={book.id}>
-                                        <TableCell>{book.title}</TableCell>
-                                        <TableCell>
-                                            {book.author.name}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button
-                                                component={NavLink}
-                                                className="btn btn-primary"
-                                                to={
-                                                    '/book/' +
-                                                    book.id +
-                                                    '/copies'
-                                                }
-                                            >
-                                                Check out
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            )}
+                            {state.bookList == null ? null :
+                                ([state.bookList.length === 0 ?
+                                        (<TableRow>
+                                            <TableCell colSpan={5} align="center">List is empty</TableCell>
+                                        </TableRow>)
+                                        :
+                                        (state.bookList.map((book) => (
+                                                    <TableRow id={book.id}>
+                                                        <TableCell>{book.title}</TableCell>
+                                                        <TableCell>
+                                                            {book.author.name}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Button
+                                                                component={NavLink}
+                                                                className="btn btn-primary"
+                                                                to={
+                                                                    '/book/' +
+                                                                    book.id +
+                                                                    '/copies'
+                                                                }
+                                                            >
+                                                                Check out
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            )
+                                        )
+                                    ]
+                                )
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
