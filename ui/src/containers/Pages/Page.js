@@ -26,6 +26,9 @@ const Page = () => (
             <Route path="/user/copies">
                 <UserCopiesPage />
             </Route>
+            <Route path="/user/{userNumber}/copies">
+                <UserCopiesPage />
+            </Route>
             <Route path="/book/:id/copies">
                 <BookCopiesPage />
             </Route>

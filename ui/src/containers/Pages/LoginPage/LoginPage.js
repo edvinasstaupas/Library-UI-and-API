@@ -49,7 +49,7 @@ const LoginPage = () => {
                                 <Grid
                                     align="center"
                                     container
-                                    justify="center"
+                                    justifyContent="center"
                                     alignItems="center"
                                 >
                                     <h1>Login</h1>
@@ -95,7 +95,7 @@ const LoginPage = () => {
                                         <Grid
                                             align="center"
                                             container
-                                            justify="center"
+                                            justifyContent="center"
                                             alignItems="center"
                                         >
                                             <Grid item>

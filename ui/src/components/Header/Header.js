@@ -14,6 +14,7 @@ import { logout } from '../../state/User/UserActions';
 const useStyles = makeStyles((theme) => ({
     appBar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
+        marginBottom: 20
     },
     toolbarTitle: {
         flexGrow: 1,

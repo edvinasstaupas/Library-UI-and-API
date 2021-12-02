@@ -91,7 +91,7 @@ const SearchBar = () => {
                                             <Grid
                                                 align="center"
                                                 container
-                                                justify="center"
+                                                justifyContent="center"
                                                 alignItems="center"
                                             >
                                                 <Grid item>

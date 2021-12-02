@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
             theme.palette.type === 'light'
                 ? theme.palette.grey[200]
                 : theme.palette.grey[800],
+        textAlign: 'center',
     },
 }));
 
@@ -20,7 +21,7 @@ const Footer = () => {
                 <Typography variant="body1">Your internet library</Typography>
                 <Typography variant="body2" color="textSecondary">
                     {'Copyright © '}
-                    <Link color="inherit" href="https://material-ui.com/">
+                    <Link color="inherit">
                         YIL
                     </Link>{' '}
                     {new Date().getFullYear()}

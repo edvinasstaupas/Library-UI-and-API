@@ -31,7 +31,7 @@ const Register3 = (step) => {
                                 <Grid
                                     align="center"
                                     container
-                                    justify="center"
+                                    justifyContent="center"
                                     alignItems="center"
                                 >
                                     <h1>Password</h1>
@@ -75,7 +75,7 @@ const Register3 = (step) => {
                                         <Grid
                                             align="center"
                                             container
-                                            justify="center"
+                                            justifyContent="center"
                                             alignItems="center"
                                         >
                                             <Grid item>
