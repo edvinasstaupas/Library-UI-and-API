@@ -9,6 +9,7 @@ import AllBooksPage from './AllBooksPage/AllBooksPage';
 import Error404Page from './Error404Page/Error404Page';
 import RegisterPage from "./RegisterPage/RegisterPage";
 import RegisterFinish from "./RegisterPage/RegisterFinish";
+import LibrarianPage from "./LibrarianPage/LibrarianPage";
 
 const Page = () => (
     <>
@@ -36,6 +37,9 @@ const Page = () => (
             </Route>
             <Route exact path="/404">
                 <Error404Page />
+            </Route>
+            <Route exact path="/librarian">
+                <LibrarianPage />
             </Route>
         </Switch>
     </>

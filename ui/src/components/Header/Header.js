@@ -85,6 +85,17 @@ const Header = () => {
                     </nav>
                     {state.loggedInUser != null ? (
                         <>
+                        {state.loggedInUser.roles.includes("ROLE_LIBRARIAN") ?
+                            <Link
+                                variant="button"
+                                color="textPrimary"
+                                to="/librarian"
+                                className={classes.link}
+                                activeClassName={classes.active}
+                                component={NavLink}
+                            >
+                                Librarian page
+                            </Link> : <p></p>}
                             <Link
                                 variant="button"
                                 color="textPrimary"
@@ -93,7 +104,7 @@ const Header = () => {
                                 activeClassName={classes.active}
                                 component={NavLink}
                             >
-                                Copies
+                                My copies
                             </Link>
                             <p>{state.loggedInUser.fullUserName}</p>
                             <Button
