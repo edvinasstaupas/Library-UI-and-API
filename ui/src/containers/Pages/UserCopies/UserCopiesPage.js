@@ -1,6 +1,6 @@
 import UserCopies from '../../../components/UserCopies';
 
-const UserCopiesPage = (id) => {
+const UserCopiesPage = (userNumber) => {
     return (
         <>
             <UserCopies />
