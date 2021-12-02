@@ -34,12 +34,10 @@ public class UserController {
         return ok(userService.getAllDto());
     }
 
-    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        User user = userService.getById(id);
-        if (user == null)
-            return notFound().build();
-        return ok(userService.getByIdDto(id));
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    @GetMapping(value = "{userNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> getUserByUserNumber(@PathVariable String userNumber) {
+        return ok(userService.getByUserNumberDto(userNumber));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

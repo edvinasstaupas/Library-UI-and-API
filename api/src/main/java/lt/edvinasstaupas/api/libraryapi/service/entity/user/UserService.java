@@ -86,11 +86,14 @@ public class UserService implements IEntityService<User, UserDto, CreateUserDto>
     }
 
     public UserDto getByUserNumberDto(String userNumber) {
-        return userMapper.convertToDto(userRepository.findByUserNumber(userNumber));
+        return userMapper.convertToDto(getByUserNumber(userNumber));
     }
 
     public User getByUserNumber(String userNumber) {
-        return userRepository.findByUserNumber(userNumber);
+        User user = userRepository.findByUserNumber(userNumber);
+        if (user == null)
+            throw new NoSuchUserException(userNumber);
+        return user;
     }
 
     public UserDto uploadAvatar(Long id, MultipartFile avatar) {
