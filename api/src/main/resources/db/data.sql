@@ -6,8 +6,8 @@ values (1, 'MEMBER'),
        (3, 'LIBRARIAN');
 insert into USERS_ROLES
 values (1, 1),
-(1, 3),
-(1, 2);
+       (1, 3),
+       (1, 2);
 insert into AUTHOR (id, isbn, name)
 values (1, 9781782924142, 'J. K. Rowling');
 insert into BOOK (id, isbn, author_id, title, published_at)

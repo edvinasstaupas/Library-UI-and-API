@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.controller;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
-import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
 import lt.edvinasstaupas.api.libraryapi.service.entity.user.UserService;

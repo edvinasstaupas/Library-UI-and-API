@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.repository;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
 import java.util.List;
