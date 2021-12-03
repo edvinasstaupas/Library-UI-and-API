@@ -6,15 +6,14 @@ import {
     makeStyles,
     Paper,
     Table,
-    TableBody, TableCell,
+    TableBody,
     TableContainer,
     TableHead,
-    TableRow, withStyles,
 } from '@material-ui/core';
 import moment from 'moment';
 import handleError from '../errors';
 import { useHistory } from 'react-router-dom';
-import {StyledTableCell, StyledTableRow} from "../StyledItems";
+import { StyledTableCell, StyledTableRow } from '../StyledItems';
 
 const useStyle = makeStyles({
     table: {
@@ -47,9 +46,15 @@ const UserCopies = () => {
                         <TableHead>
                             <StyledTableRow>
                                 <StyledTableCell>Title</StyledTableCell>
-                                <StyledTableCell align="center">Author</StyledTableCell>
-                                <StyledTableCell align="center">Due at</StyledTableCell>
-                                <StyledTableCell align="center">Library</StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Author
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Due at
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Library
+                                </StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
@@ -62,12 +67,15 @@ const UserCopies = () => {
                             ) : (
                                 copies.map((copy) => (
                                     <StyledTableRow id={copy.id}>
-                                        <StyledTableCell>{copy.book.title}</StyledTableCell>
+                                        <StyledTableCell>
+                                            {copy.book.title}
+                                        </StyledTableCell>
                                         <StyledTableCell align="center">
                                             {copy.book.author.name}
                                         </StyledTableCell>
                                         {new Date(copy.dueAt) <= new Date() ? (
-                                            <StyledTableCell align="center"
+                                            <StyledTableCell
+                                                align="center"
                                                 style={{
                                                     backgroundColor: 'red',
                                                 }}

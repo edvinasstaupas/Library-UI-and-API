@@ -8,12 +8,12 @@ import {
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../state/User/UserActions';
-import {PrimaryOutlinedButton} from "../StyledItems";
+import { PrimaryOutlinedButton } from '../StyledItems';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
-        marginBottom: 20
+        marginBottom: 20,
     },
     toolbarTitle: {
         flexGrow: 1,
@@ -85,17 +85,22 @@ const Header = () => {
                     </nav>
                     {state.loggedInUser != null ? (
                         <>
-                        {state.loggedInUser.roles.includes("ROLE_LIBRARIAN") ?
-                            <Link
-                                variant="button"
-                                color="textPrimary"
-                                to="/librarian"
-                                className={classes.link}
-                                activeClassName={classes.active}
-                                component={NavLink}
-                            >
-                                Librarian page
-                            </Link> : <p></p>}
+                            {state.loggedInUser.roles.includes(
+                                'ROLE_LIBRARIAN'
+                            ) ? (
+                                <Link
+                                    variant="button"
+                                    color="textPrimary"
+                                    to="/librarian"
+                                    className={classes.link}
+                                    activeClassName={classes.active}
+                                    component={NavLink}
+                                >
+                                    Librarian page
+                                </Link>
+                            ) : (
+                                <p></p>
+                            )}
                             <Link
                                 variant="button"
                                 color="textPrimary"

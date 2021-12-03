@@ -1,4 +1,9 @@
-import {FIRSTSTEP, RESET_NEW_USER, SECONDSTEP, THIRDSTEP} from './NewUserModel';
+import {
+    FIRSTSTEP,
+    RESET_NEW_USER,
+    SECONDSTEP,
+    THIRDSTEP,
+} from './NewUserModel';
 
 export const setFirstStepInfo = (firstStepInfo) => ({
     type: FIRSTSTEP,

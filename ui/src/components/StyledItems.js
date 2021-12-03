@@ -1,4 +1,4 @@
-import {Button, TableCell, TableRow, withStyles} from "@material-ui/core";
+import { Button, TableCell, TableRow, withStyles } from '@material-ui/core';
 
 const PrimaryButton = withStyles((theme) => ({
     root: {
@@ -23,7 +23,6 @@ const PrimaryOutlinedButton = withStyles((theme) => ({
     },
 }))(Button);
 
-
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: '#333333',
@@ -42,4 +41,9 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-export {PrimaryButton, PrimaryOutlinedButton, StyledTableCell, StyledTableRow};
+export {
+    PrimaryButton,
+    PrimaryOutlinedButton,
+    StyledTableCell,
+    StyledTableRow,
+};

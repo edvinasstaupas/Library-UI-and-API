@@ -1,4 +1,4 @@
-import {fetchCopiesByUser, fetchCopiesByUserLibrarian} from '../../api/apiEndpoints';
+import { fetchCopiesByUserLibrarian } from '../../api/apiEndpoints';
 import { useEffect, useState } from 'react';
 import {
     CircularProgress,
@@ -6,15 +6,14 @@ import {
     makeStyles,
     Paper,
     Table,
-    TableBody, TableCell,
+    TableBody,
     TableContainer,
     TableHead,
-    TableRow, withStyles,
 } from '@material-ui/core';
 import moment from 'moment';
 import handleError from '../errors';
 import { useHistory } from 'react-router-dom';
-import {StyledTableCell, StyledTableRow} from "../StyledItems";
+import { StyledTableCell, StyledTableRow } from '../StyledItems';
 
 const useStyle = makeStyles({
     table: {
@@ -30,7 +29,7 @@ const UserCopiesLibrarian = (userNumber) => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log(userNumber.userNumber.userNumber)
+        console.log(userNumber.userNumber.userNumber);
         fetchCopiesByUserLibrarian(userNumber.userNumber.userNumber)
             .then(({ data }) => {
                 setCopies(data);
@@ -48,9 +47,15 @@ const UserCopiesLibrarian = (userNumber) => {
                         <TableHead>
                             <StyledTableRow>
                                 <StyledTableCell>Title</StyledTableCell>
-                                <StyledTableCell align="center">Author</StyledTableCell>
-                                <StyledTableCell align="center">Due at</StyledTableCell>
-                                <StyledTableCell align="center">Library</StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Author
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Due at
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Library
+                                </StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
@@ -63,12 +68,15 @@ const UserCopiesLibrarian = (userNumber) => {
                             ) : (
                                 copies.map((copy) => (
                                     <StyledTableRow id={copy.id}>
-                                        <StyledTableCell>{copy.book.title}</StyledTableCell>
+                                        <StyledTableCell>
+                                            {copy.book.title}
+                                        </StyledTableCell>
                                         <StyledTableCell align="center">
                                             {copy.book.author.name}
                                         </StyledTableCell>
                                         {new Date(copy.dueAt) <= new Date() ? (
-                                            <StyledTableCell align="center"
+                                            <StyledTableCell
+                                                align="center"
                                                 style={{
                                                     backgroundColor: 'red',
                                                 }}

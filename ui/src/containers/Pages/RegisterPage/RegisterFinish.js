@@ -1,53 +1,52 @@
-import {useSelector} from "react-redux";
-import {NavLink} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {register} from "../../../api/apiEndpoints";
-import {Box, makeStyles} from "@material-ui/core";
-import { PrimaryOutlinedButton} from "../../../components/StyledItems";
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { register } from '../../../api/apiEndpoints';
+import { Box, makeStyles } from '@material-ui/core';
+import { PrimaryOutlinedButton } from '../../../components/StyledItems';
 
 const useStyles = makeStyles({
     box: {
         display: 'flex',
-        flexDirection: "column",
+        flexDirection: 'column',
         textAlign: 'center',
         height: '70vh',
-        justifyContent: "center",
-
+        justifyContent: 'center',
     },
-})
+});
 
 const RegisterFinish = () => {
-
-    const state = useSelector(state => state.newUser)
+    const state = useSelector((state) => state.newUser);
     const [user, setUser] = useState({});
 
     const classes = useStyles();
 
-        useEffect(() => {
-            register({
-                firstName: state.firstStepInfo.firstName,
-                lastName: state.firstStepInfo.lastName,
-                address: {
-                    city: state.secondStepInfo.city,
-                    street: state.secondStepInfo.street,
-                    houseNumber: state.secondStepInfo.house
-                },
-                password: state.thirdStepInfo.password,
-                password2: state.thirdStepInfo.password2
+    useEffect(() => {
+        register({
+            firstName: state.firstStepInfo.firstName,
+            lastName: state.firstStepInfo.lastName,
+            address: {
+                city: state.secondStepInfo.city,
+                street: state.secondStepInfo.street,
+                houseNumber: state.secondStepInfo.house,
+            },
+            password: state.thirdStepInfo.password,
+            password2: state.thirdStepInfo.password2,
+        })
+            .then((responseData) => {
+                setUser(responseData.data);
             })
-                .then((responseData) => {
-                    setUser(responseData.data)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }, [state])
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [state]);
 
     return (
         <>
             <Box className={classes.box}>
                 <h1>Your user number is {user.userNumber}</h1>
-                <h2>Please{' '}
+                <h2>
+                    Please{' '}
                     <PrimaryOutlinedButton
                         to="/login"
                         type="submit"
@@ -58,7 +57,7 @@ const RegisterFinish = () => {
                 </h2>
             </Box>
         </>
-    )
+    );
 };
 
 export default RegisterFinish;

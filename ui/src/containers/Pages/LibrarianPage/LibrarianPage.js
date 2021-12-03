@@ -1,15 +1,12 @@
 import * as React from 'react';
-import Librarian from "../../../components/Librarian/Librarian";
-
-
+import Librarian from '../../../components/Librarian/Librarian';
 
 const LibrarianPage = () => {
-
     return (
         <>
-            <Librarian/>
+            <Librarian />
         </>
     );
-}
+};
 
 export default LibrarianPage;

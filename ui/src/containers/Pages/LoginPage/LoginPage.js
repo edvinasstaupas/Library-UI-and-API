@@ -1,28 +1,19 @@
-import { Form, Formik, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import {
     Box,
     Button,
-    Container, createTheme,
+    Container,
     FormControl,
     Grid,
     InputLabel,
     OutlinedInput,
-    Paper, useTheme, withStyles,
+    Paper,
 } from '@material-ui/core';
 import { login } from '../../../api/apiEndpoints';
 import { NavLink, useHistory } from 'react-router-dom';
 import { setLogin } from '../../../state/User/UserActions';
 import { useDispatch } from 'react-redux';
-import {green, purple} from "@material-ui/core/colors";
-import {PrimaryButton} from "../../../components/StyledItems";
-
-
-
-const theme = createTheme({
-    palette: {
-        primary: green,
-    },
-});
+import { PrimaryButton } from '../../../components/StyledItems';
 
 const LoginPage = () => {
     const dispatch = useDispatch();

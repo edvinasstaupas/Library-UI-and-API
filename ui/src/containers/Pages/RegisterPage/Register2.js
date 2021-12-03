@@ -1,26 +1,33 @@
-import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Paper} from "@material-ui/core";
-import {Field, Form, Formik} from 'formik';
-import {useDispatch} from "react-redux";
-import {setSecondStepInfo} from "../../../state/NewUser/NewUserActions";
-import {PrimaryButton} from "../../../components/StyledItems";
+import {
+    Box,
+    Container,
+    FormControl,
+    Grid,
+    InputLabel,
+    OutlinedInput,
+    Paper,
+} from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { setSecondStepInfo } from '../../../state/NewUser/NewUserActions';
+import { PrimaryButton } from '../../../components/StyledItems';
 
 const Register2 = (step) => {
-
     const dispatch = useDispatch();
 
     const nextStep2 = (data, helper) => {
         dispatch(setSecondStepInfo(data));
         helper.setSubmitting(false);
         step.setStep(3);
-    }
+    };
 
     return (
         <>
             <Formik
                 initialValues={{
-                    city: "",
-                    street: "",
-                    house: "",
+                    city: '',
+                    street: '',
+                    house: '',
                 }}
                 onSubmit={nextStep2}
             >
@@ -96,9 +103,7 @@ const Register2 = (step) => {
                                                 {props.isSubmitting ? (
                                                     <span>Submiting...</span>
                                                 ) : (
-                                                    <PrimaryButton
-                                                        type="submit"
-                                                    >
+                                                    <PrimaryButton type="submit">
                                                         Next step
                                                     </PrimaryButton>
                                                 )}
@@ -112,7 +117,7 @@ const Register2 = (step) => {
                 )}
             </Formik>
         </>
-    )
+    );
 };
 
 export default Register2;

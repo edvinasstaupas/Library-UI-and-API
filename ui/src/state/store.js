@@ -1,9 +1,9 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import userReducer from './User/UserReducer';
 import booksReducer from './Books/BooksReducer';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import newUserReducer from "./NewUser/NewUserReducer";
+import newUserReducer from './NewUser/NewUserReducer';
 
 /**
  * Bendras Redux store

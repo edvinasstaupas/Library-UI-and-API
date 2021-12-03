@@ -1,4 +1,4 @@
-import { SEARCH, RESET_BOOKS, SEARCHED } from './BooksModel';
+import { RESET_BOOKS, SEARCH, SEARCHED } from './BooksModel';
 
 const booksReducer = (state = { bookList: [], searched: false }, action) => {
     switch (action.type) {

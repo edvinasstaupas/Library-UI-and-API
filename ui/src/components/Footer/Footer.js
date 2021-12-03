@@ -21,10 +21,7 @@ const Footer = () => {
                 <Typography variant="body1">Your internet library</Typography>
                 <Typography variant="body2" color="textSecondary">
                     {'Copyright © '}
-                    <Link color="inherit">
-                        YIL
-                    </Link>{' '}
-                    {new Date().getFullYear()}
+                    <Link color="inherit">YIL</Link> {new Date().getFullYear()}
                     {'.'}
                 </Typography>
             </Container>

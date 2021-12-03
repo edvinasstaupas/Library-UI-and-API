@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import {
     Box,
-    Button,
     Container,
     FormControl,
     Grid,
@@ -11,8 +10,8 @@ import {
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { fetchBooksBySearch } from '../../api/apiEndpoints';
-import { setBookList, setSearched } from '../../state/Books/BooksActions';
-import {PrimaryButton} from "../StyledItems";
+import { setBookList } from '../../state/Books/BooksActions';
+import { PrimaryButton } from '../StyledItems';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -101,9 +100,7 @@ const SearchBar = () => {
                                                             Submiting...
                                                         </span>
                                                     ) : (
-                                                        <PrimaryButton
-                                                            type="submit"
-                                                        >
+                                                        <PrimaryButton type="submit">
                                                             Search
                                                         </PrimaryButton>
                                                     )}

@@ -1,25 +1,32 @@
-import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Paper} from "@material-ui/core";
-import {Field, Form, Formik} from 'formik';
-import {useDispatch} from "react-redux";
-import {setFirstStepInfo} from "../../../state/NewUser/NewUserActions";
-import {PrimaryButton} from "../../../components/StyledItems";
+import {
+    Box,
+    Container,
+    FormControl,
+    Grid,
+    InputLabel,
+    OutlinedInput,
+    Paper,
+} from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { setFirstStepInfo } from '../../../state/NewUser/NewUserActions';
+import { PrimaryButton } from '../../../components/StyledItems';
 
 const Register1 = (step) => {
-
     const dispatch = useDispatch();
 
     const nextStep1 = (data, helper) => {
         dispatch(setFirstStepInfo(data));
         helper.setSubmitting(false);
         step.setStep(2);
-    }
+    };
 
     return (
         <>
             <Formik
                 initialValues={{
-                    firstName: "",
-                    lastName: "",
+                    firstName: '',
+                    lastName: '',
                 }}
                 onSubmit={nextStep1}
             >
@@ -79,9 +86,7 @@ const Register1 = (step) => {
                                                 {props.isSubmitting ? (
                                                     <span>Submiting...</span>
                                                 ) : (
-                                                    <PrimaryButton
-                                                        type="submit"
-                                                    >
+                                                    <PrimaryButton type="submit">
                                                         Next step
                                                     </PrimaryButton>
                                                 )}
@@ -95,7 +100,7 @@ const Register1 = (step) => {
                 )}
             </Formik>
         </>
-    )
+    );
 };
 
 export default Register1;

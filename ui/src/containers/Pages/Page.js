@@ -7,9 +7,9 @@ import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
 import LoginPage from './LoginPage/LoginPage';
 import AllBooksPage from './AllBooksPage/AllBooksPage';
 import Error404Page from './Error404Page/Error404Page';
-import RegisterPage from "./RegisterPage/RegisterPage";
-import LibrarianPage from "./LibrarianPage/LibrarianPage";
-import UserCopiesLibrarianPage from "./UserCopiesLibrarian/UserCopiesLibrarianPage";
+import RegisterPage from './RegisterPage/RegisterPage';
+import LibrarianPage from './LibrarianPage/LibrarianPage';
+import UserCopiesLibrarianPage from './UserCopiesLibrarian/UserCopiesLibrarianPage';
 
 const Page = () => (
     <>
@@ -27,7 +27,7 @@ const Page = () => (
                 <UserCopiesPage />
             </Route>
             <Route path="/user/:userNumber/copies">
-                <UserCopiesLibrarianPage/>
+                <UserCopiesLibrarianPage />
             </Route>
             <Route path="/book/:id/copies">
                 <BookCopiesPage />
@@ -45,7 +45,7 @@ const Page = () => (
                 <LibrarianPage />
             </Route>
             <Route path="">
-                <Error404Page/>
+                <Error404Page />
             </Route>
         </Switch>
     </>
