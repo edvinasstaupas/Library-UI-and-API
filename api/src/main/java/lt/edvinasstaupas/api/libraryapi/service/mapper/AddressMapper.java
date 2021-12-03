@@ -7,6 +7,9 @@ import lt.edvinasstaupas.api.libraryapi.entity.Address;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class AddressMapper implements IMapper<Address, AddressDto, CreateAddressDto> {
@@ -26,5 +29,13 @@ public class AddressMapper implements IMapper<Address, AddressDto, CreateAddress
     @Override
     public Address convertToDomainFromCreate(CreateAddressDto createAddressDto) {
         return modelMapper.map(createAddressDto, Address.class);
+    }
+
+    @Override
+    public List<AddressDto> mapList(List<Address> bMap) {
+        return bMap
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 }

@@ -31,11 +31,11 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(NoSuchEntityException.class)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ExceptionResponse handlingNoSuchEntityException(NoSuchEntityException ex) {
         return ExceptionResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.NO_CONTENT.value())
+                .status(HttpStatus.NOT_ACCEPTABLE.value())
                 .build();
     }
 }

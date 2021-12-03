@@ -7,6 +7,9 @@ import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class CopyMapper implements IMapper<Copy, CopyDto, CreateCopyDto> {

@@ -1,7 +1,17 @@
 import HTTP from '.';
 
 const fetchCopiesByUser = () => {
-    const path = '/user/copies';
+    const path = '/copy/user';
+    return HTTP.get(path).finally(
+        (response) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(response), 100);
+            })
+    );
+};
+
+const fetchCopiesByUserLibrarian = (userNumber) => {
+    const path = '/copy/user/' + userNumber;
     return HTTP.get(path).finally(
         (response) =>
             new Promise((resolve, reject) => {
@@ -65,4 +75,5 @@ export {
     fetchBooksBySearch,
     fetchBooksNew,
     register,
+    fetchCopiesByUserLibrarian,
 };

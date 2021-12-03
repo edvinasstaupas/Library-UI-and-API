@@ -2,17 +2,27 @@ import { Form, Formik, Field } from 'formik';
 import {
     Box,
     Button,
-    Container,
+    Container, createTheme,
     FormControl,
     Grid,
     InputLabel,
     OutlinedInput,
-    Paper,
+    Paper, useTheme, withStyles,
 } from '@material-ui/core';
 import { login } from '../../../api/apiEndpoints';
 import { NavLink, useHistory } from 'react-router-dom';
 import { setLogin } from '../../../state/User/UserActions';
 import { useDispatch } from 'react-redux';
+import {green, purple} from "@material-ui/core/colors";
+import {PrimaryButton} from "../../../components/StyledItems";
+
+
+
+const theme = createTheme({
+    palette: {
+        primary: green,
+    },
+});
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -102,13 +112,12 @@ const LoginPage = () => {
                                                 {props.isSubmitting ? (
                                                     <span>Submiting...</span>
                                                 ) : (
-                                                    <Button
-                                                        color="primary"
+                                                    <PrimaryButton
                                                         variant="contained"
                                                         type="submit"
                                                     >
                                                         Login
-                                                    </Button>
+                                                    </PrimaryButton>
                                                 )}
                                             </Grid>
                                         </Grid>

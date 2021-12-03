@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {register} from '../../../api/apiEndpoints';
 import {setThirdStepInfo} from "../../../state/NewUser/NewUserActions";
+import {PrimaryButton} from "../../../components/StyledItems";
 
 const Register3 = (step) => {
 
@@ -82,13 +83,11 @@ const Register3 = (step) => {
                                                 {props.isSubmitting ? (
                                                     <span>Submiting...</span>
                                                 ) : (
-                                                    <Button
-                                                        color="primary"
-                                                        variant="contained"
+                                                    <PrimaryButton
                                                         type="submit"
                                                     >
-                                                        Next step
-                                                    </Button>
+                                                        Finish
+                                                    </PrimaryButton>
                                                 )}
                                             </Grid>
                                         </Grid>

@@ -27,8 +27,6 @@ public class UserController {
 
     private final UserService userService;
 
-    private final CopyService copyService;
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDto>> getCopies() {
         return ok(userService.getAllDto());
@@ -68,11 +66,5 @@ public class UserController {
     @GetMapping("{id}/avatar")
     public ResponseEntity<Resource> downloadAvatar(@PathVariable Long id) {
         return userService.getAvatarById(id);
-    }
-
-    @PreAuthorize("hasRole('MEMBER')")
-    @GetMapping(value = "copies", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getUserBooks(Principal principal) {
-        return ok(copyService.getBooksByUserId(userService.getByUserNumber(principal.getName())));
     }
 }

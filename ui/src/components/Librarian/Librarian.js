@@ -16,6 +16,7 @@ import {
     OutlinedInput
 } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
+import {PrimaryButton} from "../StyledItems";
 
 const useStyle = makeStyles({ul: {margin: 0, padding: 0, listStyle: 'none'}})
 
@@ -105,9 +106,9 @@ const Librarian = () => {
                                                     <span>
                                                             Submiting...
                                                         </span>
-                                                ) : (<Button variant="outlined" type="submit">
+                                                ) : (<PrimaryButton type="submit">
                                                     Search
-                                                </Button>)}
+                                                </PrimaryButton>)}
                                             </Box>
                                         </CardActions>
                                     </Form>

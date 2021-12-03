@@ -1,8 +1,7 @@
 import {
-    Button,
     Container,
     makeStyles,
-    Paper, styled,
+    Paper,
     Table,
     TableBody,
     TableCell,
@@ -12,6 +11,7 @@ import {
 } from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {PrimaryButton, StyledTableCell, StyledTableRow} from "../StyledItems";
 
 const useStyle = makeStyles({
     table: {
@@ -19,23 +19,6 @@ const useStyle = makeStyles({
     },
 });
 
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-    },
-}))(TableRow);
 
 const Books = () => {
     const classes = useStyle();
@@ -68,9 +51,8 @@ const Books = () => {
                                                             {book.author.name}
                                                         </StyledTableCell>
                                                         <StyledTableCell align="center">
-                                                            <Button
+                                                            <PrimaryButton
                                                                 component={NavLink}
-                                                                className="btn btn-primary"
                                                                 to={
                                                                     '/book/' +
                                                                     book.id +
@@ -78,7 +60,7 @@ const Books = () => {
                                                                 }
                                                             >
                                                                 Check out
-                                                            </Button>
+                                                            </PrimaryButton>
                                                         </StyledTableCell>
                                                     </StyledTableRow>
                                                 )

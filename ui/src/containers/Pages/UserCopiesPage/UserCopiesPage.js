@@ -1,9 +1,11 @@
 import UserCopies from '../../../components/UserCopies';
+import {useParams} from "react-router-dom";
 
-const UserCopiesPage = (userNumber) => {
+const UserCopiesPage = () => {
+
     return (
         <>
-            <UserCopies />
+            <UserCopies/>
         </>
     );
 };

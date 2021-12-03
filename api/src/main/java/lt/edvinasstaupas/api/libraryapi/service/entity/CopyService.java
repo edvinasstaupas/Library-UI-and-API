@@ -60,10 +60,7 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
 
     @Override
     public List<CopyDto> getAllDto() {
-        return copyRepository.findAll()
-                .stream()
-                .map(copyMapper::convertToDto)
-                .collect(Collectors.toList());
+        return copyMapper.mapList(copyRepository.findAll());
     }
 
     @Override
@@ -77,11 +74,11 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
     }
 
     public List<CopyDto> getBooksByUserId(User user) {
-        return copyRepository.findAllByTakenBy(user).stream().map(copyMapper::convertToDto).collect(Collectors.toList());
+        return copyMapper.mapList(copyRepository.findAllByTakenBy(user));
     }
 
     public List<CopyDto> getAllDtoByBook(Book book) {
-        return copyRepository.findAllByBook(book).stream().map(copyMapper::convertToDto).collect(Collectors.toList());
+        return copyMapper.mapList(copyRepository.findAllByBook(book));
     }
 
     public CopyDto takeCopy(CopyDto copyDto, Principal principal) {
@@ -92,5 +89,9 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         copy.setTakenBy(userService.getByUserNumber(principal.getName()));
         updateDomain(copy);
         return copyMapper.convertToDto(copy);
+    }
+
+    public List<CopyDto> getAllDtoByUser(User user) {
+        return copyMapper.mapList(copyRepository.findAllByTakenBy(user));
     }
 }

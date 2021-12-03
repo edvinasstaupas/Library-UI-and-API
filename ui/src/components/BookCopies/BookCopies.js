@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import {useHistory, useParams} from 'react-router-dom';
 import handleError from '../errors';
+import {PrimaryOutlinedButton, StyledTableCell, StyledTableRow} from "../StyledItems";
 
 const useStyle = makeStyles({
     table: {
@@ -56,54 +57,52 @@ const BookCopies = () => {
                 <TableContainer component={Paper} className={classes.table}>
                     <Table aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Author</TableCell>
-                                <TableCell>Library</TableCell>
-                                <TableCell>Available</TableCell>
-                            </TableRow>
+                            <StyledTableRow>
+                                <StyledTableCell>Title</StyledTableCell>
+                                <StyledTableCell align='center'>Author</StyledTableCell>
+                                <StyledTableCell align='center'>Library</StyledTableCell>
+                                <StyledTableCell align='center'>Available</StyledTableCell>
+                            </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {copies.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={5} align="center">List is empty</TableCell>
+                                    <StyledTableRow colSpan={5} align="center">List is empty</StyledTableRow>
                                 </TableRow>
                             ) : [loading ? (
-                                <TableRow id={-1}>
-                                    <TableCell colSpan={5} align="center">
+                                <StyledTableRow id={-1}>
+                                    <StyledTableCell colSpan={5} align="center">
                                         <CircularProgress/>
-                                    </TableCell>
-                                </TableRow>
+                                    </StyledTableCell>
+                                </StyledTableRow>
                             ) : (
                                 copies.map((copy) => (
-                                    <TableRow id={copy.id}>
-                                        <TableCell>{copy.book.title}</TableCell>
-                                        <TableCell>
+                                    <StyledTableRow id={copy.id}>
+                                        <StyledTableCell>{copy.book.title}</StyledTableCell>
+                                        <StyledTableCell align='center'>
                                             {copy.book.author.name}
-                                        </TableCell>
-                                        <TableCell>
+                                        </StyledTableCell >
+                                        <StyledTableCell align='center'>
                                             {copy.library.name}
-                                        </TableCell>
-                                        <TableCell>
+                                        </StyledTableCell>
+                                        <StyledTableCell align='center'>
                                             {copy.taken ? (
-                                                <Button
-                                                    variant="outlined"
+                                                <PrimaryOutlinedButton
                                                     disabled
                                                 >
                                                     Taken
-                                                </Button>
+                                                </PrimaryOutlinedButton>
                                             ) : (
-                                                <Button
-                                                    variant="outlined"
+                                                <PrimaryOutlinedButton
                                                     onClick={() =>
                                                         takeBook(copy.id)
                                                     }
                                                 >
                                                     Reserve
-                                                </Button>
+                                                </PrimaryOutlinedButton>
                                             )}
-                                        </TableCell>
-                                    </TableRow>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
                                 ))
                             )]}
                         </TableBody>

@@ -2,14 +2,14 @@ import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import SearchPage from './SearchPage/SearchPage';
 import NewBooksPage from './NewBooksPage/NewBooksPage';
-import UserCopiesPage from './UserCopies/UserCopiesPage';
+import UserCopiesPage from './UserCopiesPage/UserCopiesPage';
 import BookCopiesPage from './BookCopiesPage/BookCopiesPage';
 import LoginPage from './LoginPage/LoginPage';
 import AllBooksPage from './AllBooksPage/AllBooksPage';
 import Error404Page from './Error404Page/Error404Page';
 import RegisterPage from "./RegisterPage/RegisterPage";
-import RegisterFinish from "./RegisterPage/RegisterFinish";
 import LibrarianPage from "./LibrarianPage/LibrarianPage";
+import UserCopiesLibrarianPage from "./UserCopiesLibrarian/UserCopiesLibrarianPage";
 
 const Page = () => (
     <>
@@ -26,8 +26,8 @@ const Page = () => (
             <Route path="/user/copies">
                 <UserCopiesPage />
             </Route>
-            <Route path="/user/{userNumber}/copies">
-                <UserCopiesPage />
+            <Route path="/user/:userNumber/copies">
+                <UserCopiesLibrarianPage/>
             </Route>
             <Route path="/book/:id/copies">
                 <BookCopiesPage />
@@ -43,6 +43,9 @@ const Page = () => (
             </Route>
             <Route exact path="/librarian">
                 <LibrarianPage />
+            </Route>
+            <Route path="">
+                <Error404Page/>
             </Route>
         </Switch>
     </>

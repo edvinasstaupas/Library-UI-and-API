@@ -3,8 +3,10 @@ package lt.edvinasstaupas.api.libraryapi.controller;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CreateCopyDto;
+import lt.edvinasstaupas.api.libraryapi.dto.user.UserDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Copy;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
+import lt.edvinasstaupas.api.libraryapi.service.entity.user.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +24,8 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CopyController {
 
     private final CopyService copyService;
+
+    private final UserService userService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CopyDto>> getCopies() {
@@ -62,4 +66,16 @@ public class CopyController {
         return ok(copyService.takeCopy(copyDto, principal));
     }
 
+
+    @PreAuthorize("hasRole('MEMBER')")
+    @GetMapping(value = "user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CopyDto>> getUserBooks(Principal principal) {
+        return ok(copyService.getBooksByUserId(userService.getByUserNumber(principal.getName())));
+    }
+
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    @GetMapping(value = "user/{userNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CopyDto>> getUserByUserNumber(@PathVariable String userNumber) {
+        return ok(copyService.getAllDtoByUser(userService.getByUserNumber(userNumber)));
+    }
 }

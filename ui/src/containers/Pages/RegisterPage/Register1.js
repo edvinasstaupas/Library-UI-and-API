@@ -2,6 +2,7 @@ import {Box, Button, Container, FormControl, Grid, InputLabel, OutlinedInput, Pa
 import {Field, Form, Formik} from 'formik';
 import {useDispatch} from "react-redux";
 import {setFirstStepInfo} from "../../../state/NewUser/NewUserActions";
+import {PrimaryButton} from "../../../components/StyledItems";
 
 const Register1 = (step) => {
 
@@ -78,13 +79,11 @@ const Register1 = (step) => {
                                                 {props.isSubmitting ? (
                                                     <span>Submiting...</span>
                                                 ) : (
-                                                    <Button
-                                                        color="primary"
-                                                        variant="contained"
+                                                    <PrimaryButton
                                                         type="submit"
                                                     >
                                                         Next step
-                                                    </Button>
+                                                    </PrimaryButton>
                                                 )}
                                             </Grid>
                                         </Grid>

@@ -1,6 +1,5 @@
 import {
     AppBar,
-    Button,
     Link,
     makeStyles,
     Toolbar,
@@ -8,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOGOUT } from '../../state/User/UserModel';
 import { logout } from '../../state/User/UserActions';
+import {PrimaryOutlinedButton} from "../StyledItems";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     active: {
         fontWeight: 'bolder',
-        color: 'blue',
+        color: 'black',
     },
 }));
 
@@ -108,25 +107,21 @@ const Header = () => {
                                 My copies
                             </Link>
                             <p>{state.loggedInUser.fullUserName}</p>
-                            <Button
+                            <PrimaryOutlinedButton
                                 onClick={onClickLogOut}
-                                color="primary"
-                                variant="outlined"
                                 className={classes.link}
                             >
                                 Log out
-                            </Button>
+                            </PrimaryOutlinedButton>
                         </>
                     ) : (
-                        <Button
+                        <PrimaryOutlinedButton
                             to="/login"
-                            color="primary"
-                            variant="outlined"
                             className={classes.link}
                             component={NavLink}
                         >
                             Login
-                        </Button>
+                        </PrimaryOutlinedButton>
                     )}
                 </Toolbar>
             </AppBar>

@@ -1,4 +1,4 @@
-import { fetchCopiesByUser } from '../../api/apiEndpoints';
+import {fetchCopiesByUser, fetchCopiesByUserLibrarian} from '../../api/apiEndpoints';
 import { useEffect, useState } from 'react';
 import {
     CircularProgress,
@@ -22,7 +22,7 @@ const useStyle = makeStyles({
     },
 });
 
-const UserCopies = () => {
+const UserCopiesLibrarian = (userNumber) => {
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,13 +30,14 @@ const UserCopies = () => {
     const history = useHistory();
 
     useEffect(() => {
-        fetchCopiesByUser()
+        console.log(userNumber.userNumber.userNumber)
+        fetchCopiesByUserLibrarian(userNumber.userNumber.userNumber)
             .then(({ data }) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
             .finally(() => setLoading(false));
-    }, [history]);
+    }, [history, userNumber]);
 
     return (
         <>
@@ -97,4 +98,4 @@ const UserCopies = () => {
     );
 };
 
-export default UserCopies;
+export default UserCopiesLibrarian;
