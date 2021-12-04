@@ -37,9 +37,19 @@ const fetchBooksBySearch = (searchDto) => {
     });
 };
 
+const reserveCopyByCopyId = (copyId) => {
+    const copy = { id: copyId };
+    return HTTP.post('copy/reserve', copy);
+};
+
 const takeCopyByCopyId = (copyId) => {
     const copy = { id: copyId };
     return HTTP.post('copy/take', copy);
+};
+
+const returnCopyByCopyId = (copyId) => {
+    const copy = { id: copyId };
+    return HTTP.post('copy/return', copy);
 };
 
 const fetchBooks = () => {
@@ -70,10 +80,12 @@ export {
     fetchCopiesByUser,
     fetchBooks,
     fetchCopiesByBook,
-    takeCopyByCopyId,
+    reserveCopyByCopyId,
     login,
     fetchBooksBySearch,
     fetchBooksNew,
     register,
     fetchCopiesByUserLibrarian,
+    takeCopyByCopyId,
+    returnCopyByCopyId,
 };

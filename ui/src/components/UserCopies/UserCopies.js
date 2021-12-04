@@ -73,7 +73,12 @@ const UserCopies = () => {
                                         <StyledTableCell align="center">
                                             {copy.book.author.name}
                                         </StyledTableCell>
-                                        {new Date(copy.dueAt) <= new Date() ? (
+                                        {copy.dueAt == null
+                                        ? <StyledTableCell align="center">
+                                        Reserved
+                                    </StyledTableCell>
+                                        :
+                                        [new Date(copy.dueAt) <= new Date() ? (
                                             <StyledTableCell
                                                 align="center"
                                                 style={{
@@ -90,7 +95,7 @@ const UserCopies = () => {
                                                     'YYYY MM DD'
                                                 )}
                                             </StyledTableCell>
-                                        )}
+                                        )]}
                                         <StyledTableCell align="center">
                                             {copy.library.name}
                                         </StyledTableCell>

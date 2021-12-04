@@ -1,6 +1,7 @@
-import { fetchCopiesByUserLibrarian } from '../../api/apiEndpoints';
-import { useEffect, useState } from 'react';
+import {fetchCopiesByUserLibrarian, returnCopyByCopyId, takeCopyByCopyId} from '../../api/apiEndpoints';
+import {useEffect, useState} from 'react';
 import {
+    Box,
     CircularProgress,
     Container,
     makeStyles,
@@ -12,8 +13,10 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import handleError from '../errors';
-import { useHistory } from 'react-router-dom';
-import { StyledTableCell, StyledTableRow } from '../StyledItems';
+import {useHistory} from 'react-router-dom';
+import {PrimaryOutlinedButton, PrimaryOutlinedGreenButton, StyledTableCell, StyledTableRow} from '../StyledItems';
+import ErrorIcon from '@material-ui/icons/Error';
+import {red} from "@material-ui/core/colors";
 
 const useStyle = makeStyles({
     table: {
@@ -29,18 +32,30 @@ const UserCopiesLibrarian = (userNumber) => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log(userNumber.userNumber.userNumber);
+        mount();
+    }, []);
+
+    const takeCopy = (copyId) => {
+        takeCopyByCopyId(copyId)
+            .then(() => mount());
+    };
+
+    const returnCopy = (copyId) => {
+        returnCopyByCopyId(copyId)
+            .then(() => mount());
+    };
+
+    const mount = () => {
         fetchCopiesByUserLibrarian(userNumber.userNumber.userNumber)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
             .finally(() => setLoading(false));
-    }, [history, userNumber]);
+    }
 
     return (
         <>
-            {() => console.log(copies[0].dueAt)}
             <Container maxWidth="md">
                 <TableContainer component={Paper} className={classes.table}>
                     <Table aria-label="simple table">
@@ -54,7 +69,12 @@ const UserCopiesLibrarian = (userNumber) => {
                                     Due at
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
                                     Library
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    Action
                                 </StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
@@ -62,7 +82,7 @@ const UserCopiesLibrarian = (userNumber) => {
                             {loading ? (
                                 <StyledTableRow id={-1}>
                                     <StyledTableCell colSpan={5} align="center">
-                                        <CircularProgress />
+                                        <CircularProgress/>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ) : (
@@ -74,26 +94,48 @@ const UserCopiesLibrarian = (userNumber) => {
                                         <StyledTableCell align="center">
                                             {copy.book.author.name}
                                         </StyledTableCell>
-                                        {new Date(copy.dueAt) <= new Date() ? (
-                                            <StyledTableCell
-                                                align="center"
-                                                style={{
-                                                    backgroundColor: 'red',
-                                                }}
-                                            >
-                                                {moment(copy.dueAt).format(
-                                                    'YYYY MM DD'
-                                                )}
+                                        {copy.dueAt == null
+                                            ? <StyledTableCell align="center">
+                                                Reserved
                                             </StyledTableCell>
-                                        ) : (
-                                            <StyledTableCell align="center">
-                                                {moment(copy.dueAt).format(
-                                                    'YYYY MM DD'
-                                                )}
-                                            </StyledTableCell>
-                                        )}
-                                        <StyledTableCell align="center">
+                                            : (
+                                                <StyledTableCell align="center">
+                                                    {moment(copy.dueAt).format(
+                                                        'YYYY MM DD'
+                                                    )}
+                                                </StyledTableCell>
+                                            )
+                                        }
+                                        <StyledTableCell align='center'>
+                                            {new Date(copy.dueAt) <= new Date() && copy.dueAt != null? (
+                                                    <Box style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        flexWrap: 'wrap',
+                                                        height: '100%',
+                                                        justifyContent: 'center',
+                                                    }}>
+                                                        <ErrorIcon fontSize="small"
+                                                                   style={{color: red[500]}}/></Box>)
+                                                : null}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center" padding={0}>
                                             {copy.library.name}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            {!copy.taken ?
+                                                <PrimaryOutlinedGreenButton
+                                                    onClick={() => takeCopy(copy.id)}
+                                                >
+                                                    Take
+                                                </PrimaryOutlinedGreenButton>
+                                                :
+                                                <PrimaryOutlinedButton
+                                                    onClick={() => returnCopy(copy.id)}
+                                                >
+                                                    Return
+                                                </PrimaryOutlinedButton>
+                                            }
                                         </StyledTableCell>
                                     </StyledTableRow>
                                 ))

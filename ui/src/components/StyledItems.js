@@ -23,6 +23,15 @@ const PrimaryOutlinedButton = withStyles((theme) => ({
     },
 }))(Button);
 
+const PrimaryOutlinedGreenButton = withStyles((theme) => ({
+    root: {
+        backgroundColor: '#4caf50',
+        '&:hover': {
+            backgroundColor: '#357a38',
+        },
+    },
+}))(PrimaryOutlinedButton);
+
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: '#333333',
@@ -46,4 +55,5 @@ export {
     PrimaryOutlinedButton,
     StyledTableCell,
     StyledTableRow,
+    PrimaryOutlinedGreenButton,
 };

@@ -1,4 +1,4 @@
-import {fetchCopiesByBook, takeCopyByCopyId} from '../../api/apiEndpoints';
+import {fetchCopiesByBook, reserveCopyByCopyId} from '../../api/apiEndpoints';
 import {useEffect, useState} from 'react';
 import {
     CircularProgress,
@@ -40,7 +40,7 @@ const BookCopies = () => {
     }, [history, id]);
 
     const takeBook = (copyId) => {
-        takeCopyByCopyId(copyId)
+        reserveCopyByCopyId(copyId)
             .then(() => {
                 history.push('/user/copies');
             })
@@ -100,7 +100,7 @@ const BookCopies = () => {
                                                         {copy.library.name}
                                                     </StyledTableCell>
                                                     <StyledTableCell align="center">
-                                                        {copy.taken ? (
+                                                        {copy.taken || copy.reserved ? (
                                                             <PrimaryOutlinedButton
                                                                 disabled
                                                             >
