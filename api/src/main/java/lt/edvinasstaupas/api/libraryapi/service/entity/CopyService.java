@@ -87,6 +87,7 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         updateDomain(copy);
         return copyMapper.convertToDto(copy);
     }
+
     public CopyDto takeCopy(CopyDto copyDto) {
         Copy copy = getById(copyDto.getId());
         copy.setTaken(true);
