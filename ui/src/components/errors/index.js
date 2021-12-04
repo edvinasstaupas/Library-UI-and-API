@@ -7,7 +7,7 @@ const handleError = (error) => {
         case 403:
             return '/aaa';
         default:
-            return '/aaa';
+            return '/';
     }
 };
 export default handleError;

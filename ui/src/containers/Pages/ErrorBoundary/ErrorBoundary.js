@@ -3,12 +3,33 @@ import React from 'react';
 class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hasError: false };
+        this.state = { hasError: false};
     }
 
+
+    //this is stupid delete later
+
     static getDerivedStateFromError(error) {
+        /*const routingFunction = (path) => {
+            history.push({
+                pathname: `/target-path`,
+            });
+        }*/
         // Update state so the next render will show the fallback UI.
-        return { hasError: true };
+        switch (error) {
+            case 500: {
+                console.log(error.message)
+                if (error.message.startsWith('JWT')) {
+                    //routingFunction("/login");
+                    // eslint-disable-next-line no-restricted-globals
+                    history.push("/login");
+                }
+            }
+                break;
+            default:
+                break;
+        }
+        return { hasError: true, error: error };
     }
 
     componentDidCatch(error, errorInfo) {
@@ -19,6 +40,7 @@ class ErrorBoundary extends React.Component {
     logErrorToMyService(error, errorInfo) {
         console.log(error);
     }
+
 
     render() {
         if (this.state.hasError) {
