@@ -26,7 +26,6 @@ const Librarian = () => {
     const history = useHistory();
 
     const searchByUserNumber = (data, helper) => {
-        console.log(data);
         helper.setSubmitting(false);
         const userNumber = data.userNumber;
         history.push('/user/' + userNumber + '/copies');
