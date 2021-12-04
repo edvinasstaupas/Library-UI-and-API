@@ -1,6 +1,6 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
-import {useHistory} from "react-router-dom";
-import {PrimaryOutlinedButton} from "../StyledItems";
+import { useHistory } from 'react-router-dom';
+import { PrimaryOutlinedButton } from '../StyledItems';
 
 const useStyles = makeStyles({
     errorBox: {
@@ -27,9 +27,11 @@ const Error404 = () => {
                         <span>0</span>
                         <span>4</span>
                     </h1>
-                    <PrimaryOutlinedButton onClick={() => {
-                        history.goBack()
-                    }}>
+                    <PrimaryOutlinedButton
+                        onClick={() => {
+                            history.goBack();
+                        }}
+                    >
                         Go back
                     </PrimaryOutlinedButton>
                 </Box>

@@ -73,29 +73,34 @@ const UserCopies = () => {
                                         <StyledTableCell align="center">
                                             {copy.book.author.name}
                                         </StyledTableCell>
-                                        {copy.dueAt == null
-                                        ? <StyledTableCell align="center">
-                                        Reserved
-                                    </StyledTableCell>
-                                        :
-                                        [new Date(copy.dueAt) <= new Date() ? (
-                                            <StyledTableCell
-                                                align="center"
-                                                style={{
-                                                    backgroundColor: 'red',
-                                                }}
-                                            >
-                                                {moment(copy.dueAt).format(
-                                                    'YYYY MM DD'
-                                                )}
+                                        {copy.dueAt == null ? (
+                                            <StyledTableCell align="center">
+                                                Reserved
                                             </StyledTableCell>
                                         ) : (
-                                            <StyledTableCell align="center">
-                                                {moment(copy.dueAt).format(
-                                                    'YYYY MM DD'
-                                                )}
-                                            </StyledTableCell>
-                                        )]}
+                                            [
+                                                new Date(copy.dueAt) <=
+                                                new Date() ? (
+                                                    <StyledTableCell
+                                                        align="center"
+                                                        style={{
+                                                            backgroundColor:
+                                                                'red',
+                                                        }}
+                                                    >
+                                                        {moment(
+                                                            copy.dueAt
+                                                        ).format('YYYY MM DD')}
+                                                    </StyledTableCell>
+                                                ) : (
+                                                    <StyledTableCell align="center">
+                                                        {moment(
+                                                            copy.dueAt
+                                                        ).format('YYYY MM DD')}
+                                                    </StyledTableCell>
+                                                ),
+                                            ]
+                                        )}
                                         <StyledTableCell align="center">
                                             {copy.library.name}
                                         </StyledTableCell>

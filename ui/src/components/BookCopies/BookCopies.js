@@ -1,5 +1,5 @@
-import {fetchCopiesByBook, reserveCopyByCopyId} from '../../api/apiEndpoints';
-import {useEffect, useState} from 'react';
+import { fetchCopiesByBook, reserveCopyByCopyId } from '../../api/apiEndpoints';
+import { useEffect, useState } from 'react';
 import {
     CircularProgress,
     Container,
@@ -11,9 +11,13 @@ import {
     TableHead,
     TableRow,
 } from '@material-ui/core';
-import {useHistory, useParams} from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import handleError from '../errors';
-import {PrimaryOutlinedButton, StyledTableCell, StyledTableRow,} from '../StyledItems';
+import {
+    PrimaryOutlinedButton,
+    StyledTableCell,
+    StyledTableRow,
+} from '../StyledItems';
 
 const useStyle = makeStyles({
     table: {
@@ -22,7 +26,7 @@ const useStyle = makeStyles({
 });
 
 const BookCopies = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
@@ -32,7 +36,7 @@ const BookCopies = () => {
 
     useEffect(() => {
         fetchCopiesByBook(id)
-            .then(({data}) => {
+            .then(({ data }) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
@@ -69,60 +73,60 @@ const BookCopies = () => {
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                            {
-                                loading ? (
-                                    <StyledTableRow id={-1}>
-                                        <StyledTableCell
-                                            colSpan={5}
-                                            align="center"
-                                        >
-                                            <CircularProgress/>
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ) : (
-                                    [copies.length === 0 ? (
-                                            <TableRow>
-                                                <StyledTableRow colSpan={5} align="center">
-                                                    List is empty
-                                                </StyledTableRow>
-                                            </TableRow>
-                                        )
-                                        : (
-                                            copies.map((copy) => (
-                                                <StyledTableRow id={copy.id}>
-                                                    <StyledTableCell>
-                                                        {copy.book.title}
-                                                    </StyledTableCell>
-                                                    <StyledTableCell align="center">
-                                                        {copy.book.author.name}
-                                                    </StyledTableCell>
-                                                    <StyledTableCell align="center">
-                                                        {copy.library.name}
-                                                    </StyledTableCell>
-                                                    <StyledTableCell align="center">
-                                                        {copy.taken || copy.reserved ? (
-                                                            <PrimaryOutlinedButton
-                                                                disabled
-                                                            >
-                                                                Taken
-                                                            </PrimaryOutlinedButton>
-                                                        ) : (
-                                                            <PrimaryOutlinedButton
-                                                                onClick={() =>
-                                                                    takeBook(
-                                                                        copy.id
-                                                                    )
-                                                                }
-                                                            >
-                                                                Reserve
-                                                            </PrimaryOutlinedButton>
-                                                        )}
-                                                    </StyledTableCell>
-                                                </StyledTableRow>
-                                            ))
-                                        ),
-                                    ]
-                                )}
+                            {loading ? (
+                                <StyledTableRow id={-1}>
+                                    <StyledTableCell colSpan={5} align="center">
+                                        <CircularProgress />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ) : (
+                                [
+                                    copies.length === 0 ? (
+                                        <TableRow>
+                                            <StyledTableRow
+                                                colSpan={5}
+                                                align="center"
+                                            >
+                                                List is empty
+                                            </StyledTableRow>
+                                        </TableRow>
+                                    ) : (
+                                        copies.map((copy) => (
+                                            <StyledTableRow id={copy.id}>
+                                                <StyledTableCell>
+                                                    {copy.book.title}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="center">
+                                                    {copy.book.author.name}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="center">
+                                                    {copy.library.name}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="center">
+                                                    {copy.taken ||
+                                                    copy.reserved ? (
+                                                        <PrimaryOutlinedButton
+                                                            disabled
+                                                        >
+                                                            Taken
+                                                        </PrimaryOutlinedButton>
+                                                    ) : (
+                                                        <PrimaryOutlinedButton
+                                                            onClick={() =>
+                                                                takeBook(
+                                                                    copy.id
+                                                                )
+                                                            }
+                                                        >
+                                                            Reserve
+                                                        </PrimaryOutlinedButton>
+                                                    )}
+                                                </StyledTableCell>
+                                            </StyledTableRow>
+                                        ))
+                                    ),
+                                ]
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>

@@ -1,4 +1,4 @@
-import {RESET_BOOKS, LOAD_BOOKS, SEARCHED} from './BooksModel';
+import { RESET_BOOKS, LOAD_BOOKS, SEARCHED } from './BooksModel';
 
 const booksReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -6,12 +6,12 @@ const booksReducer = (state = initialState, action) => {
             return {
                 ...state,
                 bookList: action.bookList,
-                loading: false
+                loading: false,
             };
         case SEARCHED:
             return {
                 ...state,
-                searched: action.searched
+                searched: action.searched,
             };
         case RESET_BOOKS:
             return initialState;
@@ -20,6 +20,6 @@ const booksReducer = (state = initialState, action) => {
     }
 };
 
-const initialState = {bookList: [], searched: false, loading :true}
+const initialState = { bookList: [], searched: false, loading: true };
 
 export default booksReducer;
