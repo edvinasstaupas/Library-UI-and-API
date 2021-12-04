@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { fetchBooksBySearch } from '../../api/apiEndpoints';
-import { setBookList } from '../../state/Books/BooksActions';
+import {setBookList, setSearched} from '../../state/Books/BooksActions';
 import { PrimaryButton } from '../StyledItems';
 
 const SearchBar = () => {
@@ -25,7 +25,8 @@ const SearchBar = () => {
         }
         fetchBooksBySearch(searchData)
             .then((data) => {
-                dispatch(setBookList({ bookList: data.data, searched: true }));
+                dispatch(setBookList(data.data));
+                dispatch(setSearched(true));
             })
             .finally(() => {
                 helper.setSubmitting(false);

@@ -1,7 +1,7 @@
-import { RESET_BOOKS, SEARCH, SEARCHED } from './BooksModel';
+import { RESET_BOOKS, LOAD_BOOKS, SEARCHED } from './BooksModel';
 
 export const setBookList = (bookList) => ({
-    type: SEARCH,
+    type: LOAD_BOOKS,
     bookList,
 });
 
