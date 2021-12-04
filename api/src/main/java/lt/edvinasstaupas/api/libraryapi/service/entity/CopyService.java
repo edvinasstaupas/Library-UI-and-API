@@ -80,17 +80,34 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         return copyMapper.mapList(copyRepository.findAllByBook(book));
     }
 
-    public CopyDto takeCopy(CopyDto copyDto, Principal principal) {
+    public CopyDto reserveCopy(CopyDto copyDto, Principal principal) {
+        Copy copy = getById(copyDto.getId());
+        copy.setReserved(true);
+        copy.setTakenBy(userService.getByUserNumber(principal.getName()));
+        updateDomain(copy);
+        return copyMapper.convertToDto(copy);
+    }
+    public CopyDto takeCopy(CopyDto copyDto) {
         Copy copy = getById(copyDto.getId());
         copy.setTaken(true);
         copy.setTakenAt(DateService.getCurrentDate());
         copy.setDueAt(DateService.getDateWithAdditionalDays(dateToReturnBookInDays));
-        copy.setTakenBy(userService.getByUserNumber(principal.getName()));
         updateDomain(copy);
         return copyMapper.convertToDto(copy);
     }
 
     public List<CopyDto> getAllDtoByUser(User user) {
         return copyMapper.mapList(copyRepository.findAllByTakenBy(user));
+    }
+
+    public CopyDto returnCopy(CopyDto copyDto) {
+        Copy copy = getById(copyDto.getId());
+        copy.setTaken(false);
+        copy.setReserved(false);
+        copy.setTakenAt(null);
+        copy.setDueAt(null);
+        copy.setTakenBy(null);
+        updateDomain(copy);
+        return copyMapper.convertToDto(copy);
     }
 }

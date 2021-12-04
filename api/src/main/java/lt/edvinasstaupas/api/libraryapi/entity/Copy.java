@@ -32,6 +32,10 @@ public class Copy {
     @Column(name = "is_taken")
     private boolean isTaken = false;
 
+    @NotNull
+    @Column(name = "is_reserved")
+    private boolean isReserved = false;
+
     @Column(name = "taken_at")
     private Date takenAt;
 

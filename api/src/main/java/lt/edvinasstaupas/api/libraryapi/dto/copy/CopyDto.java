@@ -20,6 +20,8 @@ public class CopyDto {
 
     private boolean isTaken = false;
 
+    private boolean isReserved = false;
+
     private Date takenAt;
 
     private Date dueAt;

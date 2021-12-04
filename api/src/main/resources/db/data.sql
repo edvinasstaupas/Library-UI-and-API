@@ -16,9 +16,9 @@ values (1, 9780439064873, 1, 'Harry Potter and the Chamber of Secrets', CURRENT_
        (3, 9780439064875, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25');
 insert into LIBRARY (id, name)
 values (1, 'LNB');
-insert into COPY (id, book_id, library_id, is_taken)
-values (1, 1, 1, false);
-insert into COPY (id, book_id, library_id, is_taken, taken_by_user_id, due_at)
-values (2, 1, 1, true, 1, CURRENT_DATE);
-insert into COPY (id, book_id, library_id, is_taken, taken_by_user_id, due_at)
-values (3, 2, 1, true, 1, '2021-12-15');
+insert into COPY (id, book_id, library_id, is_taken, is_reserved)
+values (1, 1, 1, false, false);
+insert into COPY (id, book_id, library_id, is_taken, is_reserved, taken_by_user_id, due_at)
+values (2, 1, 1, true, false, 1, CURRENT_DATE);
+insert into COPY (id, book_id, library_id, is_taken, is_reserved, taken_by_user_id, due_at)
+values (3, 2, 1, true, false, 1, '2021-12-15');

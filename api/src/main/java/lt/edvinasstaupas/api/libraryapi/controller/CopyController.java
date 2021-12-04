@@ -60,21 +60,32 @@ public class CopyController {
     }
 
     @PreAuthorize("hasRole('MEMBER')")
-    @PostMapping(value = "take", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CopyDto> takenCopyById(@RequestBody CopyDto copyDto, Principal principal) {
-        return ok(copyService.takeCopy(copyDto, principal));
+    @PostMapping(value = "reserve", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CopyDto> reserveCopy(@RequestBody CopyDto copyDto, Principal principal) {
+        return ok(copyService.reserveCopy(copyDto, principal));
     }
 
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    @PostMapping(value = "take", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CopyDto> takeCopy(@RequestBody CopyDto copyDto) {
+        return ok(copyService.takeCopy(copyDto));
+    }
+
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    @PostMapping(value = "return", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CopyDto> returnCopy(@RequestBody CopyDto copyDto) {
+        return ok(copyService.returnCopy(copyDto));
+    }
 
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping(value = "user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getUserBooks(Principal principal) {
+    public ResponseEntity<List<CopyDto>> getCurrentUserCopies(Principal principal) {
         return ok(copyService.getBooksByUserId(userService.getByUserNumber(principal.getName())));
     }
 
     @PreAuthorize("hasRole('LIBRARIAN')")
     @GetMapping(value = "user/{userNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getUserByUserNumber(@PathVariable String userNumber) {
+    public ResponseEntity<List<CopyDto>> getUserCopiesByUserNumber(@PathVariable String userNumber) {
         return ok(copyService.getAllDtoByUser(userService.getByUserNumber(userNumber)));
     }
 }
