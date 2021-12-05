@@ -4,10 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.copy.CopyDto;
+import lt.edvinasstaupas.api.libraryapi.dto.pageable.PageableArguments;
 import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.service.entity.BookService;
 import lt.edvinasstaupas.api.libraryapi.service.entity.CopyService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +32,12 @@ public class BookController {
     private final CopyService copyService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BookDto>> getBooks() {
-        return ok(bookService.getAllDto());
+    public ResponseEntity<List<BookDto>> getBooks(@RequestBody PageableArguments pageableArguments) {
+        return ok(bookService.getAllDtoPaginated(createPageRequest(pageableArguments)));
+    }
+
+    private Pageable createPageRequest(PageableArguments pageableArguments) {
+        return PageRequest.of(pageableArguments.getPageIndex(), pageableArguments.getPageSize());
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,18 +69,19 @@ public class BookController {
     }
 
     @GetMapping(value = "{id}/copies", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CopyDto>> getCopiesByBook(@PathVariable Long id) {
-        return ok(copyService.getAllDtoByBook(bookService.getById(id)));
+    public ResponseEntity<List<CopyDto>> getCopiesByBook(@PathVariable Long id, @RequestBody PageableArguments pageableArguments) {
+        return ok(copyService.getAllDtoByBook(bookService.getById(id), createPageRequest(pageableArguments)));
     }
 
+    //TODO add pageable here
     @PostMapping(value = "find", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BookDto>> getBooksBySearch(@RequestBody SearchDto searchDto) {
         return ok(bookService.getAllDtoBySearch(searchDto));
     }
 
     @GetMapping(value = "new", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BookDto>> getBooksNew() {
-        return ok(bookService.getAllDtoNew());
+    public ResponseEntity<List<BookDto>> getBooksNew(@RequestBody PageableArguments pageableArguments) {
+        return ok(bookService.getAllDtoNew(createPageRequest(pageableArguments)));
     }
 
 }

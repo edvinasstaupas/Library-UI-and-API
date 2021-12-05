@@ -11,6 +11,9 @@ import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,6 +71,12 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
                 .collect(Collectors.toList());
     }
 
+    public List<BookDto> getAllDtoPaginated(Pageable pageRequest) {
+        return bookRepository.findAll(pageRequest).stream()
+                .map(bookMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void update(BookDto bookDto) {
         save(bookMapper.convertToDomain(bookDto));
@@ -115,8 +124,8 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
         return bookRepository.getAllByAuthor(author);
     }
 
-    public List<BookDto> getAllDtoNew() {
-        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeductedDays(newBookDateInDays))
+    public List<BookDto> getAllDtoNew(Pageable pageable) {
+        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeductedDays(newBookDateInDays), pageable)
                 .stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());

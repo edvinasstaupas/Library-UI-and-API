@@ -12,6 +12,7 @@ import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.entity.user.UserService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.CopyMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -67,17 +68,16 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         save(copyMapper.convertToDomain(copyDto));
     }
 
-    public CopyDto updateDomain(Copy copy) {
+    public void updateDomain(Copy copy) {
         save(copy);
-        return copyMapper.convertToDto(copy);
     }
 
     public List<CopyDto> getBooksByUserId(User user) {
         return copyMapper.mapList(copyRepository.findAllByTakenBy(user));
     }
 
-    public List<CopyDto> getAllDtoByBook(Book book) {
-        return copyMapper.mapList(copyRepository.findAllByBook(book));
+    public List<CopyDto> getAllDtoByBook(Book book, Pageable pageable) {
+        return copyMapper.mapList(copyRepository.findAllByBook(book, pageable));
     }
 
     public CopyDto reserveCopy(CopyDto copyDto, Principal principal) {
