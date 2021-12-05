@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -71,19 +74,41 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     }
 
     public List<BookDto> getAllDtoBySearch(SearchDto searchDto) {
-        List<Book> booksByTitle = new ArrayList<>();
-        if (!searchDto.getTitle().equals(""))
-            booksByTitle = bookRepository.getAllByTitleContainingIgnoreCase(searchDto.getTitle());
-        List<Book> booksByAuthor = new ArrayList<>();
-        if (!searchDto.getAuthor().equals("")) {
-            authorService.getAllByName(searchDto.getAuthor())
-                    .forEach(author -> booksByAuthor.addAll(getByAuthor(author)));
+        List<Book> booksByTitle;
+        List<Book> booksByAuthor;
+
+        if (!searchDto.getTitle().equals("") && !searchDto.getAuthor().equals("")) {
+            booksByAuthor = getAllByAuthor(searchDto.getAuthor());
+            booksByTitle = getAllByTitleContainingIgnoreCase(searchDto.getTitle());
+
+            return bookMapper.mapList(booksByTitle.stream()
+                    .filter(new HashSet<>(booksByAuthor)::contains)
+                    .collect(Collectors.toList()));
+
+        } else if (!searchDto.getAuthor().equals("")) {
+            return bookMapper.mapList
+                    (authorService.getAllByName(searchDto.getAuthor())
+                            .stream()
+                            .flatMap(author -> getByAuthor(author)
+                                    .stream())
+                            .collect(Collectors.toList()));
+        } else if (!searchDto.getTitle().equals("")) {
+            return bookMapper.mapList(getAllByTitleContainingIgnoreCase(searchDto.getTitle()));
         }
 
-        return Stream.concat(booksByAuthor.stream(), booksByTitle.stream())
-                .distinct()
-                .map(bookMapper::convertToDto)
+        return new ArrayList<>();
+    }
+
+    private List<Book> getAllByAuthor(String authorName) {
+        return authorService.getAllByName(authorName)
+                .stream()
+                .flatMap(a -> getByAuthor(a)
+                        .stream())
                 .collect(Collectors.toList());
+    }
+
+    public List<Book> getAllByTitleContainingIgnoreCase(String title) {
+        return bookRepository.getAllByTitleContainingIgnoreCase(title);
     }
 
     private List<Book> getByAuthor(Author author) {
