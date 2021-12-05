@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteUserById(@PathVariable Long id) { //TODO fix empty ResponseEntity
+    public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
         User user = userService.getById(id);
         if (user == null)
             return notFound().build();
