@@ -39,7 +39,6 @@ const UserCopies = () => {
 
     return (
         <>
-            {() => console.log(copies[0].dueAt)}
             <Container maxWidth="md">
                 <TableContainer component={Paper} className={classes.table}>
                     <Table aria-label="simple table">
