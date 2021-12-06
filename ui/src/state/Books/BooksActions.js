@@ -1,4 +1,4 @@
-import { RESET_BOOKS, LOAD_BOOKS, SEARCHED } from './BooksModel';
+import { RESET_BOOKS, LOAD_BOOKS, SEARCHED, LOADING } from './BooksModel';
 
 export const setBookList = (bookList) => ({
     type: LOAD_BOOKS,
@@ -12,4 +12,9 @@ export const resetBooks = () => ({
 export const setSearched = (searched) => ({
     type: SEARCHED,
     searched,
+});
+
+export const setLoading = (loading) => ({
+    type: LOADING,
+    loading,
 });

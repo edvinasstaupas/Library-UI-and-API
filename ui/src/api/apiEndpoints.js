@@ -32,28 +32,30 @@ const fetchCopiesByBook = (id) => {
 
 const fetchBooksBySearch = (searchDto) => {
     return HTTP.post('/book/find', {
-        title: searchDto.title,
-        author: searchDto.author,
+        searchDto: {
+            title: searchDto.title,
+            author: searchDto.author,
+        }
     });
 };
 
 const reserveCopyByCopyId = (copyId) => {
-    const copy = { id: copyId };
+    const copy = {id: copyId};
     return HTTP.post('copy/reserve', copy);
 };
 
 const takeCopyByCopyId = (copyId) => {
-    const copy = { id: copyId };
+    const copy = {id: copyId};
     return HTTP.post('copy/take', copy);
 };
 
 const returnCopyByCopyId = (copyId) => {
-    const copy = { id: copyId };
+    const copy = {id: copyId};
     return HTTP.post('copy/return', copy);
 };
 
-const fetchBooks = () => {
-    const path = 'book';
+const fetchBooks = (pageableArguments) => {
+    const path = 'book?page=' + pageableArguments.page +'&size=' + pageableArguments.size;
     return HTTP.get(path).finally(
         (response) =>
             new Promise((resolve, reject) => {
