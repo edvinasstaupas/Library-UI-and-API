@@ -13,7 +13,10 @@ values (1, 9781782924142, 'J. K. Rowling');
 insert into BOOK (id, isbn, author_id, title, published_at)
 values (1, 9780439064873, 1, 'Harry Potter and the Chamber of Secrets', CURRENT_DATE),
        (2, 9780439064874, 1, 'Harry Potter and the Chamber of Secrets (2)', CURRENT_DATE),
-       (3, 9780439064875, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25');
+       (3, 9780439064875, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25'),
+       (4, 9780439064876, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25'),
+       (5, 9780439064877, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25'),
+       (6, 9780439064878, 1, 'Harry Potter and the Chamber of Secrets (2) (1)', '2020-10-25');
 insert into LIBRARY (id, name)
 values (1, 'LNB');
 insert into COPY (id, book_id, library_id, is_taken, is_reserved)
