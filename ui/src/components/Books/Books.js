@@ -69,60 +69,57 @@ const Books = (props) => {
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                            {state.searched
-                                ? [
-                                    state.loading ? (
-                                        <StyledTableRow id={-1}>
-                                            <StyledTableCell
-                                                colSpan={5}
-                                                align="center"
-                                            >
-                                                <CircularProgress/>
-                                            </StyledTableCell>
-                                        </StyledTableRow>
-                                    ) : (
-                                        [
-                                            books.length === 0 ? (
-                                                <StyledTableRow>
-                                                    <StyledTableCell
-                                                        colSpan={5}
-                                                        align="center"
-                                                    >
-                                                        List is empty
+                            {
+                                state.loading ? (
+                                    <StyledTableRow id={-1}>
+                                        <StyledTableCell
+                                            colSpan={5}
+                                            align="center"
+                                        >
+                                            <CircularProgress/>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
+                                ) : (
+                                    [
+                                        books.length === 0 ? (
+                                            <StyledTableRow>
+                                                <StyledTableCell
+                                                    colSpan={5}
+                                                    align="center"
+                                                >
+                                                    List is empty
+                                                </StyledTableCell>
+                                            </StyledTableRow>
+                                        ) : (
+                                            books.map((book) => (
+                                                <StyledTableRow
+                                                    id={book.id}
+                                                >
+                                                    <StyledTableCell>
+                                                        {book.title}
+                                                    </StyledTableCell>
+                                                    <StyledTableCell align="center">
+                                                        {book.author.name}
+                                                    </StyledTableCell>
+                                                    <StyledTableCell align="center">
+                                                        <PrimaryButton
+                                                            component={
+                                                                NavLink
+                                                            }
+                                                            to={
+                                                                '/book/' +
+                                                                book.id +
+                                                                '/copies'
+                                                            }
+                                                        >
+                                                            Check out
+                                                        </PrimaryButton>
                                                     </StyledTableCell>
                                                 </StyledTableRow>
-                                            ) : (
-                                                books.map((book) => (
-                                                    <StyledTableRow
-                                                        id={book.id}
-                                                    >
-                                                        <StyledTableCell>
-                                                            {book.title}
-                                                        </StyledTableCell>
-                                                        <StyledTableCell align="center">
-                                                            {book.author.name}
-                                                        </StyledTableCell>
-                                                        <StyledTableCell align="center">
-                                                            <PrimaryButton
-                                                                component={
-                                                                    NavLink
-                                                                }
-                                                                to={
-                                                                    '/book/' +
-                                                                    book.id +
-                                                                    '/copies'
-                                                                }
-                                                            >
-                                                                Check out
-                                                            </PrimaryButton>
-                                                        </StyledTableCell>
-                                                    </StyledTableRow>
-                                                ))
-                                            ),
-                                        ]
-                                    ),
-                                ]
-                                : null}
+                                            ))
+                                        ),
+                                    ]
+                                )}
                         </TableBody>
                     </Table>
                     <TablePagination

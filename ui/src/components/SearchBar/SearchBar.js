@@ -13,25 +13,9 @@ import { fetchBooksBySearch } from '../../api/apiEndpoints';
 import { setBookList, setSearched } from '../../state/Books/BooksActions';
 import { PrimaryButton } from '../StyledItems';
 
-const SearchBar = () => {
-    const dispatch = useDispatch();
+const SearchBar = (props) => {
 
-    const postSearch = (searchData, helper) => {
-        if (searchData.title === null) {
-            searchData.title = '';
-        }
-        if (searchData.author === null) {
-            searchData.author = '';
-        }
-        fetchBooksBySearch(searchData)
-            .then((data) => {
-                dispatch(setBookList(data.data));
-                dispatch(setSearched(true));
-            })
-            .finally(() => {
-                helper.setSubmitting(false);
-            });
-    };
+    const postSearch = props.postSearch;
 
     return (
         <>

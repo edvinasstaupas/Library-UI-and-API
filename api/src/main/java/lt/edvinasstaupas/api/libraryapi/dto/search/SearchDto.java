@@ -6,6 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchDto {
+
     private String title;
+
     private String author;
+
+    private int page;
+
+    private int size;
 }

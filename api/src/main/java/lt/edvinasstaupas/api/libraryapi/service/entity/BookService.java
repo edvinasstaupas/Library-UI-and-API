@@ -77,27 +77,30 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
         save(bookMapper.convertToDomain(bookDto));
     }
 
-    public List<BookDto> getAllDtoBySearch(SearchDto searchDto) {
+    public List<BookDto> getAllDtoBySearch(String title, String author) {
         List<Book> booksByTitle;
         List<Book> booksByAuthor;
 
-        if (!searchDto.getTitle().equals("") && !searchDto.getAuthor().equals("")) {
-            booksByAuthor = getAllByAuthor(searchDto.getAuthor());
-            booksByTitle = getAllByTitleContainingIgnoreCase(searchDto.getTitle());
+        if (!title.equals("") && !author.equals("")) {
+            booksByAuthor = getAllByAuthor(author);
+            booksByTitle = getAllByTitleContainingIgnoreCase(title);
 
             return bookMapper.mapList(booksByTitle.stream()
                     .filter(new HashSet<>(booksByAuthor)::contains)
                     .collect(Collectors.toList()));
 
-        } else if (!searchDto.getAuthor().equals("")) {
+        } else if (title.equals("") && author.equals("")) {
+            return getAllDto();
+
+        } else if (!author.equals("")) {
             return bookMapper.mapList
-                    (authorService.getAllByName(searchDto.getAuthor())
+                    (authorService.getAllByName(author)
                             .stream()
-                            .flatMap(author -> getByAuthor(author)
+                            .flatMap(a -> getByAuthor(a)
                                     .stream())
                             .collect(Collectors.toList()));
-        } else if (!searchDto.getTitle().equals("")) {
-            return bookMapper.mapList(getAllByTitleContainingIgnoreCase(searchDto.getTitle()));
+        } else if (!title.equals("")) {
+            return bookMapper.mapList(getAllByTitleContainingIgnoreCase(title));
         }
 
         return new ArrayList<>();
@@ -119,8 +122,8 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
         return bookRepository.getAllByAuthor(author);
     }
 
-    public List<BookDto> getAllDtoNew(Pageable pageable) {
-        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeductedDays(newBookDateInDays), pageable)
+    public List<BookDto> getAllDtoNew() {
+        return bookRepository.getAllByPublishedAtAfter(DateService.getDateWithDeductedDays(newBookDateInDays))
                 .stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());

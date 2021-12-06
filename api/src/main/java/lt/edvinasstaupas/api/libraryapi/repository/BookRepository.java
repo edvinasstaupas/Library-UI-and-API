@@ -15,5 +15,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> getAllByAuthor(Author author);
 
-    List<Book> getAllByPublishedAtAfter(Date date, Pageable pageable);
+    List<Book> getAllByPublishedAtAfter(Date date);
 }

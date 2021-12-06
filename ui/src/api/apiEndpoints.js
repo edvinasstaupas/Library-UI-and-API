@@ -30,13 +30,14 @@ const fetchCopiesByBook = (id) => {
     );
 };
 
-const fetchBooksBySearch = (searchDto) => {
-    return HTTP.post('/book/find', {
-        searchDto: {
-            title: searchDto.title,
-            author: searchDto.author,
-        }
-    });
+const fetchBooksBySearch = (pageableArguments, searchData) => {
+    const searchDto = {
+        title: searchData.title,
+        author: searchData.author,
+        page: pageableArguments.page,
+        size: pageableArguments.size,
+    }
+    return HTTP.post('/book/find', searchDto);
 };
 
 const reserveCopyByCopyId = (copyId) => {
@@ -55,8 +56,13 @@ const returnCopyByCopyId = (copyId) => {
 };
 
 const fetchBooks = (pageableArguments) => {
-    const path = 'book?page=' + pageableArguments.page +'&size=' + pageableArguments.size;
-    return HTTP.get(path).finally(
+    const path = 'book';
+    return HTTP.get(path, {
+        params: {
+            page: pageableArguments.page,
+            size: pageableArguments.size,
+        }
+    }).finally(
         (response) =>
             new Promise((resolve, reject) => {
                 setTimeout(() => resolve(response), 100);
@@ -64,9 +70,14 @@ const fetchBooks = (pageableArguments) => {
     );
 };
 
-const fetchBooksNew = () => {
+const fetchBooksNew = (pageableArguments) => {
     const path = 'book/new';
-    return HTTP.get(path).finally(
+    return HTTP.get(path, {
+        params: {
+            page: pageableArguments.page,
+            size: pageableArguments.size,
+        }
+    }).finally(
         (response) =>
             new Promise((resolve, reject) => {
                 setTimeout(() => resolve(response), 100);

@@ -14,8 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -72,13 +70,12 @@ public class BookController {
 
     //TODO add pageable here
     @PostMapping(value = "find", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BookDto>> getBooksBySearch(@RequestBody SearchDto searchDto) {
-        return ok(bookService.getAllDtoBySearch(searchDto));
+    public ResponseEntity<PaginatedListDto<BookDto>> getBooksBySearch(@RequestBody SearchDto searchDto) {
+        return ok(new PaginatedListDto<>(bookService.getAllDtoBySearch(searchDto.getTitle(), searchDto.getAuthor()), createPageRequest(searchDto.getPage(), searchDto.getSize())));
     }
-/*
-    @GetMapping(value = "new", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BookDto>> getBooksNew(@RequestBody PageableArguments pageableArguments) {
-        return ok(bookService.getAllDtoNew(createPageRequest(pageableArguments)));
-    }*/
 
+    @GetMapping(value = "new", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PaginatedListDto<BookDto>> getBooksNew(@RequestParam int page, @RequestParam int size) {
+        return ok(new PaginatedListDto<>(bookService.getAllDtoNew(), createPageRequest(page, size)));
+    }
 }

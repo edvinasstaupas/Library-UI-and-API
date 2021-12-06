@@ -2,7 +2,7 @@ import Books from '../../../components/Books';
 import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchBooks} from '../../../api/apiEndpoints';
-import {setLoading, setSearched} from '../../../state/Books/BooksActions';
+import {setLoading} from '../../../state/Books/BooksActions';
 
 const AllBooksPage = () => {
     const dispatch = useDispatch();
@@ -17,14 +17,15 @@ const AllBooksPage = () => {
             .then((data) => {
                 setBooks(data.data.list);
                 setTotalRows(data.data.totalRows);
-                dispatch(setLoading(false));
-                dispatch(setSearched(true));
             })
+            .finally(
+                dispatch(setLoading(false))
+            )
     }, [dispatch, page, size]);
 
     return (
         <>
-            <Books books={books} size={size} setSize={setSize} page={page} setPage={setPage} totalRows={totalRows} />
+            <Books books={books} size={size} setSize={setSize} page={page} setPage={setPage} totalRows={totalRows}/>
         </>
     );
 };
