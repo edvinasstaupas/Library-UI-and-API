@@ -30,7 +30,7 @@ public class BookController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaginatedListDto<BookDto>> getBooks(@RequestParam int page, @RequestParam int size) {
-        return ok(bookService.getAllDtoPaginated(createPageRequest(page, size)));
+        return ok(new PaginatedListDto<>(bookService.getAllDtoPaginated(), createPageRequest(page, size)));
     }
 
     private Pageable createPageRequest(int page, int size) {

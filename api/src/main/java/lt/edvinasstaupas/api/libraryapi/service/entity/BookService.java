@@ -11,18 +11,13 @@ import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -71,8 +66,8 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
                 .collect(Collectors.toList());
     }
 
-    public List<BookDto> getAllDtoPaginated(Pageable pageRequest) {
-        return bookRepository.findAll(pageRequest).stream()
+    public List<BookDto> getAllDtoPaginated() {
+        return bookRepository.findAll().stream()
                 .map(bookMapper::convertToDto)
                 .collect(Collectors.toList());
     }
