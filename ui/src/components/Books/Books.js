@@ -58,7 +58,7 @@ const Books = (props) => {
                 <TableContainer component={Paper} className={classes.table}>
                     <Table aria-label="simple table">
                         <TableHead>
-                            <StyledTableRow>
+                            <StyledTableRow id={-3}>
                                 <StyledTableCell>Title</StyledTableCell>
                                 <StyledTableCell align="center">
                                     Author
@@ -82,7 +82,7 @@ const Books = (props) => {
                                 ) : (
                                     [
                                         books.length === 0 ? (
-                                            <StyledTableRow>
+                                            <StyledTableRow id={-2}>
                                                 <StyledTableCell
                                                     colSpan={5}
                                                     align="center"
@@ -93,7 +93,7 @@ const Books = (props) => {
                                         ) : (
                                             books.map((book) => (
                                                 <StyledTableRow
-                                                    id={book.id}
+                                                    id={book.id} key={book.id}
                                                 >
                                                     <StyledTableCell>
                                                         {book.title}
