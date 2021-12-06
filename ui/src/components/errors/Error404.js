@@ -7,9 +7,15 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
+        height: '100%',
+        justifyContent: 'center',
+        maxWidth: '40%'
+    },
+    container: {
+        display: 'flex',
         height: '70vh',
         justifyContent: 'center',
-    },
+    }
 });
 
 const Error404 = () => {
@@ -19,7 +25,7 @@ const Error404 = () => {
 
     return (
         <>
-            <Container>
+            <Container className={classes.container}>
                 <Box className={classes.errorBox}>
                     <h1>Oops! Page not found</h1>
                     <h1>
@@ -29,7 +35,7 @@ const Error404 = () => {
                     </h1>
                     <PrimaryOutlinedButton
                         onClick={() => {
-                            history.goBack();
+                            history.go(-2);
                         }}
                     >
                         Go back
