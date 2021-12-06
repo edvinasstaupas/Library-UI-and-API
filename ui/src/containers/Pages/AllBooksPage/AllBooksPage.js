@@ -17,10 +17,8 @@ const AllBooksPage = () => {
             .then((data) => {
                 setBooks(data.data.list);
                 setTotalRows(data.data.totalRows);
-            })
-            .finally(
                 dispatch(setLoading(false))
-            )
+            })
     }, [dispatch, page, size]);
 
     return (

@@ -8,9 +8,6 @@ import {
     OutlinedInput,
     Paper,
 } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { fetchBooksBySearch } from '../../api/apiEndpoints';
-import { setBookList, setSearched } from '../../state/Books/BooksActions';
 import { PrimaryButton } from '../StyledItems';
 
 const SearchBar = (props) => {

@@ -53,10 +53,8 @@ const SearchPage = () => {
             .then((data) => {
                 setBooks(data.data.list);
                 setTotalRows(data.data.totalRows);
-            })
-            .finally(() => {
                 dispatch(setLoading(false))
-            });
+            })
     }, [dispatch, params]);
 
     return (
