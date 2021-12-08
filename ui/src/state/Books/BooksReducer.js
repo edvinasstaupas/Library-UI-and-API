@@ -1,4 +1,4 @@
-import {LOADING} from './BooksModel';
+import { LOADING } from './BooksModel';
 
 const booksReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -12,6 +12,6 @@ const booksReducer = (state = initialState, action) => {
     }
 };
 
-const initialState = {loading: true};
+const initialState = { loading: true };
 
 export default booksReducer;

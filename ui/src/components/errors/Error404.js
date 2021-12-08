@@ -9,13 +9,13 @@ const useStyles = makeStyles({
         textAlign: 'center',
         height: '100%',
         justifyContent: 'center',
-        maxWidth: '40%'
+        maxWidth: '40%',
     },
     container: {
         display: 'flex',
         height: '70vh',
         justifyContent: 'center',
-    }
+    },
 });
 
 const Error404 = () => {

@@ -11,7 +11,6 @@ import {
 import { PrimaryButton } from '../StyledItems';
 
 const SearchBar = (props) => {
-
     const postSearch = props.postSearch;
 
     return (

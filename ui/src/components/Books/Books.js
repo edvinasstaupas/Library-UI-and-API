@@ -9,11 +9,10 @@ import {
     TableHead,
     TablePagination,
 } from '@material-ui/core';
-import {NavLink} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {PrimaryButton, StyledTableCell, StyledTableRow} from '../StyledItems';
-import {setLoading} from "../../state/Books/BooksActions";
-
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { PrimaryButton, StyledTableCell, StyledTableRow } from '../StyledItems';
+import { setLoading } from '../../state/Books/BooksActions';
 
 const useStyle = makeStyles({
     table: {
@@ -34,21 +33,20 @@ const Books = (props) => {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.books);
 
-    function onPageChange() {
-    }
+    function onPageChange() {}
 
     function onRowsPerPageChange(event) {
-        dispatch(setLoading(true))
-        setSize(event.target.value)
+        dispatch(setLoading(true));
+        setSize(event.target.value);
     }
 
     function handleNextButtonClick() {
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
         setPage(page + 1);
     }
 
     function handlePreviousButtonClick() {
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
         setPage(page - 1);
     }
 
@@ -69,75 +67,71 @@ const Books = (props) => {
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                            {
-                                state.loading ? (
-                                    <StyledTableRow id={-1}>
-                                        <StyledTableCell
-                                            colSpan={5}
-                                            align="center"
-                                        >
-                                            <CircularProgress/>
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ) : (
-                                    [
-                                        books.length === 0 ? (
-                                            <StyledTableRow id={-2}>
-                                                <StyledTableCell
-                                                    colSpan={5}
-                                                    align="center"
-                                                >
-                                                    List is empty
+                            {state.loading ? (
+                                <StyledTableRow id={-1}>
+                                    <StyledTableCell colSpan={5} align="center">
+                                        <CircularProgress />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ) : (
+                                [
+                                    books.length === 0 ? (
+                                        <StyledTableRow id={-2}>
+                                            <StyledTableCell
+                                                colSpan={5}
+                                                align="center"
+                                            >
+                                                List is empty
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ) : (
+                                        books.map((book) => (
+                                            <StyledTableRow
+                                                id={book.id}
+                                                key={book.id}
+                                            >
+                                                <StyledTableCell>
+                                                    {book.title}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="center">
+                                                    {book.author.name}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="center">
+                                                    <PrimaryButton
+                                                        component={NavLink}
+                                                        to={
+                                                            '/book/' +
+                                                            book.id +
+                                                            '/copies'
+                                                        }
+                                                    >
+                                                        Check out
+                                                    </PrimaryButton>
                                                 </StyledTableCell>
                                             </StyledTableRow>
-                                        ) : (
-                                            books.map((book) => (
-                                                <StyledTableRow
-                                                    id={book.id} key={book.id}
-                                                >
-                                                    <StyledTableCell>
-                                                        {book.title}
-                                                    </StyledTableCell>
-                                                    <StyledTableCell align="center">
-                                                        {book.author.name}
-                                                    </StyledTableCell>
-                                                    <StyledTableCell align="center">
-                                                        <PrimaryButton
-                                                            component={
-                                                                NavLink
-                                                            }
-                                                            to={
-                                                                '/book/' +
-                                                                book.id +
-                                                                '/copies'
-                                                            }
-                                                        >
-                                                            Check out
-                                                        </PrimaryButton>
-                                                    </StyledTableCell>
-                                                </StyledTableRow>
-                                            ))
-                                        ),
-                                    ]
-                                )}
+                                        ))
+                                    ),
+                                ]
+                            )}
                         </TableBody>
                     </Table>
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
-                        component='div'
+                        component="div"
                         rowsPerPage={size}
                         page={page}
                         onPageChange={onPageChange}
                         onRowsPerPageChange={onRowsPerPageChange}
                         backIconButtonProps={{
                             'aria-label': 'Previous Page',
-                            'onClick': () => handlePreviousButtonClick(),
+                            onClick: () => handlePreviousButtonClick(),
                         }}
                         nextIconButtonProps={{
                             'aria-label': 'Next Page',
-                            'onClick': () => handleNextButtonClick(),
+                            onClick: () => handleNextButtonClick(),
                         }}
-                        count={totalRows}/>
+                        count={totalRows}
+                    />
                 </TableContainer>
             </Container>
         </>

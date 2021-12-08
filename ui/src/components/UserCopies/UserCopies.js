@@ -2,9 +2,9 @@ import {
     fetchCopiesByUser,
     fetchCopiesByUserLibrarian,
     returnCopyByCopyId,
-    takeCopyByCopyId
+    takeCopyByCopyId,
 } from '../../api/apiEndpoints';
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     Box,
     CircularProgress,
@@ -19,10 +19,15 @@ import {
 import moment from 'moment';
 import handleError from '../errors';
 import { useHistory } from 'react-router-dom';
-import {PrimaryOutlinedButton, PrimaryOutlinedGreenButton, StyledTableCell, StyledTableRow} from '../StyledItems';
-import ErrorIcon from "@material-ui/icons/Error";
-import {red} from "@material-ui/core/colors";
-import {useSelector} from "react-redux";
+import {
+    PrimaryOutlinedButton,
+    PrimaryOutlinedGreenButton,
+    StyledTableCell,
+    StyledTableRow,
+} from '../StyledItems';
+import ErrorIcon from '@material-ui/icons/Error';
+import { red } from '@material-ui/core/colors';
+import { useSelector } from 'react-redux';
 
 const useStyle = makeStyles({
     table: {
@@ -31,11 +36,10 @@ const useStyle = makeStyles({
 });
 
 const UserCopies = (userNumber) => {
-
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const roles = useSelector(state => state.user.loggedInUser.roles)
+    const roles = useSelector((state) => state.user.loggedInUser.roles);
 
     const history = useHistory();
 
@@ -49,7 +53,7 @@ const UserCopies = (userNumber) => {
 
     const mount = useCallback(() => {
         fetchCopiesByUser(userNumber)
-            .then(({data}) => {
+            .then(({ data }) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
@@ -59,7 +63,6 @@ const UserCopies = (userNumber) => {
     useEffect(() => {
         mount();
     }, [mount]);
-
 
     return (
         <>
@@ -79,99 +82,94 @@ const UserCopies = (userNumber) => {
                                 <StyledTableCell align="center">
                                     Library
                                 </StyledTableCell>
-                                {roles.includes("ROLE_LIBRARIAN") ?
+                                {roles.includes('ROLE_LIBRARIAN') ? (
                                     <StyledTableCell align="center">
                                         Action
                                     </StyledTableCell>
-                                    : null}
+                                ) : null}
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {loading ? (
                                 <StyledTableRow id={-1}>
                                     <StyledTableCell colSpan={5} align="center">
-                                        <CircularProgress/>
+                                        <CircularProgress />
                                     </StyledTableCell>
                                 </StyledTableRow>
-                            ) : (copies.length === 0 ?
-                                    <StyledTableRow id={-2}>
-                                        <StyledTableCell
-                                            colSpan={6}
-                                            align="center"
-                                        >
-                                            List is empty
+                            ) : copies.length === 0 ? (
+                                <StyledTableRow id={-2}>
+                                    <StyledTableCell colSpan={6} align="center">
+                                        List is empty
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ) : (
+                                copies.map((copy) => (
+                                    <StyledTableRow id={copy.id}>
+                                        <StyledTableCell>
+                                            {copy.book.title}
                                         </StyledTableCell>
-                                    </StyledTableRow>
-                                    :
-                                    copies.map((copy) => (
-                                        <StyledTableRow id={copy.id}>
-                                            <StyledTableCell>
-                                                {copy.book.title}
-                                            </StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            {copy.book.author.name}
+                                        </StyledTableCell>
+                                        {copy.dueAt == null ? (
                                             <StyledTableCell align="center">
-                                                {copy.book.author.name}
+                                                Reserved
                                             </StyledTableCell>
-                                            {copy.dueAt == null ? (
-                                                <StyledTableCell align="center">
-                                                    Reserved
-                                                </StyledTableCell>
-                                            ) : (
-                                                <StyledTableCell align="center">
-                                                    {moment(copy.dueAt).format(
-                                                        'YYYY MM DD'
-                                                    )}
-                                                </StyledTableCell>
-                                            )}
+                                        ) : (
                                             <StyledTableCell align="center">
-                                                {new Date(copy.dueAt) <=
+                                                {moment(copy.dueAt).format(
+                                                    'YYYY MM DD'
+                                                )}
+                                            </StyledTableCell>
+                                        )}
+                                        <StyledTableCell align="center">
+                                            {new Date(copy.dueAt) <=
                                                 new Date() &&
-                                                copy.dueAt != null ? (
-                                                    <Box
+                                            copy.dueAt != null ? (
+                                                <Box
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        flexWrap: 'wrap',
+                                                        justifyContent:
+                                                            'center',
+                                                    }}
+                                                >
+                                                    <ErrorIcon
+                                                        fontSize="small"
                                                         style={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            flexWrap: 'wrap',
-                                                            justifyContent:
-                                                                'center',
+                                                            color: red[500],
                                                         }}
+                                                    />
+                                                </Box>
+                                            ) : null}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            {copy.library.name}
+                                        </StyledTableCell>
+                                        {roles.includes('ROLE_LIBRARIAN') ? (
+                                            <StyledTableCell align="center">
+                                                {!copy.taken ? (
+                                                    <PrimaryOutlinedGreenButton
+                                                        onClick={() =>
+                                                            takeCopy(copy.id)
+                                                        }
                                                     >
-                                                        <ErrorIcon
-                                                            fontSize="small"
-                                                            style={{
-                                                                color: red[500],
-                                                            }}
-                                                        />
-                                                    </Box>
-                                                ) : null}
+                                                        Take
+                                                    </PrimaryOutlinedGreenButton>
+                                                ) : (
+                                                    <PrimaryOutlinedButton
+                                                        onClick={() =>
+                                                            returnCopy(copy.id)
+                                                        }
+                                                    >
+                                                        Return
+                                                    </PrimaryOutlinedButton>
+                                                )}
                                             </StyledTableCell>
-                                            <StyledTableCell
-                                                align="center"
-                                            >
-                                                {copy.library.name}
-                                            </StyledTableCell>
-                                            {roles.includes("ROLE_LIBRARIAN") ?
-                                                <StyledTableCell align="center">
-                                                    {!copy.taken ? (
-                                                        <PrimaryOutlinedGreenButton
-                                                            onClick={() =>
-                                                                takeCopy(copy.id)
-                                                            }
-                                                        >
-                                                            Take
-                                                        </PrimaryOutlinedGreenButton>
-                                                    ) : (
-                                                        <PrimaryOutlinedButton
-                                                            onClick={() =>
-                                                                returnCopy(copy.id)
-                                                            }
-                                                        >
-                                                            Return
-                                                        </PrimaryOutlinedButton>
-                                                    )}
-                                                </StyledTableCell>
-                                                : null}
-                                        </StyledTableRow>
-                                    ))
+                                        ) : null}
+                                    </StyledTableRow>
+                                ))
                             )}
                         </TableBody>
                     </Table>

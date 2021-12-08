@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import UserCopies from "../../../components/UserCopies";
+import UserCopies from '../../../components/UserCopies';
 
 const UserCopiesLibrarianPage = () => {
     const userNumber = useParams();

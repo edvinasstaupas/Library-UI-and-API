@@ -36,22 +36,22 @@ const fetchBooksBySearch = (pageableArguments, searchData) => {
         author: searchData.author,
         page: pageableArguments.page,
         size: pageableArguments.size,
-    }
+    };
     return HTTP.post('/book/find', searchDto);
 };
 
 const reserveCopyByCopyId = (copyId) => {
-    const copy = {id: copyId};
+    const copy = { id: copyId };
     return HTTP.post('copy/reserve', copy);
 };
 
 const takeCopyByCopyId = (copyId) => {
-    const copy = {id: copyId};
+    const copy = { id: copyId };
     return HTTP.post('copy/take', copy);
 };
 
 const returnCopyByCopyId = (copyId) => {
-    const copy = {id: copyId};
+    const copy = { id: copyId };
     return HTTP.post('copy/return', copy);
 };
 
@@ -61,7 +61,7 @@ const fetchBooks = (pageableArguments) => {
         params: {
             page: pageableArguments.page,
             size: pageableArguments.size,
-        }
+        },
     }).finally(
         (response) =>
             new Promise((resolve, reject) => {
@@ -76,7 +76,7 @@ const fetchBooksNew = (pageableArguments) => {
         params: {
             page: pageableArguments.page,
             size: pageableArguments.size,
-        }
+        },
     }).finally(
         (response) =>
             new Promise((resolve, reject) => {
@@ -84,7 +84,6 @@ const fetchBooksNew = (pageableArguments) => {
             })
     );
 };
-
 
 const createBookApi = (createBookDto) => {
     const book = {
@@ -95,7 +94,6 @@ const createBookApi = (createBookDto) => {
     };
     return HTTP.post('book', book);
 };
-
 
 const login = (loginData) => HTTP.post('login', loginData);
 
