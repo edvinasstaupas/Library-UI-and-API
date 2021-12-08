@@ -85,9 +85,31 @@ const fetchBooksNew = (pageableArguments) => {
     );
 };
 
+
+const createBookApi = (createBookDto) => {
+    const book = {
+        isbn: createBookDto.isbn,
+        title: createBookDto.title,
+        author: createBookDto.author,
+        publishedAt: createBookDto.publishedAt,
+    };
+    return HTTP.post('book', book);
+};
+
+
 const login = (loginData) => HTTP.post('login', loginData);
 
 const register = (registerData) => HTTP.post('register', registerData);
+
+const fetchAuthors = () => {
+    const path = '/author';
+    return HTTP.get(path).finally(
+        (response) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(response), 100);
+            })
+    );
+};
 
 export {
     fetchCopiesByUser,
@@ -101,4 +123,6 @@ export {
     fetchCopiesByUserLibrarian,
     takeCopyByCopyId,
     returnCopyByCopyId,
+    fetchAuthors,
+    createBookApi,
 };
