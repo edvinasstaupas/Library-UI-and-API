@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {fetchBooksNew} from '../../api/apiEndpoints';
 import Books from '../Books';
 import {useDispatch} from 'react-redux';
-import {setLoading, setSearched} from '../../state/Books/BooksActions';
+import {setLoading} from '../../state/Books/BooksActions';
 
 const NewBooks = () => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const NewBooks = () => {
     const [totalRows, setTotalRows] = useState(5);
 
     useEffect(() => {
-        dispatch(setSearched(true));
+        dispatch(setLoading(true));
         fetchBooksNew({page: page, size: size}).then((data) => {
                 setBooks(data.data.list);
                 setTotalRows(data.data.totalRows);

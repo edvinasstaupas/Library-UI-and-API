@@ -49,6 +49,7 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
+        dispatch(setLoading(true));
         fetchBooksBySearch({page: params.page, size: params.size}, {title: params.title, author: params.author})
             .then((data) => {
                 setBooks(data.data.list);

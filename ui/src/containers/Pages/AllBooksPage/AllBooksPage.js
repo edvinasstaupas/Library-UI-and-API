@@ -13,6 +13,7 @@ const AllBooksPage = () => {
     const [totalRows, setTotalRows] = useState(5);
 
     useEffect(() => {
+        dispatch(setLoading(true));
         fetchBooks({page: page, size: size})
             .then((data) => {
                 setBooks(data.data.list);
