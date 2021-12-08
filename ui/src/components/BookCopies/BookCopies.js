@@ -1,5 +1,5 @@
-import { fetchCopiesByBook, reserveCopyByCopyId } from '../../api/apiEndpoints';
-import { useEffect, useState } from 'react';
+import {fetchCopiesByBook, reserveCopyByCopyId} from '../../api/apiEndpoints';
+import {useEffect, useState} from 'react';
 import {
     CircularProgress,
     Container,
@@ -9,15 +9,10 @@ import {
     TableBody,
     TableContainer,
     TableHead,
-    TableRow,
 } from '@material-ui/core';
-import { useHistory, useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import handleError from '../errors';
-import {
-    PrimaryOutlinedButton,
-    StyledTableCell,
-    StyledTableRow,
-} from '../StyledItems';
+import {PrimaryOutlinedButton, StyledTableCell, StyledTableRow,} from '../StyledItems';
 
 const useStyle = makeStyles({
     table: {
@@ -26,7 +21,7 @@ const useStyle = makeStyles({
 });
 
 const BookCopies = () => {
-    const { id } = useParams();
+    const {id} = useParams();
 
     const classes = useStyle();
     const [copies, setCopies] = useState([]);
@@ -36,7 +31,7 @@ const BookCopies = () => {
 
     useEffect(() => {
         fetchCopiesByBook(id)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setCopies(data);
             })
             .catch((error) => history.push(handleError(error.response)))
@@ -76,20 +71,20 @@ const BookCopies = () => {
                             {loading ? (
                                 <StyledTableRow id={-1}>
                                     <StyledTableCell colSpan={5} align="center">
-                                        <CircularProgress />
+                                        <CircularProgress/>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ) : (
                                 [
                                     copies.length === 0 ? (
-                                        <TableRow>
-                                            <StyledTableRow
-                                                colSpan={5}
+                                        <StyledTableRow id={-2}>
+                                            <StyledTableCell
+                                                colSpan={4}
                                                 align="center"
                                             >
                                                 List is empty
-                                            </StyledTableRow>
-                                        </TableRow>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
                                     ) : (
                                         copies.map((copy) => (
                                             <StyledTableRow id={copy.id}>
