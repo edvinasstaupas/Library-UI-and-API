@@ -76,8 +76,8 @@ public class CopyService implements IEntityService<Copy, CopyDto, CreateCopyDto>
         return copyMapper.mapList(copyRepository.findAllByTakenBy(user));
     }
 
-    public List<CopyDto> getAllDtoByBook(Book book, Pageable pageable) {
-        return copyMapper.mapList(copyRepository.findAllByBook(book, pageable));
+    public List<CopyDto> getAllDtoByBook(Book book) {
+        return copyMapper.mapList(copyRepository.findAllByBook(book));
     }
 
     public CopyDto reserveCopy(CopyDto copyDto, Principal principal) {
