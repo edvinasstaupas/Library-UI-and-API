@@ -1,6 +1,7 @@
 package lt.edvinasstaupas.api.libraryapi.entity;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

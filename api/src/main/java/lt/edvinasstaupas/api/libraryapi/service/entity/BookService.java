@@ -80,11 +80,12 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     public List<BookDto> getAllDtoBySearch(String title, String author) {
         List<Book> booksByTitle;
         List<Book> booksByAuthor;
-
+        //sutvarkyti
         if (!title.equals("") && !author.equals("")) {
             booksByAuthor = getAllByAuthor(author);
             booksByTitle = getAllByTitleContainingIgnoreCase(title);
 
+            //SELECT u from users u where u.pavarde like 'kazkas%'
             return bookMapper.mapList(booksByTitle.stream()
                     .filter(new HashSet<>(booksByAuthor)::contains)
                     .collect(Collectors.toList()));
