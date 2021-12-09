@@ -27,7 +27,8 @@ import {
 } from '../StyledItems';
 import ErrorIcon from '@material-ui/icons/Error';
 import { red } from '@material-ui/core/colors';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLoading} from "../../state/Books/BooksActions";
 
 const useStyle = makeStyles({
     table: {
@@ -35,38 +36,32 @@ const useStyle = makeStyles({
     },
 });
 
-const UserCopies = (userNumber) => {
+const UserCopies = (props) => {
+    const copies = props.copies;
     const classes = useStyle();
-    const [copies, setCopies] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const roles = useSelector((state) => state.user.loggedInUser.roles);
+    const loading = useSelector(state => state.books.loading)
+    const user = useSelector((state) => state.user);
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const takeCopy = (copyId) => {
         takeCopyByCopyId(copyId)
-            .then(() => mount())
+            .then()
             .catch((error) => history.push(handleError(error.response)));
     };
 
     const returnCopy = (copyId) => {
         returnCopyByCopyId(copyId)
-            .then(() => mount())
+            .then()
             .catch((error) => history.push(handleError(error.response)));
     };
 
-    const mount = useCallback(() => {
-        fetchCopiesByUser(userNumber)
-            .then(({ data }) => {
-                setCopies(data);
-            })
-            .catch((error) => history.push(handleError(error.response)))
-            .finally(() => setLoading(false));
-    }, [userNumber, history]);
-
     useEffect(() => {
-        mount();
-    }, [mount]);
+        if (user.loggedInUser == null) {
+            history.push('/');
+        }
+    }, [history, user]);
 
     return (
         <>
@@ -86,7 +81,7 @@ const UserCopies = (userNumber) => {
                                 <StyledTableCell align="center">
                                     Library
                                 </StyledTableCell>
-                                {roles.includes('ROLE_LIBRARIAN') ? (
+                                {user.loggedInUser.roles.includes('ROLE_LIBRARIAN') ? (
                                     <StyledTableCell align="center">
                                         Action
                                     </StyledTableCell>
@@ -96,7 +91,7 @@ const UserCopies = (userNumber) => {
                         <TableBody>
                             {loading ? (
                                 <StyledTableRow id={-1}>
-                                    <StyledTableCell colSpan={5} align="center">
+                                    <StyledTableCell colSpan={6} align="center">
                                         <CircularProgress />
                                     </StyledTableCell>
                                 </StyledTableRow>
@@ -151,7 +146,7 @@ const UserCopies = (userNumber) => {
                                         <StyledTableCell align="center">
                                             {copy.library.name}
                                         </StyledTableCell>
-                                        {roles.includes('ROLE_LIBRARIAN') ? (
+                                        {user.loggedInUser.roles.includes('ROLE_LIBRARIAN') ? (
                                             <StyledTableCell align="center">
                                                 {!copy.taken ? (
                                                     <PrimaryOutlinedButton
