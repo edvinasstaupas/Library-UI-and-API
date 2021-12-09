@@ -72,7 +72,7 @@ const fetchBooks = (pageableArguments) => {
 
 const fetchBooksNoPagination = () => {
     const path = 'book/all';
-    return HTTP.get(path,).finally(
+    return HTTP.get(path).finally(
         (response) =>
             new Promise((resolve, reject) => {
                 setTimeout(() => resolve(response), 100);

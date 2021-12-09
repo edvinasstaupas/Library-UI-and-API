@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchBooks } from '../../../api/apiEndpoints';
 import { setLoading } from '../../../state/Books/BooksActions';
-import handleError from "../../../components/errors";
-import {useHistory} from "react-router-dom";
+import handleError from '../../../components/errors';
+import { useHistory } from 'react-router-dom';
 
 const AllBooksPage = () => {
     const dispatch = useDispatch();
@@ -18,11 +18,12 @@ const AllBooksPage = () => {
 
     useEffect(() => {
         dispatch(setLoading(true));
-        fetchBooks({ page: page, size: size }).then((data) => {
-            setBooks(data.data.list);
-            setTotalRows(data.data.totalRows);
-            dispatch(setLoading(false));
-        })
+        fetchBooks({ page: page, size: size })
+            .then((data) => {
+                setBooks(data.data.list);
+                setTotalRows(data.data.totalRows);
+                dispatch(setLoading(false));
+            })
             .catch((error) => history.push(handleError(error.response)));
     }, [dispatch, page, size]);
 

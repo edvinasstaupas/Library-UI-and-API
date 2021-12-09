@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import {NavLink, useHistory} from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { register } from '../../../api/apiEndpoints';
 import { Box, makeStyles } from '@material-ui/core';
 import { PrimaryOutlinedButton } from '../../../components/StyledItems';
-import handleError from "../../../components/errors";
+import handleError from '../../../components/errors';
 
 const useStyles = makeStyles({
     box: {

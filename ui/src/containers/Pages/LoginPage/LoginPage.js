@@ -14,7 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { setLogin } from '../../../state/User/UserActions';
 import { useDispatch } from 'react-redux';
 import { PrimaryButton } from '../../../components/StyledItems';
-import handleError from "../../../components/errors";
+import handleError from '../../../components/errors';
 
 const LoginPage = () => {
     const dispatch = useDispatch();

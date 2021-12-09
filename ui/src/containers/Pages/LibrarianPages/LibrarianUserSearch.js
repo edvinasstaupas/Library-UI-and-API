@@ -10,16 +10,15 @@ import {
     InputLabel,
     MenuItem,
     OutlinedInput,
-    Select
-} from "@material-ui/core";
-import {Field, Form, Formik} from "formik";
-import {PrimaryButton} from "../../../components/StyledItems";
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import dateFnsFormat from "date-fns/format";
-import * as React from "react";
-import {useHistory} from "react-router-dom";
-import LibrarianSecurity from "../../../components/Librarian/LibrarianSecurity";
-
+    Select,
+} from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
+import { PrimaryButton } from '../../../components/StyledItems';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import dateFnsFormat from 'date-fns/format';
+import * as React from 'react';
+import { useHistory } from 'react-router-dom';
+import LibrarianSecurity from '../../../components/Librarian/LibrarianSecurity';
 
 const LibrarianUserSearch = () => {
     const history = useHistory();
@@ -32,7 +31,7 @@ const LibrarianUserSearch = () => {
 
     return (
         <>
-            <LibrarianSecurity/>
+            <LibrarianSecurity />
             <Container>
                 <Box p={10}>
                     <Grid
@@ -70,9 +69,9 @@ const LibrarianUserSearch = () => {
                                                                 .mode ===
                                                             'light'
                                                                 ? theme.palette
-                                                                    .grey[200]
+                                                                      .grey[200]
                                                                 : theme.palette
-                                                                    .grey[700],
+                                                                      .grey[700],
                                                     }}
                                                 />
                                                 <CardContent>
@@ -138,6 +137,5 @@ const LibrarianUserSearch = () => {
         </>
     );
 };
-
 
 export default LibrarianUserSearch;

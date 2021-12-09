@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import SearchPage from './SearchPage/SearchPage';
 import NewBooksPage from './NewBooksPage/NewBooksPage';
@@ -10,54 +10,54 @@ import Error404Page from './Error404Page/Error404Page';
 import RegisterPage from './RegisterPage/RegisterPage';
 import LibrarianPage from './LibrarianPage/LibrarianPage';
 import UserCopiesLibrarianPage from './LibrarianPages/UserCopiesLibrarianPage';
-import LibrarianUserSearch from "./LibrarianPages/LibrarianUserSearch";
-import LibrarianAddBook from "./LibrarianPages/LibrarianAddBook";
-import LibrarianAddCopy from "./LibrarianPages/LibrarianAddCopy";
+import LibrarianUserSearch from './LibrarianPages/LibrarianUserSearch';
+import LibrarianAddBook from './LibrarianPages/LibrarianAddBook';
+import LibrarianAddCopy from './LibrarianPages/LibrarianAddCopy';
 
 const Page = () => (
     <>
         <Switch>
             <Route exact path="/">
-                <AllBooksPage/>
+                <AllBooksPage />
             </Route>
             <Route path="/search">
-                <SearchPage/>
+                <SearchPage />
             </Route>
             <Route path="/newBooks">
-                <NewBooksPage/>
+                <NewBooksPage />
             </Route>
             <Route path="/user/copies">
-                <UserCopiesPage/>
+                <UserCopiesPage />
             </Route>
             <Route path="/user/:userNumber/copies">
-                <UserCopiesLibrarianPage/>
+                <UserCopiesLibrarianPage />
             </Route>
             <Route path="/book/:id/copies">
-                <BookCopiesPage/>
+                <BookCopiesPage />
             </Route>
             <Route exact path="/login">
-                <LoginPage/>
+                <LoginPage />
             </Route>
             <Route exact path="/register">
-                <RegisterPage/>
+                <RegisterPage />
             </Route>
             <Route exact path="/404">
-                <Error404Page/>
+                <Error404Page />
             </Route>
             <Route exact path="/librarian">
-                <LibrarianPage/>
+                <LibrarianPage />
             </Route>
             <Route exact path="/librarian/addBook">
-                <LibrarianAddBook/>
+                <LibrarianAddBook />
             </Route>
             <Route exact path="/librarian/addCopy">
-                <LibrarianAddCopy/>
+                <LibrarianAddCopy />
             </Route>
             <Route exact path="/librarian/copies">
-                <LibrarianUserSearch/>
+                <LibrarianUserSearch />
             </Route>
             <Route path="">
-                <Error404Page/>
+                <Error404Page />
             </Route>
         </Switch>
     </>

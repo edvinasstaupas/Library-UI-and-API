@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setLoading } from '../../../state/Books/BooksActions';
 import { fetchBooksBySearch } from '../../../api/apiEndpoints';
-import handleError from "../../../components/errors";
-import {useHistory} from "react-router-dom";
+import handleError from '../../../components/errors';
+import { useHistory } from 'react-router-dom';
 
 const SearchPage = () => {
     const dispatch = useDispatch();
@@ -61,11 +61,12 @@ const SearchPage = () => {
         fetchBooksBySearch(
             { page: params.page, size: params.size },
             { title: params.title, author: params.author }
-        ).then((data) => {
-            setBooks(data.data.list);
-            setTotalRows(data.data.totalRows);
-            dispatch(setLoading(false));
-        })
+        )
+            .then((data) => {
+                setBooks(data.data.list);
+                setTotalRows(data.data.totalRows);
+                dispatch(setLoading(false));
+            })
             .catch((error) => history.push(handleError(error.response)));
     }, [dispatch, params]);
 

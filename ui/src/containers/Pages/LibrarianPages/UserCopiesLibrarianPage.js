@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserCopies from '../../../components/UserCopies';
-import LibrarianSecurity from "../../../components/Librarian/LibrarianSecurity";
-import * as React from "react";
+import LibrarianSecurity from '../../../components/Librarian/LibrarianSecurity';
+import * as React from 'react';
 
 const UserCopiesLibrarianPage = () => {
     const userNumber = useParams();
@@ -19,7 +19,7 @@ const UserCopiesLibrarianPage = () => {
 
     return (
         <>
-            <LibrarianSecurity/>
+            <LibrarianSecurity />
             <UserCopies userNumber={userNumber} />
         </>
     );
