@@ -47,9 +47,8 @@ const LibrarianAddBook = () => {
 
     function createBook(data, helper) {
         data.author = author;
-        console.log(data)
         createBookApi(data).then((data) => {
-            history.push('book/' + data.data.id + '/copies');
+            history.push('/book/' + data.data.id + '/copies');
         });
         helper.setSubmitting(false);
     }
