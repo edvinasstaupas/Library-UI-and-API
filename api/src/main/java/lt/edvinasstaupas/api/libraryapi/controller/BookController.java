@@ -30,8 +30,13 @@ public class BookController {
     private final CopyService copyService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PaginatedListDto<BookDto>> getBooks(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<PaginatedListDto<BookDto>> getBooksPaginated(@RequestParam int page, @RequestParam int size) {
         return ok(new PaginatedListDto<>(bookService.getAllDtoPaginated(), createPageRequest(page, size)));
+    }
+
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookDto>> getBooks() {
+        return ok(bookService.getAllDtoPaginated());
     }
 
     private Pageable createPageRequest(int page, int size) {

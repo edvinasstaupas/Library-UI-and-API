@@ -102,6 +102,48 @@ const Librarian = () => {
                             </CardActions>
                         </Card>
                         </Grid>
+                    <Grid item xs={4}>
+                        <Card>
+                            <CardHeader
+                                title="Add copy"
+                                titleTypographyProps={{
+                                    align: 'center',
+                                }}
+                                action={null}
+                                subheaderTypographyProps={{
+                                    align: 'center',
+                                }}
+                                sx={{
+                                    backgroundColor: (
+                                        theme
+                                    ) =>
+                                        theme.palette
+                                            .mode ===
+                                        'light'
+                                            ? theme.palette
+                                                .grey[200]
+                                            : theme.palette
+                                                .grey[700],
+                                }}
+                            />
+                            <CardContent>
+                            </CardContent>
+                            <CardActions>
+                                <Box
+                                    sx={{
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent:
+                                            'center',
+                                    }}
+                                >
+                                    <PrimaryButton component={NavLink} to="/librarian/addCopy">
+                                        Go
+                                    </PrimaryButton>
+                                </Box>
+                            </CardActions>
+                        </Card>
+                        </Grid>
                     </Grid>
                 </Box>
             </Container>

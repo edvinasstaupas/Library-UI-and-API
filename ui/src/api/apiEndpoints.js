@@ -70,6 +70,16 @@ const fetchBooks = (pageableArguments) => {
     );
 };
 
+const fetchBooksNoPagination = () => {
+    const path = 'book/all';
+    return HTTP.get(path,).finally(
+        (response) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(response), 100);
+            })
+    );
+};
+
 const fetchBooksNew = (pageableArguments) => {
     const path = 'book/new';
     return HTTP.get(path, {
@@ -94,6 +104,13 @@ const createBookApi = (createBookDto) => {
     };
     return HTTP.post('book', book);
 };
+const createCopyApi = (createCopyDto) => {
+    const copy = {
+        book: createCopyDto.book,
+        library: createCopyDto.library,
+    };
+    return HTTP.post('copy', copy);
+};
 
 const login = (loginData) => HTTP.post('login', loginData);
 
@@ -101,6 +118,15 @@ const register = (registerData) => HTTP.post('register', registerData);
 
 const fetchAuthors = () => {
     const path = '/author';
+    return HTTP.get(path).finally(
+        (response) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(response), 100);
+            })
+    );
+};
+const fetchLibraries = () => {
+    const path = '/library';
     return HTTP.get(path).finally(
         (response) =>
             new Promise((resolve, reject) => {
@@ -123,4 +149,7 @@ export {
     returnCopyByCopyId,
     fetchAuthors,
     createBookApi,
+    createCopyApi,
+    fetchBooksNoPagination,
+    fetchLibraries,
 };

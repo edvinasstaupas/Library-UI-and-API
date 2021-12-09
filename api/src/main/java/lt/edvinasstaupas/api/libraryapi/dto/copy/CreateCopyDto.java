@@ -2,6 +2,8 @@ package lt.edvinasstaupas.api.libraryapi.dto.copy;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
+import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.entity.Library;
 
@@ -9,7 +11,7 @@ import lt.edvinasstaupas.api.libraryapi.entity.Library;
 @Setter
 public class CreateCopyDto {
 
-    private Book book;
+    private BookDto book;
 
-    private Library library;
+    private LibraryDto library;
 }

@@ -12,6 +12,7 @@ import LibrarianPage from './LibrarianPage/LibrarianPage';
 import UserCopiesLibrarianPage from './LibrarianPages/UserCopiesLibrarianPage';
 import LibrarianUserSearch from "./LibrarianPages/LibrarianUserSearch";
 import LibrarianAddBook from "./LibrarianPages/LibrarianAddBook";
+import LibrarianAddCopy from "./LibrarianPages/LibrarianAddCopy";
 
 const Page = () => (
     <>
@@ -48,6 +49,9 @@ const Page = () => (
             </Route>
             <Route exact path="/librarian/addBook">
                 <LibrarianAddBook/>
+            </Route>
+            <Route exact path="/librarian/addCopy">
+                <LibrarianAddCopy/>
             </Route>
             <Route exact path="/librarian/copies">
                 <LibrarianUserSearch/>
