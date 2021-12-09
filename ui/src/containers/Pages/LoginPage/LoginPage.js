@@ -14,6 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { setLogin } from '../../../state/User/UserActions';
 import { useDispatch } from 'react-redux';
 import { PrimaryButton } from '../../../components/StyledItems';
+import handleError from "../../../components/errors";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const LoginPage = () => {
 
                 history.goBack();
             })
+            .catch((error) => history.push(handleError(error.response)))
             .finally(() => helper.setSubmitting(false));
     };
 

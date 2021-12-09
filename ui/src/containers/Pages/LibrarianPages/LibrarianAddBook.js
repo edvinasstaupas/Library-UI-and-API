@@ -22,6 +22,9 @@ import {
     Select,
     TextField,
 } from '@material-ui/core';
+import handleError from "../../../components/errors";
+import LibrarianSecurity from "../../../components/Librarian/LibrarianSecurity";
+import * as React from "react";
 
 const LibrarianAddBook = () => {
 
@@ -42,19 +45,22 @@ const LibrarianAddBook = () => {
     };
 
     useEffect(() => {
-        fetchAuthors().then((data) => setAuthors(data.data));
+        fetchAuthors().then((data) => setAuthors(data.data))
+            .catch((error) => history.push(handleError(error.response)));
     }, []);
 
     function createBook(data, helper) {
         data.author = author;
         createBookApi(data).then((data) => {
-            history.push('/book/' + data.data.id + '/copies');
-        });
+            history.push('/librarian/addCopy');
+        })
+            .catch((error) => history.push(handleError(error.response)));
         helper.setSubmitting(false);
     }
 
     return (
         <>
+            <LibrarianSecurity/>
             <Container style={{
                 minHeight: '70vh',
                 display: 'flex',

@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { register } from '../../../api/apiEndpoints';
 import { Box, makeStyles } from '@material-ui/core';
 import { PrimaryOutlinedButton } from '../../../components/StyledItems';
+import handleError from "../../../components/errors";
 
 const useStyles = makeStyles({
     box: {
@@ -18,6 +19,8 @@ const useStyles = makeStyles({
 const RegisterFinish = () => {
     const state = useSelector((state) => state.newUser);
     const [user, setUser] = useState({});
+
+    const history = useHistory();
 
     const classes = useStyles();
 
@@ -36,10 +39,8 @@ const RegisterFinish = () => {
             .then((responseData) => {
                 setUser(responseData.data);
             })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [state]);
+            .catch((error) => history.push(handleError(error.response)));
+    }, [history, state]);
 
     return (
         <>

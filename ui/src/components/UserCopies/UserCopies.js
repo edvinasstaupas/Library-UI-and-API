@@ -44,11 +44,13 @@ const UserCopies = (userNumber) => {
     const history = useHistory();
 
     const takeCopy = (copyId) => {
-        takeCopyByCopyId(copyId).then(() => mount());
+        takeCopyByCopyId(copyId).then(() => mount())
+            .catch((error) => history.push(handleError(error.response)));
     };
 
     const returnCopy = (copyId) => {
-        returnCopyByCopyId(copyId).then(() => mount());
+        returnCopyByCopyId(copyId).then(() => mount())
+            .catch((error) => history.push(handleError(error.response)));
     };
 
     const mount = useCallback(() => {
@@ -150,13 +152,13 @@ const UserCopies = (userNumber) => {
                                         {roles.includes('ROLE_LIBRARIAN') ? (
                                             <StyledTableCell align="center">
                                                 {!copy.taken ? (
-                                                    <PrimaryOutlinedGreenButton
+                                                    <PrimaryOutlinedButton
                                                         onClick={() =>
                                                             takeCopy(copy.id)
                                                         }
                                                     >
                                                         Take
-                                                    </PrimaryOutlinedGreenButton>
+                                                    </PrimaryOutlinedButton>
                                                 ) : (
                                                     <PrimaryOutlinedButton
                                                         onClick={() =>

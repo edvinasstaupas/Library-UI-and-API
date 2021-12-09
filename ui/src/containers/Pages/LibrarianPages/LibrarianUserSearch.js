@@ -18,6 +18,7 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import dateFnsFormat from "date-fns/format";
 import * as React from "react";
 import {useHistory} from "react-router-dom";
+import LibrarianSecurity from "../../../components/Librarian/LibrarianSecurity";
 
 
 const LibrarianUserSearch = () => {
@@ -31,6 +32,7 @@ const LibrarianUserSearch = () => {
 
     return (
         <>
+            <LibrarianSecurity/>
             <Container>
                 <Box p={10}>
                     <Grid

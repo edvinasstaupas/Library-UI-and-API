@@ -59,7 +59,7 @@ const Header = () => {
                         to="/"
                         component={NavLink}
                     >
-                        Your internet library
+                        Home
                     </Typography>
                     <nav>
                         <Link

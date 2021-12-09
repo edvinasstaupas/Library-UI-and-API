@@ -28,6 +28,9 @@ import {
     Select,
     TextField,
 } from '@material-ui/core';
+import handleError from "../../../components/errors";
+import LibrarianSecurity from "../../../components/Librarian/LibrarianSecurity";
+import * as React from "react";
 
 const LibrarianAddCopy = () => {
 
@@ -49,21 +52,25 @@ const handleChangeLibrary = (event) => {
 
 
     useEffect(() => {
-        fetchBooksNoPagination().then((data) => setBooks(data.data));
-        fetchLibraries().then((data) => setLibraries(data.data));
-    }, []);
+        fetchBooksNoPagination().then((data) => setBooks(data.data))
+            .catch((error) => history.push(handleError(error.response)));
+        fetchLibraries().then((data) => setLibraries(data.data))
+            .catch((error) => history.push(handleError(error.response)));
+    }, [history]);
 
     function createCopy(data, helper) {
         data.book = book;
         data.library = library;
         createCopyApi(data).then(() => {
             history.push('/book/' + book.id + '/copies');
-        });
+        })
+            .catch((error) => history.push(handleError(error.response)));
         helper.setSubmitting(false);
     }
 
     return (
         <>
+            <LibrarianSecurity/>
             <Container style={{
                 minHeight: '70vh',
                 display: 'flex',
