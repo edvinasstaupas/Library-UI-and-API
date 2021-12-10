@@ -1,10 +1,5 @@
-import {
-    fetchCopiesByUser,
-    fetchCopiesByUserLibrarian,
-    returnCopyByCopyId,
-    takeCopyByCopyId,
-} from '../../api/apiEndpoints';
-import { useCallback, useEffect, useState } from 'react';
+import {returnCopyByCopyId, takeCopyByCopyId,} from '../../api/apiEndpoints';
+import {useEffect} from 'react';
 import {
     Box,
     CircularProgress,
@@ -18,17 +13,11 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import handleError from '../errors';
-import { useHistory } from 'react-router-dom';
-import {
-    PrimaryOutlinedButton,
-    PrimaryOutlinedGreenButton,
-    StyledTableCell,
-    StyledTableRow,
-} from '../StyledItems';
+import {useHistory} from 'react-router-dom';
+import {PrimaryOutlinedButton, StyledTableCell, StyledTableRow,} from '../StyledItems';
 import ErrorIcon from '@material-ui/icons/Error';
-import { red } from '@material-ui/core/colors';
+import {red} from '@material-ui/core/colors';
 import {useDispatch, useSelector} from 'react-redux';
-import {setLoading} from "../../state/Books/BooksActions";
 
 const useStyle = makeStyles({
     table: {
@@ -43,17 +32,16 @@ const UserCopies = (props) => {
     const user = useSelector((state) => state.user);
 
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const takeCopy = (copyId) => {
         takeCopyByCopyId(copyId)
-            .then()
+            .then(() => update())
             .catch((error) => history.push(handleError(error.response)));
     };
 
     const returnCopy = (copyId) => {
         returnCopyByCopyId(copyId)
-            .then()
+            .then(() => update())
             .catch((error) => history.push(handleError(error.response)));
     };
 
@@ -92,7 +80,7 @@ const UserCopies = (props) => {
                             {loading ? (
                                 <StyledTableRow id={-1}>
                                     <StyledTableCell colSpan={6} align="center">
-                                        <CircularProgress />
+                                        <CircularProgress/>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ) : copies.length === 0 ? (
@@ -123,7 +111,7 @@ const UserCopies = (props) => {
                                         )}
                                         <StyledTableCell align="center">
                                             {new Date(copy.dueAt) <=
-                                                new Date() &&
+                                            new Date() &&
                                             copy.dueAt != null ? (
                                                 <Box
                                                     style={{

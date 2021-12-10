@@ -1,6 +1,6 @@
 import UserCopies from '../../../components/UserCopies';
-import {useEffect, useState} from "react";
-import {fetchCopiesByUser, fetchCopiesByUserLibrarian} from "../../../api/apiEndpoints";
+import {useCallback, useEffect, useState} from "react";
+import {fetchCopiesByUser} from "../../../api/apiEndpoints";
 import handleError from "../../../components/errors";
 import {setLoading} from "../../../state/Books/BooksActions";
 import {useDispatch, useSelector} from "react-redux";
@@ -13,16 +13,15 @@ const UserCopiesPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { isLoading, error, data: copies, execute } = useAsync(fetchCopiesByUser);
+
+    if (error) {
+        history.push(handleError(error));
+    }
+
     useEffect(() => {
-        if (user == null) {
+        if (user == null)
             history.push("/login");
-        }
-        fetchCopiesByUser()
-            .then(({ data }) => {
-                setCopies(data);
-            })
-            .catch((error) => history.push(handleError(error.response)))
-            .finally(() => dispatch(setLoading(false)));
     }, [dispatch, history, user])
 
     return (
