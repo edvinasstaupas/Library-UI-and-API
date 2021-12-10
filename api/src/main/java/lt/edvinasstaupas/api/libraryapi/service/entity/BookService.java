@@ -3,7 +3,6 @@ package lt.edvinasstaupas.api.libraryapi.service.entity;
 import lombok.RequiredArgsConstructor;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.book.CreateBookDto;
-import lt.edvinasstaupas.api.libraryapi.dto.search.SearchDto;
 import lt.edvinasstaupas.api.libraryapi.entity.Author;
 import lt.edvinasstaupas.api.libraryapi.entity.Book;
 import lt.edvinasstaupas.api.libraryapi.exception.nosuchentity.NoSuchBookException;
@@ -11,10 +10,8 @@ import lt.edvinasstaupas.api.libraryapi.repository.BookRepository;
 import lt.edvinasstaupas.api.libraryapi.service.date.DateService;
 import lt.edvinasstaupas.api.libraryapi.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,33 +75,17 @@ public class BookService implements IEntityService<Book, BookDto, CreateBookDto>
     }
 
     public List<BookDto> getAllDtoBySearch(String title, String author) {
-        List<Book> booksByTitle;
-        List<Book> booksByAuthor;
-        //sutvarkyti
-        if (!title.equals("") && !author.equals("")) {
-            booksByAuthor = getAllByAuthor(author);
-            booksByTitle = getAllByTitleContainingIgnoreCase(title);
-
-            //SELECT u from users u where u.pavarde like 'kazkas%'
-            return bookMapper.mapList(booksByTitle.stream()
-                    .filter(new HashSet<>(booksByAuthor)::contains)
-                    .collect(Collectors.toList()));
-
-        } else if (title.equals("") && author.equals("")) {
-            return getAllDto();
-
-        } else if (!author.equals("")) {
+        if (!author.equals("") && title.equals("")) {
             return bookMapper.mapList
-                    (authorService.getAllByName(author)
-                            .stream()
-                            .flatMap(a -> getByAuthor(a)
-                                    .stream())
-                            .collect(Collectors.toList()));
-        } else if (!title.equals("")) {
+                    (getAllByAuthor(author));
+        } else if (!title.equals("") && author.equals("")) {
             return bookMapper.mapList(getAllByTitleContainingIgnoreCase(title));
         }
-
-        return new ArrayList<>();
+        List<Book> booksByAuthor = getAllByAuthor(author);
+        List<Book> booksByTitle = getAllByTitleContainingIgnoreCase(title);
+        return bookMapper.mapList(booksByTitle.stream()
+                .filter(new HashSet<>(booksByAuthor)::contains)
+                .collect(Collectors.toList()));
     }
 
     private List<Book> getAllByAuthor(String authorName) {
