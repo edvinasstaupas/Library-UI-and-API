@@ -27,8 +27,9 @@ const useStyle = makeStyles({
 
 const UserCopies = (props) => {
     const copies = props.copies;
+    const update = props.update;
+    const loading = props.isLoading;
     const classes = useStyle();
-    const loading = useSelector(state => state.books.loading)
     const user = useSelector((state) => state.user);
 
     const history = useHistory();
