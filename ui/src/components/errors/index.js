@@ -10,4 +10,9 @@ const handleError = (error) => {
             return '/';
     }
 };
+
+const a = () => return <h1>asd</h1>
+
+const a = <h1>asd</h1>
+
 export default handleError;

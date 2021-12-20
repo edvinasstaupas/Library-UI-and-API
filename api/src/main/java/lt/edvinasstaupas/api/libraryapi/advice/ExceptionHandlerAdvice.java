@@ -17,7 +17,6 @@ public class ExceptionHandlerAdvice {
     public ExceptionResponse handlingToLargeFileException(SizeLimitExceededException ex) {
         return ExceptionResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.PAYLOAD_TOO_LARGE.value())
                 .build();
     }
 
@@ -26,16 +25,14 @@ public class ExceptionHandlerAdvice {
     public ExceptionResponse handlingFileException(FileException ex) {
         return ExceptionResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.NO_CONTENT.value())
                 .build();
     }
 
     @ExceptionHandler(NoSuchEntityException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ExceptionResponse handlingNoSuchEntityException(NoSuchEntityException ex) {
         return ExceptionResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND.value())
                 .build();
     }
 }

@@ -39,10 +39,6 @@ public class BookController {
         return ok(bookService.getAllDtoPaginated());
     }
 
-    private Pageable createPageRequest(int page, int size) {
-        return PageRequest.of(page, size);
-    }
-
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
         BookDto bookDto = bookService.getByIdDto(id);
@@ -85,5 +81,9 @@ public class BookController {
     @GetMapping(value = "new", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaginatedListDto<BookDto>> getBooksNew(@RequestParam int page, @RequestParam int size) {
         return ok(new PaginatedListDto<>(bookService.getAllDtoNew(), createPageRequest(page, size)));
+    }
+
+    private Pageable createPageRequest(int page, int size) {
+        return PageRequest.of(page, size);
     }
 }
