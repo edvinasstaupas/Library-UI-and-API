@@ -24,10 +24,9 @@ import static java.util.stream.Collectors.toSet;
 @Component
 public class JwtTokenProvider {
 
+    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
     @Value("#{${security.jwt.validity-time} * 60 * 1000}")
     private Long tokenValidityInMillis;
-
-    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
     private SecretKey secretKey;
 
     @PostConstruct
