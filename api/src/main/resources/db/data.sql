@@ -9,7 +9,8 @@ values (1, 1),
        (1, 3),
        (1, 2);
 insert into AUTHOR (id, isbn, name)
-values (1, 9781782924142, 'J. K. Rowling'), (2, 9781782924143, 'Suzanne Collins');
+values (1, 9781782924142, 'J. K. Rowling'),
+       (2, 9781782924143, 'Suzanne Collins');
 insert into BOOK (id, isbn, author_id, title, published_at)
 values (1, 9780439064873, 1, 'Harry Potter and the Chamber of Secrets', CURRENT_DATE),
        (2, 9780439064874, 1, 'Harry Potter and the Goblet of Fire', CURRENT_DATE),

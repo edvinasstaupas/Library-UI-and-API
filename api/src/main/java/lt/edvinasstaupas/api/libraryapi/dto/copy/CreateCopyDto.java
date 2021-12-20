@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.edvinasstaupas.api.libraryapi.dto.book.BookDto;
 import lt.edvinasstaupas.api.libraryapi.dto.library.LibraryDto;
-import lt.edvinasstaupas.api.libraryapi.entity.Book;
-import lt.edvinasstaupas.api.libraryapi.entity.Library;
 
 @Getter
 @Setter
